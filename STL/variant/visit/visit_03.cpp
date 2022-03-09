@@ -19,7 +19,7 @@ private:
 
 class Dog {
 public:
-	Dog(const std::string name) : m_name{ std::move(name)} {}
+	Dog(const std::string name) : m_name{ std::move(name) } {}
 	void woof() const
 	{
 		std::cout << m_name << " havliyor!\n";
@@ -32,7 +32,7 @@ private:
 
 class Lamb {
 public:
-	Lamb(const std::string name) : m_name{ std::move(name)} {}
+	Lamb(const std::string name) : m_name{ std::move(name) } {}
 	void bleat() const
 	{
 		std::cout << m_name << " meliyor!\n";
@@ -58,10 +58,10 @@ struct AnimalVoice
 	void operator()(const Lamb& lamb) const { lamb.bleat(); }
 };
 
-using namespace std;
 
 int main()
 {
+	using namespace std;
 	list<Animal> animal_farm{ Cat{"pamuk"}, Dog{"kont"}, Lamb{"kuzucuk"}, Lamb{"pamuk"}, Cat{"kara"} };
 
 	for (const Animal& a : animal_farm) {
@@ -77,7 +77,7 @@ int main()
 			break;
 		}
 	}
-	cout << "-----\n";
+	cout << "-----------------\n";
 
 	for (const Animal& a : animal_farm) {
 		if (const auto dog_ptr = get_if<Dog>(&a)) {
@@ -90,12 +90,12 @@ int main()
 			lamb_ptr->bleat();
 		}
 	}
-	cout << "-----\n";
+	cout << "-----------------\n";
 
 	for (const Animal& a : animal_farm) {
 		visit(AnimalVoice{}, a);
 	}
-	cout << "-----\n";
+	cout << "-----------------\n";
 
 	cout << "hayvan ciftliginde "
 		<< count_if(begin(animal_farm), end(animal_farm), is_type<Cat>)
@@ -103,5 +103,5 @@ int main()
 		<< count_if(begin(animal_farm), end(animal_farm), is_type<Dog>)
 		<< " kopek ve "
 		<< count_if(begin(animal_farm), end(animal_farm), is_type<Lamb>)
-		<< " kuzu yasiyor" << endl;
+		<< " kuzu yasiyor";
 }
