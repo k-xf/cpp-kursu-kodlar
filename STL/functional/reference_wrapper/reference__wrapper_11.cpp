@@ -1,3 +1,5 @@
+//reference_wrapper'in constexpr bağlamda kullanılması 
+
 #include <functional>
 
 constexpr int foo(int x)
