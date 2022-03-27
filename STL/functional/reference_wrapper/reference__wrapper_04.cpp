@@ -3,12 +3,10 @@
 #include <functional>
 #include <iostream>
 
-using namespace std;
-
 int main()
 {
-	string s{ "neco" };
+	std::string s{ "neco" };
 
-	reference_wrapper r = s;
-	cout << r.get() << "\n";
+	std::reference_wrapper r = s;
+	std::cout << r.get() << "\n";
 }
