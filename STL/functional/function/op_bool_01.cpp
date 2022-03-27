@@ -9,9 +9,7 @@ int foo(int x)
 
 int main()
 {
-	using namespace std;
-
-	function<int(int)> fnc;
+	std::function<int(int)> fnc;
 
 	if (fnc) {
 		std::cout << "dolu durumda\n";
@@ -32,6 +30,4 @@ int main()
 	else {
 		std::cout << "bos durumda\n";
 	}
-
-
 }
