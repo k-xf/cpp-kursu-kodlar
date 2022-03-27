@@ -3,9 +3,9 @@
 #include <iterator>
 
 
-struct Biggie 
+struct Biggie
 {
-	bool operator()(int i) const 
+	bool operator()(int i) const
 	{
 		//code
 		return true;
@@ -13,14 +13,12 @@ struct Biggie
 	//very big data
 };
 
-const Biggie gbig; 
+const Biggie gbig;
 
-std::vector<int> ivec; 
+std::vector<int> ivec;
 
 int main()
 {
-	using namespace std;
-
-	vector<int> destvec;
-	std::copy_if(ivec.begin(), ivec.end(), back_inserter(destvec), ref(gbig));
+	std::vector<int> destvec;
+	std::copy_if(ivec.begin(), ivec.end(), back_inserter(destvec), std::ref(gbig));
 }
