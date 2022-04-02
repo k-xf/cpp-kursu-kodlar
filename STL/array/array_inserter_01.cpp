@@ -5,8 +5,8 @@ std::ostream&
 operator<<(std::ostream& os, const std::array<T, size>& ar)
 {
 	os << "[";
-	size_t i;
-	for (i = 0; i < size - 1; ++i)
+	size_t i{};
+	for (; i < size - 1; ++i)
 		os << ar[i] << ", ";
 	return os << ar[i] << "]";
 }
