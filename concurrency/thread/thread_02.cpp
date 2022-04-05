@@ -1,10 +1,11 @@
 #include <iostream>
 #include <thread>
 
+//thread class constructor may take any callable
+
 int main()
 {
-	auto hello{ [] { std::cout << "Hello World!\n"; } };
-	std::thread t{ hello };
+	auto fn{ [] { std::cout << "hello, is it me you're looking for!\n"; } };
+	std::thread t{ fn };
 	t.join();
 }
-
