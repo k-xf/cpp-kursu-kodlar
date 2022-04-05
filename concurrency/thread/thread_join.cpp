@@ -1,3 +1,5 @@
+//eğer thread nesnesinin detsructor'u çağrıldığında thread joinable durumda ise terminate işlevi çağrılır.
+
 #include <iostream>
 #include <thread>
 
