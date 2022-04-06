@@ -1,3 +1,8 @@
+/*
+	we can move an object to the function that our thread will run.
+
+*/
+
 #include <vector>
 #include <iostream>
 #include <thread>
