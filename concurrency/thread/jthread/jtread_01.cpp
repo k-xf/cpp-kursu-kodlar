@@ -5,28 +5,27 @@
 
 class joining_thread
 {
-	std::thread t;
 public:
 	joining_thread() noexcept = default;
 
 	template<typename Callable, typename ... Args>
 	explicit joining_thread(Callable&& func, Args&& ... args) :
-		t(std::forward<Callable>(func), std::forward<Args>(args)...)
+		m_t(std::forward<Callable>(func), std::forward<Args>(args)...)
 	{}
 
-	explicit joining_thread(std::thread t_) noexcept :
-		t(std::move(t_))
+	explicit joining_thread(std::thread t) noexcept :
+		m_t(std::move(t))
 	{}
 
 	joining_thread(joining_thread&& other) noexcept :
-		t(std::move(other.t))
+		m_t(std::move(other.m_t))
 	{}
 
 	joining_thread& operator=(joining_thread&& other) noexcept
 	{
 		if (joinable())
 			join();
-		t = std::move(other.t);
+		m_t = std::move(other.m_t);
 		return *this;
 	}
 
@@ -34,7 +33,7 @@ public:
 	{
 		if (joinable())
 			join();
-		t = std::move(other);
+		m_t = std::move(other);
 		return *this;
 	}
 
@@ -46,36 +45,38 @@ public:
 
 	void swap(joining_thread& other) noexcept
 	{
-		t.swap(other.t);
+		m_t.swap(other.m_t);
 	}
 
-	std::thread::id get_id() const noexcept 
+	std::thread::id get_id() const noexcept
 	{
-		return t.get_id();
+		return m_t.get_id();
 	}
 
 	bool joinable() const noexcept
 	{
-		return t.joinable();
+		return m_t.joinable();
 	}
 
 	void join()
 	{
-		t.join();
+		m_t.join();
 	}
 
 	void detach()
 	{
-		t.detach();
+		m_t.detach();
 	}
 
 	std::thread& as_thread() noexcept
 	{
-		return t;
+		return m_t;
 	}
 
 	const std::thread& as_thread() const noexcept
 	{
-		return t;
+		return m_t;
 	}
+private:
+	std::thread m_t;
 };
