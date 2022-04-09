@@ -10,4 +10,5 @@ void func()
 {
 	using A::f;
 	using B::f; //gecerli
+        f(); //gecersiz
 }
