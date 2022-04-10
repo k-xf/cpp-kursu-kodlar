@@ -1,9 +1,11 @@
 #include <memory>
 
-struct Data {};
+struct Data {
+	//...
+};
 
-Data*	createData(void);
-void	cleanup(Data* p);
+Data* createData(void);
+void  cleanup(Data* p);
 
 
 struct DataCleaner {
