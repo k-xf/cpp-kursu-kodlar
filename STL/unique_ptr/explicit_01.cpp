@@ -1,4 +1,4 @@
-//unique_ptr sınıfının T* parametreli kurucu işlevi explicit
+//constructor with T* param is explicit
 
 #include <memory>
 #include "triple.h"
