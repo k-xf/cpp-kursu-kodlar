@@ -6,6 +6,8 @@ int main()
 {
 	std::unique_ptr<std::string> upx;
 
+	std::cout.setf(std::ios::boolalpha);
+
 	if (upx != nullptr)
 		std::cout << "dolu\n";
 	else
