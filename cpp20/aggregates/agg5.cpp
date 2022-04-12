@@ -1,5 +1,3 @@
-#include <iostream>
-
 struct Nec {
 	int a, b, c;
 };
