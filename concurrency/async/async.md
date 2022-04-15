@@ -110,4 +110,25 @@ int main()
 }
 ```
 
+Bu ke aşağıdaki koda bakalım:
 
+```
+#include <future>
+
+int foo();
+int bar();
+
+int main()
+{
+	auto result_foo(std::async(foo));
+	int result = bar() + result_foo.get();
+	
+	/*
+		Kodu bu şekilde düzenlersek olmaz.
+		result_foo.get() çağrısı ile derleyici tarafından önce
+		result_foo.get() ifadeis ele alınabilir. 
+		Bu durumda foo fonksiyonu senkron çalışır.
+	*/
+
+}
+```
