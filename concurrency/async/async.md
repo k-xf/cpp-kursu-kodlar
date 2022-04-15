@@ -79,4 +79,31 @@ Gönderilen _callable_'ın er geç çağrılması gerekecek. Eğer fonksiyonun �
 #### bazı notlar
 + _std::async_ işlevine gönderilen _callable_'ın geri dönüş değeri yoksa bu durumda async fonksiyonunun geri dönüş değeri _std::future<void>_ türüdür.
 + _std::async_ işlevine gönderilen _callable_ çalıştırıldığında bir exception gönderirse bu exception yakalanabilir.
+	
+```
+#include <future>
+
+int foo();
+int bar();
+
+int main()
+{
+	auto result_foo(std::async(foo));
+	int result_bar = bar();
+	int result = result_foo.get() + result_bar;
+	/*
+		Burada result_foo.get() çağrısı ile 3 ayrı durum oluşabilir:
+		1. eğer foo işlevi async tarafından ayrı bir thread ile koştutlumaya başlatılmış ;
+		ve fonksiyonun kodunun çalışması bitmiş ise sonucu hemen elde etmiş oluruz.
+
+		2. eğer foo işlevi ayrı bir thread ile başlatılmış ancak fonksiyonun kodunun çalışması 
+		henüz sonuçlanmadıysa get ile onu çağıran thread fonnksiyonun kodunun çalışması bitene kadar bloke olur.
+
+		3. eğer foo işlevinin çalıştıtılması henüz başlatılmadıysa, çalışmaya başlaması zorlanır fonksiyon senkron gibi çalışır
+		fonksiyonun çalışması bitene kadar get'i çağıran thread bloke olur.
+	*/
+
+}
+```
+
 
