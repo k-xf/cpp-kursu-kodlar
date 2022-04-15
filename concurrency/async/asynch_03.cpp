@@ -1,15 +1,15 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <future>
 #include <stdexcept>
-#include <algorithm>
+#include <cmath>
+#include <vector>
+#include <future>
 #include <numeric>
+#include <iostream>
+
 
 double square_root(double x)
 {
 	if (x < 0.)
-		throw std::domain_error("negatif sayi ustunde karekok islemi!!!");
+		throw std::domain_error("square root of a negative integer!!!");
 
 	return std::sqrt(x);
 }
