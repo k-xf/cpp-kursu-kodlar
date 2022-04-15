@@ -31,8 +31,9 @@ int main()
 	try {
 		auto i = ftr.get();
 	}
+	//catch (const std::exception& ex) {
 	//catch (const std::logic_error& ex) {
-	catch (const std::exception& ex) {
+	catch (const std::future_error& ex) {
 		std::cout << "exception caught: " << ex.what() << '\n';
 	}
 }
