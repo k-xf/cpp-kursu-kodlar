@@ -77,8 +77,9 @@ Gönderilen _callable_'ın er geç çağrılması gerekecek. Eğer fonksiyonun �
 
 
 #### bazı notlar
-+ _std::async_ işlevine gönderilen _callable_'ın geri dönüş değeri yoksa bu durumda async fonksiyonunun geri dönüş değeri _std::future<void>_ türüdür.
-+ _std::async_ işlevine gönderilen _callable_ çalıştırıldığında bir exception gönderirse bu exception yakalanabilir.
++ _std::async_ işlevine gönderilen _callable_'ın geri dönüş değeri yoksa bu durumda _std::async_ fonksiyonunun geri dönüş değeri _std::future<void>_ türüdür.
++ _std::async_ işlevine gönderilen _callable_ çalıştırıldığında bir _exception_ gönderirse bu _exception_ yakalanabilir.
++ _std::async_ ile paralel çalıştırma sağlamamız senkronizasyon 
 	
 ```
 #include <future>
