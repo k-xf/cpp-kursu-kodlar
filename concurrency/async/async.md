@@ -54,6 +54,14 @@ future async(F func, args...)
 + Bu durumda geri dönüş değeri olan _future_ nesnesinin _wait()_ ya da _get()_ fonksiyonlarından biri çağrıldığında _func_ senkron olarak çağrılacak.
 
 
+```
+int foo();
+std::future<int> result = async(std::launch::async, foo);
+```
+
+#### _std::async_ işlevinin birinci parametresine _launch policy_ olarak _std::launch::async_ geçilirse
+- fonksiyonu asenkron olarak çalıştırmaya zorluyoruz. Asenkron çalıştırma mümkün değil ise _std::system_error sınıfı_ türünden _exception throw_ edecek.
+- fonksiyonu geri dönüş değerini _(std::future<int>)_ bir nesneye atamaz isek çağrıyı yapan _thread_ _bloke_ olacak ve _foo_ işlevinin çalışması beklenecek. Bu durumda çağrının senkron yapılmasıyla arada bir fark kalmayacak.
 
 
 
