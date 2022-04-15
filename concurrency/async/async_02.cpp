@@ -1,9 +1,8 @@
 #include <string>
-#include <chrono>
-#include <thread>
-#include <iostream>
 #include <algorithm>
+#include <thread>
 #include <future>
+#include <iostream>
 
 
 std::string get_str_letters(int n)
@@ -36,11 +35,11 @@ int main()
 {
 	auto start = std::chrono::steady_clock::now();
 
-	//auto ftr1 = std::async(std::launch::deferred, get_str_letters, 20);
-	//auto ftr2 = std::async(std::launch::deferred, get_str_digits, 20);
+	auto ftr1 = async(std::launch::deferred, get_str_letters, 20);
+	auto ftr2 = async(std::launch::deferred, get_str_digits, 20);
 
-	auto ftr1 = std::async(std::launch::async, get_str_letters, 20);
-	auto ftr2 = std::async(std::launch::async, get_str_digits, 20);
+	//auto ftr1 = async(std::launch::async, get_str_letters, 20);
+	//auto ftr2 = async(std::launch::async, get_str_digits, 20);
 
 
 	auto s1 = ftr1.get();
