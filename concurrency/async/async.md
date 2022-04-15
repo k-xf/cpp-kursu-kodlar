@@ -46,7 +46,7 @@ future async(std::launch::deferred, F func, args...)
 ```
 + Bu durumda geri dönüş değeri olan _future_ nesnesinin _wait()_ ya da _get()_ fonksiyonlarından biri çağrıldığında _func_ işlevi senkron olarak çağrılacak.
 
-## Bu std::launch parametresi yok ise
+#### Bu std::launch parametresi yok ise
 
 ```
 future async(F func, args...)
@@ -63,6 +63,17 @@ std::future<int> result = async(std::launch::async, foo);
 - fonksiyonu asenkron olarak çalıştırmaya zorluyoruz. Asenkron çalıştırma mümkün değil ise _std::system_error sınıfı_ türünden _exception throw_ edecek.
 - fonksiyonu geri dönüş değerini _(std::future<int>)_ bir nesneye atamaz isek çağrıyı yapan _thread_ _bloke_ olacak ve _foo_ işlevinin çalışması beklenecek. Bu durumda çağrının senkron yapılmasıyla arada bir fark kalmayacak.
 
+
+#### _std::async_ tarafından döndürülen _std::future_ nesnesine iki nedenle ihtiyaç duyuyoruz
+
+_sdt::async_'e gönderilen _callable_'ın gelecekteki sonucuna _(outcome)_ bu future nesnesi yoluyla ulaşabileceğiz. Bu sonuç _(outcome)_
++ ya bir geri dönüş değeri _(return value)_
++ ya da bir _exception_ olacak
+
+_async_'e gönderilen fonksiyonun geri dönüş türü örneğin _int_ ise _async_'in geriş dönüş değeri _std::future<int>_ olacak.
+Eğer _task_ _void_ bir fonksiyon ise yani geri dönüş değeri yok ise _async_'in geri dönüş değeri _std::future<void>_ olacak.
+
+Gönderilen _callable_'ın er geç çağrılması gerekecek. Eğer fonksiyonun çalıştırılması henüz başlatılmadıysa fonksiyonun çalışmaya başlatılması için bu _std::future_ nesnesine ihtiyacımız olacak. Yani fonksiyonun geri dönüş değerini kullanmayacak olsak da _async_'in geri dönüş değeri olan _future_ nesnesi bize gerekecek.
 
 
 #### bazı notlar
