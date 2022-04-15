@@ -8,7 +8,7 @@ Birinci parametre _launch policy_. <br>
 _enum class launch_. (bitsel işlemlere uygun tür)
 
 
-## Bu parametreye std::launch::async geçilirse
+#### Bu parametreye std::launch::async geçilirse
 
 ```
 future async(std::launch::async, F func, args...)
@@ -24,7 +24,7 @@ future async(std::launch::async, F func, args...)
   + geri döndürülen _future_ nesnesinin _get_ üye fonksiyonu çağrıldığında
   + geri döndürülen _future_ nesneninin _wait_ üyefonksiyonu çağrıldığında
 
-## Bu parametreye std::launch::deferred geçilirse
+#### Bu parametreye std::launch::deferred geçilirse
 
 ```
 future async(std::launch::deferred, F func, args...)
