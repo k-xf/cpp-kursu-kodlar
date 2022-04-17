@@ -43,5 +43,7 @@ int main()
 
 	for (auto fptr : a) {
 		std::cout << (mx.*fptr)(5) << "\n";
+		//std::cout << std::invoke(fptr, mx, 5)<< "\n";
+
 	}
 }
