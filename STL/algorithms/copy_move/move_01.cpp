@@ -6,13 +6,13 @@ class Myclass {
 public:
 	Myclass() = default;
 
-	Myclass& operator=(const Myclass&) 
+	Myclass& operator=(const Myclass&)
 	{
 		std::cout << "copy assignment\n";
 		return *this;
 	}
 
-	Myclass& operator=(Myclass &&)
+	Myclass& operator=(Myclass&&)noexcept
 	{
 		std::cout << "move assignment\n";
 		return *this;
@@ -26,5 +26,5 @@ int main()
 
 	copy(vec_source.begin(), vec_source.end(), vec_dest.begin());
 	move(vec_source.begin(), vec_source.end(), vec_dest.begin());
-	
+
 }
