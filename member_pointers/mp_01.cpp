@@ -1,4 +1,5 @@
 #include <iostream>
+#include <functional>
 
 class Myclass {
 
@@ -24,8 +25,8 @@ int main()
 	auto fptr = &Myclass::set;
 	Myclass x{ 20 };
 	x.print();
-	(x.*fptr)(50);
-
+	(x.*fptr)(30);
+	x.print();
+	std::invoke(&Myclass::set, x, 40);
 	x.print();
 }
-
