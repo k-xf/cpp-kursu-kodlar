@@ -24,3 +24,8 @@ void bar()
 {
     func(); // çağrılan overloaded işlevi => void overloaded(char)
 }
+
+
+/*
+    overloaded ismi farklı çeviri birimlerinde (translation unit)  farklı varlıklara ilişkin olduğundan ODR ihlal edilmiş oluyor.
+*/
