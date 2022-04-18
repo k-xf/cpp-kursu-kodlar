@@ -27,7 +27,7 @@ Gelecekte oluşacak bir sonucu tutmak için olanaklara sahip.
 Sonuç _std::future_ nesnesi tarafından sadece bir kez _get_ edilebilir. 
 Bir kez _get()_ fonksiyonu çağrıldıktan sonra _future_ nesnesi geçersiz hale gelir. <br>
 Geçersiz bir future nesnesi için sadece 
-;+ destructor
++ destructor
 + valid()
 + move assignment
 
