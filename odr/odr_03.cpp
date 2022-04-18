@@ -15,7 +15,7 @@ void foo()
     func();  // çağrılan overloaded => void overloaded(int)
 }
 
-//bar.cpp
+/*   bar.cpp   */
 void overloaded(char); //başka bir başlık dosyasından gelmiş olabilir
 
 #include "header.h"
