@@ -1,3 +1,4 @@
+std::future ve std::promise sınıfları (sınıf şablonları) standart kütüphaneye _C++11_ standartları ile eklendi.;
 _std:future_, standart _\<future>_ başlık dosyasında tanımlanmış bir sınıf şablonu. (C++11)
 Bir operasyonun sonucunu _(outcome)_ temsil ediyor. (Ya çalıştırılacak bir fonksiyonun geri dönüş değeri ya da çalıştırılacak fonksiyondan gönderilecek _exception_. Ama ikisi birden değil)
 
