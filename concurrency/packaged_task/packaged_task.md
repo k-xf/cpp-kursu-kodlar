@@ -5,10 +5,10 @@ _std::packaged_task_ sınıfı türünden bir nesne asenkron çağrı yapmak ama
 _std::packaged_task_ nesnesinin _get_future_ işlevi ile onunla ilişkilendirilmiş _std::future_ nesnesini elde ederiz.
 Sınıfın fonksiyon çağrı operatör fonksiyonu sarmalanan _callable_'ı çağırır.
 
-std::packaged_task sınıfı çoğunlukla aşağıdaki gibi kullanılır:
+_std::packaged_task_ sınıfı çoğunlukla aşağıdaki gibi kullanılır:
 
 
-+ İş yükü olan callable bir _std::packaged_task_ nesnesi ile sarmalanır:
++ İş yükü olan _callable_ bir _std::packaged_task_ nesnesi ile sarmalanır:
 	
 ```
 	std::packaged_task<int(int, int)> ptask([](int a, int b)
