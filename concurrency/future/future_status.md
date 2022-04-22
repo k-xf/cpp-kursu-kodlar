@@ -1,5 +1,6 @@
+#### std::future_status
 
-std::future_status std::future sınıfının
+_std::future_status_ bir _enum class_. Bu tür std::future sınıfının
 - wait_for
 - wait_until
 
