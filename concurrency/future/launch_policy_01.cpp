@@ -2,7 +2,6 @@
 #include <future>
 #include <iostream>
 
-using dsec = std::chrono::duration<double>;
 
 int main() 
 {
@@ -13,6 +12,7 @@ int main()
 
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 
+	using dsec = std::chrono::duration<double>;
 	auto deferred_sec = static_cast<dsec>(lazy_async.get() - tp_start).count();
 	auto eager_sec    = static_cast<dsec>(eager_async.get() - tp_start).count();
 
