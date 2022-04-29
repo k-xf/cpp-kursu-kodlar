@@ -6,12 +6,18 @@ public:
 	void func()
 	{
 		std::lock_guard<std::mutex> guard{mtx};
+		std::cout << "func cagrildi" << std::endl;
 		foo();
+		std::cout << "func sona eriyor" << std::endl;
+
 	}
 
 	void foo()
 	{
 		std::lock_guard<std::mutex> guard{mtx};
+		std::cout << "foo cagrildi" << std::endl;
+		std::cout << "foo sona eriyor" << std::endl;
+
 	}
 
 private:
@@ -30,9 +36,3 @@ int main()
 	}
 }
 
-/*
-	The C++ standard library permits the second attempt to throw a std::system_error 
-	with the error code resource_deadlock_would_occur 
-	if the platform detects such a deadlock.
-	But this is not required and is often not the case.
-*/
