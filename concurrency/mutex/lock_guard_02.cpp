@@ -7,7 +7,7 @@ std::mutex print_mutex;
 
 void print(const std::string& s)
 {
-	std::lock_guard<std::mutex> l(print_mutex);
+	std::lock_guard<std::mutex> guard(print_mutex);
 	
 	for (char c : s) {
 		std::cout.put(c);
