@@ -49,3 +49,9 @@ void func()
     }
 }
 ```
+
+_std::time_mutex_ kullanarak _constructor_'a bir durayion geçebiliriz:
+
+```
+std::unique_lock<std::timed_mutex> lock(mutex, std::chrono::seconds(1));
+```
