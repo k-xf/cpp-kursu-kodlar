@@ -4,7 +4,13 @@ _std::unique_lock_ <mutex> başlık dosyasında tanımlanan bir sınıf şablonu
 template <class Mutex>
 class unique_lock;
 ```
-The class unique_lock is a general-purpose mutex ownership wrapper allowing deferred locking, time-constrained attempts at locking, recursive locking, transfer of lock ownership, and use with condition variables.
+
+
+_std::unique_lock_ genel amaçlı bir mutex sarmalayıcısı. Aşağıdaki olanakları sağlıyor:
+
++ deferred locking (sınıfın kurucu işlevi ile kilidi edinmek yerine daha sonra nesnenin _lock_ işlevini çağırabiliyoruz.)
+
+, time-constrained attempts at locking, recursive locking, transfer of lock ownership, and use with condition variables.
 
 The class unique_lock is movable, but not copyable -- it meets the requirements of MoveConstructible and MoveAssignable but not of CopyConstructible or CopyAssignable.
 
