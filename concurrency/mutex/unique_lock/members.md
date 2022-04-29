@@ -18,7 +18,7 @@ Move constructor; moves lock state from rv to l (rv has no associated mutex anym
 Unlocks the mutex, if any locked, and destroys the lock guard.<br><br>
 **unique_lock lock = rv;<br>**
 Move assignment; moves the lock state from rv to lock (rv has no associated mutex anymore).<br><br>
-**swap(l1,l2);<br>**
+**swap(lock1, lock2);<br>**
 Swaps locks.<br><br>
 **lock1.swap(lock2);**<br>
 Swaps locks.<br><br>
