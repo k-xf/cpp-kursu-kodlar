@@ -17,4 +17,7 @@ _std::unique_lock_ genel amaçlı bir mutex sarmalayıcısı. Aşağıdaki olana
 _std::unique_lock_ nesneleri kopyalanamıyor ancak taşınabiliyor.
   
  std::lock_guard ile aynı arayüze sahip ama daha fazla olanak sağlıyor. Kilitlemenin ne zaman ve nasıl olacağını belirleyebiliyoruz
-
+  
+Bu sınıfın temel avantajı şu:
+std::unique_lock nesnesinin destructor'ı çağrıldığında kilit edinilmiş durumda ise kilidi serbest bırakır, kilit edinilmiş durumda değil ise destructor bir şey yapmaz.
+ 
