@@ -15,4 +15,6 @@ _std::unique_lock_ genel amaçlı bir mutex sarmalayıcısı. Aşağıdaki olana
 + **condition variables ile kullanılma olanağı**
 
 _std::unique_lock_ nesneleri kopyalanamıyor ancak taşınabiliyor.
+  
+ std::lock_guard ile aynı arayüze sahip ama daha fazla olanak sağlıyor. Kilitlemenin ne zaman ve nasıl olacağını belirleyebiliyoruz
 
