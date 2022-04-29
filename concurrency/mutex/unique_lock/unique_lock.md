@@ -35,3 +35,17 @@ void func()
 }
 
 ```
+  
+_mutex_ türü olarak _std::time_mutex_ kullanarak belirli süre bir kilidi edinmeye çalışmasını sağlayabiliyoruz:
+
+```
+std::mutex mtx;
+
+void func()
+{
+    std::unique_lock<std::mutex> guard(mtx, std::try_to_lock);
+    if (guard) { //kilit edinilmis ise
+
+    }
+}
+```
