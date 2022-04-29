@@ -14,7 +14,7 @@ Creates a lock guard for the mutex mtx and tries to lock it for duration dur.<br
 Creates a lock guard for the mutex mtx and tries to lock it until timepoint tp.<br><br>
 **unique_lock lock(rv);<br>**
 Move constructor; moves lock state from rv to l (rv has no associated mutex anymore).<br><br>
-**l.~unique_lock();**
+**lock.~unique_lock();**<br>
 Unlocks the mutex, if any locked, and destroys the lock guard.<br><br>
 **unique_lock lock = rv;<br>**
 Move assignment; moves the lock state from rv to lock (rv has no associated mutex anymore).<br><br>
