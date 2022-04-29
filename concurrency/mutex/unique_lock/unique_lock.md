@@ -12,7 +12,7 @@ _std::unique_lock_ genel amaçlı bir mutex sarmalayıcısı. Aşağıdaki olana
 + **time-constrained attempts at locking**
 + **recursive locking**
 + **kilit mülkiyetinin transferi**
-+** condition variables ile kullanılma olanağı**
++ **condition variables ile kullanılma olanağı**
 
 _std::unique_lock_ nesneleri kopyalanamıyor ancak taşınabiliyor.
 
