@@ -6,7 +6,7 @@
 + A recursive mutex has more overhead than a nonrecursive mutex.
 + Code that uses recursive mutexes can often be more difficult to understand and therefore more prone to bugs.
 + Consequently, the use of recursive mutexes should be avoided if possible.
-+ + recursive mutexes provided by classes std::recursive_mutex and std::recursive_timed_mutex.
++ recursive mutexes provided by classes std::recursive_mutex and std::recursive_timed_mutex.
 + recursive_mutex class similar to std::mutex class except allows relocking.
 + recursive_timed_mutex class similar to std::timed_mutex class except allows relocking.
 + implementation-defined limit to number of levels of locking allowed by recursive mutex.
