@@ -3,4 +3,5 @@ _race condition_ bir sorun oluşturmak zorunda değil. (_benign_ olabilir). Anca
 + **data race** kötü (benign olmayan) bir _race condition_. _data race_ tanımsız davranış oluşturuyor.
 + **deadlock:** iki ya da daha fazla sayıda _thread_ ilerleme kaydedemiyor. Her ikisi de diğerinin tuttuğu kaynağı bekleyecek şekilde bloke oluyorlar.
 race condition
-+ **livelock:** iki ya da daha fazla thread (bloke olmadan) birbirlerinin tuttuğu kaynakları beklediklerinden ilerleme kaydedemiyorlar.
++ **livelock:** iki ya da daha fazla _thread_ (bloke olmadan) birbirlerinin tuttuğu kaynakları beklediklerinden ilerleme kaydedemiyorlar.
++ **critical section** Birden fazla _thread_ tarafından eş zamanlı olarak erişilmemesi gereken bir kaynak içeren bir kod parçası.
