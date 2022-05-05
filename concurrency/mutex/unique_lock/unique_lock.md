@@ -8,7 +8,7 @@ class unique_lock;
 
 _std::unique_lock_ genel amaçlı bir mutex sarmalayıcısı. Aşağıdaki olanakları sağlıyor:
 
-+ **deferred locking** (sınıfın kurucu işlevi ile kilidi edinmek yerine daha sonra nesnenin _lock_ işlevini çağırabiliyoruz.)
++ **deferred locking** (sınıfın kurucu işlevi ile kilidi edinebildiğimiz gibi daha sonra nesnenin _lock_ işlevini de çağırabiliyoruz.)
 + **time-constrained attempts at locking**
 + **recursive locking**
 + **kilit mülkiyetinin transferi**
