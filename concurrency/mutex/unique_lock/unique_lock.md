@@ -16,12 +16,12 @@ _std::unique_lock_ genel amaçlı bir mutex sarmalayıcısı. Aşağıdaki olana
 
 _std::unique_lock_ nesneleri kopyalanamıyor ancak taşınabiliyor.
   
- std::lock_guard ile aynı arayüze sahip ama daha fazla olanak sağlıyor. Kilitlemenin ne zaman ve nasıl olacağını belirleyebiliyoruz
+ _std::lock_guard_ ile aynı arayüze sahip ama daha fazla olanak sağlıyor. Kilitlemenin ne zaman ve nasıl olacağını belirleyebiliyoruz.
   
 Bu sınıfın temel avantajı şu:
 _std::unique_lock_ nesnesinin _destructor_'ı çağrıldığında kilit edinilmiş durumda ise kilidi serbest bırakır, kilit edinilmiş durumda değil ise _destructor_ bir şey yapmaz.
  
-sınıfın _constructor_'una argüman olarak _try_to_lock_ geçersek kurucu işlev kilidi edinmeye çalışır ama _thread_'i bloke etmez.
+sınıfın kurucu işlevine argüman olarak _try_to_lock_ geçersek kurucu işlev kilidi edinmeye çalışır ama _thread_'i bloke etmez.
 
 ```
 std::mutex mtx;
@@ -50,7 +50,7 @@ void func()
 }
 ```
 
-_std::time_mutex_ kullanarak _constructor_'a bir durayion geçebiliriz:
+_std::time_mutex_ kullanarak kurucu işleve bir _std::duration_ geçebiliriz:
 
 ```
 std::unique_lock<std::timed_mutex> lock(mutex, std::chrono::seconds(1));
