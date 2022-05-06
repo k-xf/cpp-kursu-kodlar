@@ -5,6 +5,7 @@
 	fonksiyon bu durumda false değer dönüyor.
 	böylece kilidi edinemediğinde / kilidi edinene kadar
 	başka işlemler yapabiliyoruz.
+	Kilidi edinmiş bir thread'in tekrar try_lock fonksiyonunu çağırması tanımsız davranış
 */
 
 #include <iostream>
