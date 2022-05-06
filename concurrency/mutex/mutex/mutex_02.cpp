@@ -1,18 +1,22 @@
 #include <mutex>
 #include <iostream>
 #include <thread>
+#include <chrono>
 
 std::mutex mtx;
 
 void print_block(int n, char c)
 {
-	mtx.lock();
+	using namespace std::literals;
+
+	//mtx.lock();
 	for (int i = 0; i < n; ++i) {
+		std::this_thread::sleep_for(5ms);
 		std::cout << c;
 	}
 	std::cout << '\n';
 
-	mtx.unlock();
+	//mtx.unlock();
 }
 
 int main()
