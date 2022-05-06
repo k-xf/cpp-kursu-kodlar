@@ -8,7 +8,7 @@ std::mutex mtx;
 void func()
 {
 	//mtx.lock();
-	for (unsigned long long i = 0; i < 1'000'000; ++i) {
+	for (unsigned long long i = 0; i < 1'000'000ull; ++i) {
 		++counter;
 	}
 	//mtx.unlock();
