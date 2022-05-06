@@ -1,7 +1,7 @@
 #### std::shared_mutex
 
 + C++17 standartları ile eklendi.
-+ _std::shered_mutes _iki ayrı erişim seviyesine sahip <br>
++ _std::shared_mutex _iki ayrı erişim seviyesine sahip <br>
 **paylaşımlı _(shared)_ :**  birden  fazla _thread_ aynı _mutex_'in sahipliğini paylaşabilir.<br>
 exclusive - yalnızca bir thread mutex'e sahip olabilir<br>
 
