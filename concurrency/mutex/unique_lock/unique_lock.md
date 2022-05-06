@@ -6,22 +6,21 @@ class unique_lock;
 ```
 
 
-_std::unique_lock_ genel amaçlı bir mutex sarmalayıcısı. Aşağıdaki olanakları sağlıyor:
+_std::unique_lock_ genel amaçlı bir mutex sarmalayıcısı. mutex'in edinilmesi için farklı stratejiler sunuyor: 
 
 + **deferred locking** (sınıfın kurucu işlevi ile kilidi edinebildiğimiz gibi daha sonra nesnenin _lock_ işlevini de çağırabiliyoruz.)
 + **belirli süreyle sınırlandırılmış kilitleme girişimi olanağı**
-+ **birden fazla kilitleme**
++ **birden fazla kez kilitleme**
 + **kilit mülkiyetinin transferi**
 + **condition variables ile kullanılma olanağı**
 
-_std::unique_lock_ nesneleri kopyalanamıyor ancak taşınabiliyor.
-  
- _std::lock_guard_ ile aynı arayüze sahip ama daha fazla olanak sağlıyor. Kilitlemenin ne zaman ve nasıl olacağını belirleyebiliyoruz.
-  
-Bu sınıfın temel avantajı şu:
+Ayrıca
++ _std::unique_lock_ nesneleri kopyalanamıyor ancak taşınabiliyor. _std::lock_guard_ sınıf nesnelerinin taşınamadığını hatırlayalım.
++ _std::lock_guard_ ile aynı arayüze sahip ama daha fazla olanak sağlıyor. Kilitlemenin ne zaman ve nasıl olacağını belirleyebiliyoruz.
++ Bu sınıfın temel avantajı şu:
 _std::unique_lock_ nesnesinin _destructor_'ı çağrıldığında kilit edinilmiş durumda ise kilidi serbest bırakır, kilit edinilmiş durumda değil ise _destructor_ bir şey yapmaz.
  
-sınıfın kurucu işlevine argüman olarak _try_to_lock_ geçersek kurucu işlev kilidi edinmeye çalışır ama _thread_'i bloke etmez.
++ sınıfın kurucu işlevine argüman olarak _try_to_lock_ geçersek kurucu işlev kilidi edinmeye çalışır ama _thread_'i bloke etmez.
 
 ```
 std::mutex mtx;
