@@ -5,7 +5,8 @@
 	fonksiyon bu durumda false değer dönüyor.
 	böylece kilidi edinemediğinde / kilidi edinene kadar
 	başka işlemler yapabiliyoruz.
-	Kilidi edinmiş bir thread'in tekrar try_lock fonksiyonunu çağırması tanımsız davranış
+	Kilidi edinmiş bir thread'in tekrar try_lock fonksiyonunu çağırması tanımsız davranış.
+	eğer aynı thread'in aynı mutex'i birden fazla kez kilitlemesi gerekiyor ise std::recursive_mutex kullanılmalı
 */
 
 #include <iostream>
