@@ -55,4 +55,5 @@ _std::time_mutex_ kullanarak kurucu işleve bir _std::duration_ geçebiliriz:
 std::unique_lock<std::timed_mutex> lock(mutex, std::chrono::seconds(1));
 ```
 
- + sınıfın kurucu işlevine argüman olarak std::defer_lock geçilirse mutex'i edinmez. daha sonra sınıfın lock fonksiyonlarından birini çağırmamız gerekiyor.
++ sınıfın kurucu işlevine argüman olarak _std::defer_lock_ geçilirse _mutex_'i edinmez. daha sonra sınıfın _lock_ fonksiyonlarından birini çağırmamız gerekiyor.
++ sınıfın kurucu işlevine _std::adopt_lock_ geçilirse ilgili _thread_'in zaten bu _mutex_'i edindiği varsayılır.
