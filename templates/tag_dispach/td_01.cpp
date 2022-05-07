@@ -18,7 +18,7 @@ template<typename T>
 void func(T x)
 {
 	func_impl(x, typename std::is_integral<T>::type{});
-	//func_impl(x, typename std::is_integral<T>{});
+	//func_impl(x, typename std::is_integral<T>{});  //kalıtım
 }
 
 
