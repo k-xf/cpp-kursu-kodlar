@@ -18,15 +18,15 @@ An atomic type provides guarantees regarding:
 - The default memory order is sequentially consistent (std::memory_order_seq_cst).
 - Initially, only this default will be considered.
 
-- std::atomic_flag provides flag with basic atomic operations
-- flag can be in one of two states: set (i.e., true) or clear (i.e., false)
-- two operations for flag:
-	- test and set: set state to true and query previous state
+- std::atomic_flag türü sadece temel işlemler sunar.
+- Bu türden bir değişken (flag) yalnızca iki durumda olabilir. Ya _set_ edilmiş durumda (true) ya da _clear_ edilmiş durumda (yani _false_)
+- bu tür 2 operasyon sunar:
+	- _test_and_set_: state'i true yaparken set işleminden önceki değeri sorgular _(get eder)_. 
 	- clear: set state to false
-- default constructor initializes flag to unspecified state
-- not movable and not copyable
+- varsayılan kurucu işlev (default ctor) nesneyi 
+- kopyalanamayan ve taşınamayan bir türdür.
 - implementation-defined macro ATOMIC_FLAG_INIT can be used to set flag to clear state in (static or automatic) initialization using statement of the form 
 	std::atomic_flag f = ATOMIC_FLAG_INIT; 
-- guaranteed to be lock free
+- bir kilit mekanizmasının kullanılmadığı garanti edilmektedir.
 - intended to be used as building block for higher-level synchronization primitives, such as spinlock mutex
 
