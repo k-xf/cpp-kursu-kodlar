@@ -27,6 +27,6 @@ An atomic type provides guarantees regarding:
 - kopyalanamayan ve taşınamayan bir türdür.
 - implementation-defined macro ATOMIC_FLAG_INIT can be used to set flag to clear state in (static or automatic) initialization using statement of the form 
 	std::atomic_flag f = ATOMIC_FLAG_INIT; 
-- bir kilit mekanizmasının kullanılmadığı garanti edilmektedir.
-- intended to be used as building block for higher-level synchronization primitives, such as spinlock mutex
+- Bir kilit mekanizmasının kullanılmadığı garanti edilmektedir.
+- _std::atomic_flag_, _spinlock mutex_ gibi daha yüksek seviyeli senkronizsayon mekanizmalarında araç olarak kullanılır.
 
