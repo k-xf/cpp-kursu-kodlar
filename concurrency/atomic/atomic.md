@@ -1,11 +1,12 @@
 #### atomic
 
-- Threadler arasında veriyi paylaşırken "data race" oluşmaması için genellikle bir senkonizayon mekanizması gereklidir. (örneğin mutex kullanarak senkronizasyonu sağlamal).
-- Atomic types are another mechanism for providing synchronized access to data.
-- An operation that is indivisible is said to be atomic (i.e., no parts of any other operations can interleave with any part of an atomic operation).
-- Most processors support atomic memory operations via special machine instructions.
-- Atomic memory operations cannot result in torn reads or torn writes.
-- The standard library offers the following types in order to provide support for atomic memory operations:
-    - std::atomic_flag
-    - std::atomic
-- These types provide a uniform interface for accessing the atomic memory operations of the underlying hardware.
+- _Thread_'ler arasında veriyi paylaşırken _"data race"_ oluşmaması için genellikle bir senkronizasyon mekanizması gereklidir. (örneğin _mutex_ kullanarak senkronizasyonu sağlamak).
+- Veriye senkronize edilmiş erişim sağlamanın başka bir yolu da atomik türleri kullanmaktır.
+- Bölünemeyecek bir işleme "atomik işlem" denir. Atomik bir işlem arasına başka bir işlem giremez. Örneğin arttırma işlemi atomik ise bu işleme tabi tutulan bir değişken diğer _thread_'ler tarafından ya işlemden önceki ya da işlemden sonraki değeri ile görülebilir.
+ İşlemcilerin çoğunda atomik bellek işlemleri özel makine komutları ile gerçekleştirilir.
+- atomik bellek işlemleri _"torn read"_ ya da _"torn write"_ durumu oluşturmazlar.
+- C++ standart kütüphanesi atomik bellek işlemleri için aşağıdaki atomik türleri sunmaktadır:
+    - _std::atomic_flag_
+    - _std::atomic_
+- Bu türler donanımın sağladığı atomik operasyonlar için uniform bir arayüz sunarlar.
+
