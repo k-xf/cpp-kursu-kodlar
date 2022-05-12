@@ -10,3 +10,23 @@
     - _std::atomic_
 - Bu türler donanımın sağladığı atomik operasyonlar için uniform bir arayüz sunarlar.
 
+An atomic type provides guarantees regarding:
+	- atomicity; and
+	- ordering.
+- An ordering guarantee specifies the manner in which memory operations can become visible to threads.
+- Several memory ordering schemes are supported by atomic types.
+- The default memory order is sequentially consistent (std::memory_order_seq_cst).
+- Initially, only this default will be considered.
+
+- std::atomic_flag provides flag with basic atomic operations
+- flag can be in one of two states: set (i.e., true) or clear (i.e., false)
+- two operations for flag:
+	- test and set: set state to true and query previous state
+	- clear: set state to false
+- default constructor initializes flag to unspecified state
+- not movable and not copyable
+- implementation-defined macro ATOMIC_FLAG_INIT can be used to set flag to clear state in (static or automatic) initialization using statement of the form 
+	std::atomic_flag f = ATOMIC_FLAG_INIT; 
+- guaranteed to be lock free
+- intended to be used as building block for higher-level synchronization primitives, such as spinlock mutex
+
