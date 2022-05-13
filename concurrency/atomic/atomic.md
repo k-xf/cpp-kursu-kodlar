@@ -19,14 +19,16 @@ Atomik bir tür aşağıdaki garantileri sağlar:
 
 
 - std::atomic_flag türü sadece temel işlemler sunar.
-- Bu türden bir değişken (flag) yalnızca iki durumda olabilir. Ya _set_ edilmiş durumda (true) ya da _clear_ edilmiş durumda (yani _false_)
+- Bu türden bir değişken _(flag)_ yalnızca iki durumda olabilir. Ya _set_ edilmiş durumda (true) ya da _clear_ edilmiş durumda (yani _false_)
 - bu tür 2 operasyon sunar:
 	- _test_and_set_: state'i true yaparken set işleminden önceki değeri sorgular _(get eder)_. 
 	- clear: set state to false
-- varsayılan kurucu işlev (default ctor) nesneyi 
+- varsayılan kurucu işlev (default ctor) nesneyi belirlenmemiş bir değerle başlatır.
 - kopyalanamayan ve taşınamayan bir türdür.
-- implementation-defined macro ATOMIC_FLAG_INIT can be used to set flag to clear state in (static or automatic) initialization using statement of the form 
-	std::atomic_flag f = ATOMIC_FLAG_INIT; 
+- derleyiciye bağlı olan _ATOMIC_FLAG_INIT_ makrosu bu türden bir değişkene ilk değer vermek için kullanılır: 
+```
+std::atomic_flag f = ATOMIC_FLAG_INIT; 
+```
 - Bir kilit mekanizmasının kullanılmadığı garanti edilmektedir.
 - _std::atomic_flag_, _spinlock mutex_ gibi daha yüksek seviyeli senkronizsayon mekanizmalarında araç olarak kullanılır.
 
