@@ -19,3 +19,29 @@ _happens-before_ ilişkisi "zamansal olarak daha önce gerçekleşme" ilişkisin
 Eğer _A_ operasyonu _B_ operasyonuna göre zamansal açıdan daha önce gerçekleştiriliyor ise bu _A_'nın etkilerinin _B_'yi yürütecek _thread_'de _B_ yürütülmeden önce görülür olma garantisi değildir. _caching_, _store buffer_ vs gibi mekanizmalar operasyonun etkilerinin diğer _thread_'lerde görülmesini geciktirebilir.
 
 Daha erken zamanda oluşma garantisi _happens-before_ ilşkisi için gerek şarttır ancak yeter şart değildir.
+
+#### sequenced before ilişkisi
+sequenced-before ilişkisi aynı _thread_'deki işlemlere ilişkindir.
+
+- _Sequenced-before_ ilişkisi geçişkendir _(transitive)_ 
+A _sequenced before_ B  doğru ise
+B _sequenced before_ C  doğru ise
+A _sequenced before_ C  doğrudur.
+
+```
+x = 1; 		// A
+y = 2; 		// B
+z = x + 1;	// C
+```
+
+Aşağıdaki kodu ele alalım:
+
+```
+y = a * x + b; // (y = ((a * x) + b);
+```
+Bu ifadede 3 işlem var: çarpma toplama ve atama.
+Burada 
+çarpma işlemi  _sequenced before_ toplama işlemi
+toplama işlemi _sequenced before_ atama işlemi
+dolayısıyla 
+atama işlemi _sequenced before_ toplama işlemi
