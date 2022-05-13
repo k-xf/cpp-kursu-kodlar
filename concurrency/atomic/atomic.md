@@ -10,13 +10,13 @@
     - _std::atomic_
 - Bu türler donanımın sağladığı atomik operasyonlar için uniform bir arayüz sunarlar.
 
-An atomic type provides guarantees regarding:
-	- atomicity; and
-	- ordering.
-- An ordering guarantee specifies the manner in which memory operations can become visible to threads.
-- Several memory ordering schemes are supported by atomic types.
-- The default memory order is sequentially consistent (std::memory_order_seq_cst).
-- Initially, only this default will be considered.
+Atomik bir tür aşağıdaki garantileri sağlar:
+	- atomicity (atomiklik - bölünmezlik)
+	- ordering. (bellek işlemlerinin sıralanması - önceliği sonralığı)
+- Sıralı işlem garantisi bellek işlemlerinin diğer thread'lerde ne şekilde görülebileceği garantisidir.
+- atomik türler birbirinden bellek işlemlerinin sıralanması konusunda farklı garantiler sunarlar.
+- Varsayılan  düzen _"sequentially consistency_"'dir. 
+
 
 - std::atomic_flag türü sadece temel işlemler sunar.
 - Bu türden bir değişken (flag) yalnızca iki durumda olabilir. Ya _set_ edilmiş durumda (true) ya da _clear_ edilmiş durumda (yani _false_)
