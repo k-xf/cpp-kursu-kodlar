@@ -34,14 +34,20 @@ y = 2; 		// B
 z = x + 1;	// C
 ```
 
-Aşağıdaki kodu ele alalım:
+Aşağıdaki kodu ele alalım:<br>
 
 ```
 y = a * x + b; // (y = ((a * x) + b);
 ```
-Bu ifadede 3 işlem var: çarpma toplama ve atama.
-Burada 
-çarpma işlemi  _sequenced before_ toplama işlemi
-toplama işlemi _sequenced before_ atama işlemi
-dolayısıyla 
-atama işlemi _sequenced before_ toplama işlemi
+Bu ifadede 3 işlem var: çarpma toplama ve atama. Burada<br>
+çarpma işlemi  _sequenced before_ toplama işlemi <br>
+toplama işlemi _sequenced before_ atama işlemi <br>
+dolayısıyla <br>
+atama işlemi _sequenced before_ toplama işlemi <br>
+
+Eğer bir _thread_ için <br>
+A _sequenced before_ B doğru ise <br>
+A _happens before_ B doğrudur.<br>
+
+Bu şu anlama geliyor:<br>
+_sequenced-before_ ilişkisi aynı zamanda _thread_ içindeki _(intra-thread)_ happens before ilişkisine karşılık geliyor.<br>
