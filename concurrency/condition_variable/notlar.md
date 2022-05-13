@@ -8,4 +8,6 @@
 + Bir _condition variable_ bir _event_ ile ilişkilendirilir.
 + Bir _event_'i beklemek isteyen bir _thread_ _condition variable_'ın _wait_ fonksiyonunu çağırır. 
 + Bir _thread_ bir _event_'in gerçekleşmiş olduğunu bir ya da birden fazla _thread_'e bildirmek için _condition variable_'ın _notify_one_ ya da _notify_all_ fonksiyonlarından birini çağırır. 
++ Bildirimi alan _thread_ çalışmaya devam ettiğinde istenen koşulun sağlanmış olma garantisi yoktur. Başka bir _thread_ koşulun değişmesini sağlamış olabilir ya da _"spurious wakeup"_ denilen durum oluşmuş olabilir. Bu nedenle uyanan _thread_'in koşulun sağlanmış olup olmadığını kontrol etmesi gerekir.
+
 
