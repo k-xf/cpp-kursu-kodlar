@@ -1,11 +1,11 @@
-+ sometimes may want to perform action only once in code executed in multiple threads.
-+ can be achieved through use of std::once_flag type in conjunction with std::call_once template function.
-+ std::once_flag class represents flag used to track if action performed.
-+ declaration of _std::call_once_:
++ Bazı durumlarda bir kodun birden fazla thread tarafından tek bir kez çalıştırılmasını isteriz.
++ Bunu gerçekleştirmek için std::once_flag sınıfı türünden bir değişkeni std::call_once fonksiyon şablonu ile birlikte kullanabiliriz.
++ _std::once_flag_ değişkeni bir eylemin gerçekleşip gerçekleşmediği bilgisini tutan bir bayrak olarak kullanılır.
++ _std::call_once_ fonksiyonunun bildirimi şöyle
 ```
 template <class Callable, class... Args>
 void call_once(std::once_flag& flag, Callable&& f, Args&&... args);
 ```
-+ std::call_once invokes f only once based on value of flag object.
-+ first invocation of f is guaranteed to complete before any threads return from call_once.
-+ useful for one-time initialization of dynamically generated objects.
++ _std::call_once_ _f_ işlevini _flag_ nesnesini kullanarak yalnızca bir kez çağırır.
++ f işlevinin ilk kez çağrılması diğer _thread_'lerin _std::call_once_ çağrılarının return etmesinden önce gerçekleşir.
++ Tipik kullanım senaryorsu, dinamik ömürlü nesnelerin yalnızca bir kez _initialize_ edilmesidir.
