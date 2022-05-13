@@ -17,7 +17,7 @@ Atomik bir tür aşağıdaki garantileri sağlar:
 - atomik türler birbirinden bellek işlemlerinin sıralanması konusunda farklı garantiler sunarlar.
 - Varsayılan  düzen _"sequentially consistency_"'dir. 
 
-
+#### std::atomic_flag
 - std::atomic_flag türü sadece temel işlemler sunar.
 - Bu türden bir değişken _(flag)_ yalnızca iki durumda olabilir. Ya _set_ edilmiş durumda (true) ya da _clear_ edilmiş durumda (yani _false_)
 - bu tür 2 operasyon sunar:
@@ -32,3 +32,11 @@ std::atomic_flag f = ATOMIC_FLAG_INIT;
 - Bir kilit mekanizmasının kullanılmadığı garanti edilmektedir.
 - _std::atomic_flag_, _spinlock mutex_ gibi daha yüksek seviyeli senkronizsayon mekanizmalarında araç olarak kullanılır.
 
+#### std::atomic
+_std::atomic_ bir sınıf şablonudur. Bu sınıf şablonundan elde edilen türler atomik operasyonlar sunar.
+
+```
+template <typename T>
+struct atomic;
+```
+   
