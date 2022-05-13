@@ -19,11 +19,11 @@ Atomik bir tür aşağıdaki garantileri sağlar:
 
 #### std::atomic_flag
 - std::atomic_flag türü sadece temel işlemler sunar.
-- Bu türden bir değişken _(flag)_ yalnızca iki durumda olabilir. Ya _set_ edilmiş durumda (true) ya da _clear_ edilmiş durumda (yani _false_)
+- Bu türden bir değişken _(flag)_ yalnızca iki durumda olabilir. Ya _set_ edilmiş durumda _(true)_ ya da _clear_ edilmiş durumda (yani _false_)
 - bu tür 2 operasyon sunar:
-	- _test_and_set_: state'i true yaparken set işleminden önceki değeri sorgular _(get eder)_. 
-	- clear: set state to false
-- varsayılan kurucu işlev (default ctor) nesneyi belirlenmemiş bir değerle başlatır.
+	- _test_and_set_: _state_'i _true_ yaparken set işleminden önceki değeri sorgular _(get eder)_. 
+	- clear: _state_' i _false_ değere çekiyor.
+- varsayılan kurucu işlev _(default ctor)_ nesneyi belirlenmemiş bir değerle başlatır.
 - kopyalanamayan ve taşınamayan bir türdür.
 - derleyiciye bağlı olan _ATOMIC_FLAG_INIT_ makrosu bu türden bir değişkene ilk değer vermek için kullanılır: 
 ```
@@ -39,4 +39,12 @@ _std::atomic_ bir sınıf şablonudur. Bu sınıf şablonundan elde edilen türl
 template <typename T>
 struct atomic;
 ```
-   
+- tam sayı türleri ve _pointer_ türleri için bu sınıfın _"partial specialization"_ları var.
+
+- T türünden bir nesne için atomik operasyonlar sağlıyor.
+- Tüm temel türler _(fundamental types)_ için standart kütüphane tarafından _"full specialization"_ sağlanmış durumdda.
+- Template argümanı olarak kullanılacak türün _"trivially copyable"_ ve "bitwise equality comparable" olması gerekiyor.
+- Kilit sistemi kullanılmama _(lock-free)_ olma garantisi verilmiyor. Ancak platformların çoğunda temel türler olan template argümanları söz konusu olduğunda bir kilit sistemi kullanılmadan _(lock-free)_ gerçekleştiriliyor.
+- Kopyalama ya da taşıma yoluyla nesne oluşturulamıyor. _(not copy-constructible - not move constructible)_
+- Atama yapılabilir (assignable) bir tür. Ancak atama operatörü referans değil değer döndürüyor.
+- varsayılan bellek düzeni (memory order) _std::memory_order_seq_cst_.
