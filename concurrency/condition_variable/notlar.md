@@ -1,6 +1,6 @@
 #### condition variable
 
-- _condition variable_ bir başka _thread_'in tetikleyeceği bir _event_'i beklememenin temel mekanizmasıdır. 
+- _condition variable_ bir başka _thread_'in tetikleyeceği bir _event_'i beklemenin temel mekanizmasıdır. 
 - Birden fazla _thread_'in kullanıldığı programlarda çoğu zaman bir _thread_'in belirli bir _event_ oluşuncaya kadar beklemesi gerekir (giriş çıkış işleminin tamamlanması ya da bir verinin hazırlanması gibi)
 - Bir _thread_'in bir _event_'in gerçekleşip gerçekleşmediğini sorgulaması işlemci zamanının boşa harcanmasına dolayısıyla verimin düşmesine neden olabilir.
 - Böyle durumlarda bekleyen _thread_'in bloke olması ve ilgili event gerçekleştikten sonra tekrar çalışmaya başlaması genellikle daha iyidir.
