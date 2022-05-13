@@ -12,4 +12,9 @@
 - _condition_variable_ olarak _std::condition_variable_ sınıfı türünden bir nesne kullanılır.
 - _std::condition_variable_ nesneleri kopyalanamaz ve taşınamaz _(not copyable - not moveable)_.
 - sınıfın _wait, wait_for_ ya da _wait_until_ üye fonksiyonları ile koşulun sağlanması beklenir. 
-
+- sınıfın _notify_one_ ve _notify_all_ üye fonksiyonları ile bekleyen _thread_'lere koşulun oluştuğu bildirilir (signal).
+- uyanan _thread_'in koşulu tekrar sınaması gerekir, çünkü
+  - _spurious wakeup_ oluşabilir.
+  - sinyalin alınması ve _mutex_'in edinilmesi zaman aralığı içinde başka bir _thread_ koşulu değiştirmiş olabilir.
+- _wait, wait_for_ ve _wait_until_ fonksiyonları _mutex_'i atomik olarak edinirler ve ilgili _thread_'i bloke ederler.
+- _notify_one_ ve _notify_all_ fonksiyonları atomiktir.
