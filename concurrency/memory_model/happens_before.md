@@ -1,6 +1,6 @@
 Bir programın çalışma zamanında nasıl davranacağını kestirebilmemiz için şunları bilebilmemiz gerekir:
-	- programdaki (farklı _thread_'ler tarafından gerçekleştirilebilecek) işlemlerin _(operasyonların)_ hangi sırayla yürütüleceği
-	- programdaki bir işlemin/işlemlerin sonuçlarının (başka _thread_'ler tarafından yürütülebilecek) diğer bir işlem/işlemler yapılmadan görülür olup olmadığı
+- programdaki (farklı _thread_'ler tarafından gerçekleştirilebilecek) işlemlerin _(operasyonların)_ hangi sırayla yürütüleceği
+- programdaki bir işlemin/işlemlerin sonuçlarının (başka _thread_'ler tarafından yürütülebilecek) diğer bir işlem/işlemler yapılmadan görülür olup olmadığı
 
 Tek bir _thread_'in söz konusu olduğu programlarda yukarıdaki soruların cevabı sezgisel olarak verilebilir.
 Birden fazla _thread_'in söz konusu olduğu programlarda ise bu durum çok daha karmaşıktır.
