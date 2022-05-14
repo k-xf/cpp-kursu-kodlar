@@ -9,7 +9,8 @@
 + Bir _event_'i beklemek isteyen bir _thread_ _condition variable_'ın _wait_ fonksiyonlarından birini çağırır. _(wait, wait\_for, wait\_until)_
 + Bir _thread_ _(producer)_ bir _event_'in gerçekleşmiş olduğunu bir ya da birden fazla _thread_'e _(consumers)_ bildirmek için _condition variable_'ın _notify_one_ ya da _notify_all_ fonksiyonlarından birini çağırır. 
 + Bildirimi alan _thread_ çalışmaya devam ettiğinde istenen koşulun sağlanmış olma garantisi yoktur. 
-Başka bir _thread_ koşulun değişmesini sağlamış olabilir ya da _"spurious wakeup"_ denilen durum oluşmuş olabilir. 
+Başka bir _thread_ koşulun değişmesini sağlamış olabilir ya da _"spurious wakeup"_ denilen durum oluşmuş olabilir. (Bekleyen bir _thread_'in aslında diğer taraftan bir bildirim almadan uyanmasına "spurious wake" denir.)
+
 Bu nedenle uyanan _thread_'in koşulun sağlanmış olup olmadığını tekrar kontrol etmesi gerekir.
 - _condition_variable_ olarak _std::condition_variable_ sınıfı türünden bir nesne kullanılır.
 - _condition_variable_ sınıfı _\<condition_variable\>_ başlık dosyasında tanımlanmıştır. _std::condition_variable_ nesneleri kopyalanamaz ve taşınamaz _(not copyable - not moveable)_.
@@ -40,4 +41,15 @@ Bekleyen bir _thread_, önce _std::unique\_lock_ kullanarak (aynı) _mutex_'i ed
 _std::condition\_variable_ sınıfı yalnızca _std::unique\_lock<std::mutex>_ ile kullanılabilir. Bu şekilde kullanım zorunluluğu bazı platformlarda en yüksek verimle çalışmasını sağlar. _std::condition\_variable_any_ sınıfı ise _BasicLockable_ niteliğini sağlayan herhangi bir nesneyle _(örneğin std::shared\_lock)_ çalışabilmesini sağlar.<br>
 _std::condition\_variable_ sınıfının _wait, wait\_for, wait\_until, notify_one ve notify\_all_ üye fonksiyonları birden fazla _thread_ tarafından eş zamanlı çağrılabilir.
 
+_std::condition_variable_ sınıfının _wait_ üye fonksiyonu, bloke olmadan beklemeye _(busy wait)_ karşı bir optimizasyon olarak görülebilir. _wait_ fonksiyonunu (ideal olmasa da) gerçekleştirimi şöyle olabilir:
 
+```
+template<typename Pred>
+void wait(std::unique_lock<std::mutex>& lk, Predicate pred) 
+{
+	while(!pred()) {
+		lk.unlock();
+		lk.lock();
+	}
+}
+```
