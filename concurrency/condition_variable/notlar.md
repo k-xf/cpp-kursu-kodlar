@@ -42,7 +42,7 @@ Bekleyen bir _thread_, önce _std::unique\_lock_ kullanarak (aynı) _mutex_'i ed
 _std::condition\_variable_ sınıfı yalnızca _std::unique\_lock<std::mutex>_ ile kullanılabilir. Bu şekilde kullanım zorunluluğu bazı platformlarda en yüksek verimle çalışmasını sağlar. _std::condition\_variable_any_ sınıfı ise _BasicLockable_ niteliğini sağlayan herhangi bir nesneyle _(örneğin std::shared\_lock)_ çalışabilmesini sağlar.<br>
 _std::condition\_variable_ sınıfının _wait, wait\_for, wait\_until, notify_one ve notify\_all_ üye fonksiyonları birden fazla _thread_ tarafından eş zamanlı çağrılabilir.
 
-_std::condition_variable_ sınıfının _wait_ üye fonksiyonu, bloke olmadan beklemeye _(busy wait)_ karşı bir optimizasyon olarak görülebilir. _wait_ fonksiyonunu (ideal olmasa da) gerçekleştirimi şöyle olabilir:
+_std::condition_variable_ sınıfının _wait_ üye fonksiyonu, bloke olmadan beklemeye _(busy wait)_ karşı bir optimizasyon olarak görülebilir. _wait_ fonksiyonunun (ideal olmasa da) gerçekleştirimi şöyle olabilir:
 
 ```
 template<typename Pred>
