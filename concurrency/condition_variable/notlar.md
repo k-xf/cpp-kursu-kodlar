@@ -26,10 +26,13 @@ Tipik işlem akışı şöyle gerçekleştirilir:
 - Kilit edinilmiş durumdayken paylaşılan değişkeni değiştirir. Yapılan değişikliğin bekleyen _thread_(ler)e doğru bir şekilde bildirilebilmesi için, paylaşılan değişken atomik olsa dahi değişikliğin kilit edinilmiş durumda yapılması gerekir.<br>
 - Bu amaçla tanımlanmış olan _std::condition_variable_ nesnesinin _notify_one_ ya da _notify_all_ fonksiyonlarından birini çağırır. Bu fonksiyonlar çağrıldığında kilitin edinilmiş durumda olması gerekmez.<br>
 
-Bekleyen bir _thread_, önce _std::unique\_lock_ kullanarak (aynı) _mutex_'i edinirler. Daha sonra aşağıdaki iki seçenekten birini uygularlar:
+Bekleyen bir _thread_, önce _std::unique\_lock_ kullanarak (aynı) _mutex_'i edinir. Daha sonra aşağıdaki iki seçenekten birini uygular:<br<
+- Birinci seçenek
+  - Değişikliği zaten yapılmış ve bildirimin de gerçekleşmiş olabileceği ihtimaline karşı önce kuşulu test eder.
+  - wait, wait\_for, ya da wait\_until fonksiyonlarından birini. çağırır. Çağrılan _wait_ fonksiyonu edinilmiş _mutex_'i otomatik olarak serbest bırakır ve _thread_'in çalışmasını durdurur.
+  - _condition\_variable_ nesnesinin _notify_ fonksiyonu çağrıldığında (ya da bekleme süresi dolduğunda) ya da bir _"spurious wakeup"_ oluştuğunda, _thread_ uyanır ve _mutex_ yeniden edinilir.
+ - Uyanan ve kilidi edinen _thread_'in koşulun gerçekleşip gerçekleşmediğini kontrol etmesi eğer bir _spurious wakeup_ söz konusu ise tekrar bekleme durumuna geçmesi gerekir.
 
-- Değişikliği zaten yapılmış ve bildirimin de gerçekleşmiş olabileceği ihtimaline karşı önce kuşulu test eder.
-- wait, wait\_for, ya da wait\_until fonksiyonlarından birini. çağırır. Çağrılan _wait_ fonksiyonu edinilmiş _mutex_'i otomatik olarak serbest bırakır ve _thread_'in çalışmasını durdurur.
-_ _condition\_variable_ nesnesinin _notify_ fonksiyonu çağrıldığında (ya da bekleme süresi dolduğunda) ya da bir _"spurious wakeup"_ oluştuğunda, _thread_ uyanır ve _mutex_ yeniden edinilir.
-_ Uyanan ve kilidi edinen _thread_'in koşulun gerçekleşip gerçekleşmediğini kontrol etmesi eğer bir _spurious wakeup_ söz konusu ise tekrar bekleme durumuna geçmesi gerekir.
+- İkinci seçenek olarak bekleyen _thread_
+  - bu işlemlerin hepsini sarmalayan _wait_ fonksiyonlarının bir _predicate_ alan _overload_'larından birini çağırır. 
 
