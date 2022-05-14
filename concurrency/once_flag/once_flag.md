@@ -1,5 +1,5 @@
-+ Bazı durumlarda bir kodun birden fazla thread tarafından tek bir kez çalıştırılmasını isteriz.
-+ Bunu gerçekleştirmek için std::once_flag sınıfı türünden bir değişkeni std::call_once fonksiyon şablonu ile birlikte kullanabiliriz.
++ Bazı durumlarda bir kodun birden fazla _thread_ tarafından tek bir kez çalıştırılmasını isteriz.
++ Bunu gerçekleştirmek için _std::once_flag_ sınıfı türünden bir değişkeni _std::call_once_ fonksiyon şablonu ile birlikte kullanabiliriz.
 + _std::once_flag_ değişkeni bir eylemin gerçekleşip gerçekleşmediği bilgisini tutan bir bayrak olarak kullanılır.
 + _std::call_once_ fonksiyonunun bildirimi şöyle
 ```
