@@ -6,7 +6,7 @@
 - Böyle durumlarda bekleyen _thread_'in bloke olması ve ilgili _event_ gerçekleştikten sonra tekrar çalışmaya başlaması genellikle daha iyidir.
 - Bir _condition variable_, belirli bir koşul _(condition)_ gerçekleşinceye kadar bir _thread_'in bloke olarak beklemesini sağlayan bir senkronizasyon yapısıdır.
 + Bir _condition variable_ bir _event_ ile ilişkilendirilir.
-+ Bir _event_'i beklemek isteyen bir _thread_ _condition variable_'ın _wait_ fonksiyonlarından birini çağırır. _(wait, wait\_for, wait_until) _
++ Bir _event_'i beklemek isteyen bir _thread_ _condition variable_'ın _wait_ fonksiyonlarından birini çağırır. _(wait, wait\_for, wait\_until) _
 + Bir _thread_ _(producer)_ bir _event_'in gerçekleşmiş olduğunu bir ya da birden fazla _thread_'e _(consumers)_ bildirmek için _condition variable_'ın _notify_one_ ya da _notify_all_ fonksiyonlarından birini çağırır. 
 + Bildirimi alan _thread_ çalışmaya devam ettiğinde istenen koşulun sağlanmış olma garantisi yoktur. 
 Başka bir _thread_ koşulun değişmesini sağlamış olabilir ya da _"spurious wakeup"_ denilen durum oluşmuş olabilir. 
@@ -35,4 +35,8 @@ Bekleyen bir _thread_, önce _std::unique\_lock_ kullanarak (aynı) _mutex_'i ed
 
 - İkinci seçenek olarak bekleyen _thread_
   - bu işlemlerin hepsini sarmalayan _wait_ fonksiyonlarının bir _predicate_ alan _overload_'larından birini çağırır. 
+
+_std::condition\_variable_ sınıfı yalnızca _std::unique\_lock<std::mutex>_ ile kullanılabilir. Bu şekilde kullanım zorunluluğu bazı platformlarda en yüksek verimle çalışmasını sağlar. _std::condition\_variable_any_ sınıfı ise _BasicLockable_ niteliğini sağlayan herhangi bir nesneyle _(örneğin std::shared\_lock)_ çalışabilmesini sağlar.<br>
+std::condition_variable sınıfının _wait, wait\_for, wait\_until, notify_one ve notify\_all_ üye fonksiyonları birden fazla _thread_ tarafından eş zamanlı çağrılabilir.
+
 
