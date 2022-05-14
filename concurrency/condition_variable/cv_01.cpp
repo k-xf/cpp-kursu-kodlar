@@ -15,13 +15,10 @@ void producer()
 
 void consumer()
 {
-	std::unique_lock ulock{ mtx, std::defer_lock };
-	while (true) {
-		ulock.lock();
-		if (shared_variable != 0) {
-			break;
-		}
+	std::unique_lock ulock{ mtx};
+	while (shared_variable == 0) {
 		ulock.unlock();
+		ulock.lock();
 	}
 
 	std::cout << "value is " << shared_variable << "\n";
@@ -30,7 +27,7 @@ void consumer()
 int main()
 {
 	std::thread t1{ producer };
-	std::thread t2{ consumer};
+	std::thread t2{ consumer };
 
 	t1.join();
 	t2.join();
