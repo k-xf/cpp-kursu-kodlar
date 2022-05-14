@@ -17,7 +17,7 @@ int main()
 	x = 1;
 	std::thread t(foo); // M1 (constructor kodunun çalışması tamamlanıyor)
 	t.join(); // M2 (join fonksiyonu return etmiş durumda)
-	assert(x == 2); // assertion doğrulanır. Çünkü A2 M1 ile senkronize
+	assert(x == 2); // assertion doğrulanır. Çünkü A2 M2 ile senkronize
 }
 
 
