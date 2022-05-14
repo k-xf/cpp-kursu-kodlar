@@ -10,7 +10,7 @@ Birden fazla _thread_'in söz konusu olduğu programlarda ise bu durum çok daha
 _A_ ve _B_ iki operasyon olsun. Bu operasyonlar aynı _thread_'de gerçekleştirilen operasyonlar olabildiği gibi farklı _thread_'lerde gerçekleştirilen operasyonlar da olabilir.
 Eğer _A_ operasyonunun etkileri _B_ operasyonunu yürütecek _thread_'de _B_ operasyonu yürütülmeden önce görülür durumda ise
 
-**A happens before B ** <br>
+**A happens before B** <br>
 
 garantisi söz konusudur.
 
