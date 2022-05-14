@@ -7,7 +7,7 @@
 std::unique_ptr<int> uptr;
 std::once_flag init_flag;
 
-void init() 
+void init()
 {
 	uptr = std::make_unique<int>(42);
 }
@@ -19,7 +19,7 @@ const int& get_value()
 }
 
 
-void do_work() 
+void do_work()
 {
 	const int& v = get_value();
 	assert(v == 42);
@@ -27,9 +27,13 @@ void do_work()
 
 int main()
 {
-	std::vector<std::jthread> threads;
-	
-	for (int i = 0; i < 4; ++i) {
-		threads.emplace_back(do_work);
+	std::vector<std::thread> tvec;
+
+	for (int i = 0; i < 10; ++i) {
+		tvec.emplace_back(do_work);
+	}
+
+	for (auto& th : tvec) {
+		th.join();
 	}
 }
