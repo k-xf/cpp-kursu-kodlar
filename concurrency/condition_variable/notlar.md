@@ -24,19 +24,20 @@ Bu nedenle uyanan _thread_'in koşulun sağlanmış olup olmadığını tekrar k
 Tipik işlem akışı şöyle gerçekleştirilir:
 - Tipik olarak _std::lock_guard_ kullanarak bir _mutex_'i edinir. <br>
 - Kilit edinilmiş durumdayken paylaşılan değişkeni değiştirir. Yapılan değişikliğin bekleyen _thread_(ler)e doğru bir şekilde bildirilebilmesi için, paylaşılan değişken atomik olsa dahi değişikliğin kilit edinilmiş durumda yapılması gerekir.<br>
-- Bu amaçla tanımlanmış olan _std::condition_variable_ nesnesinin _notify_one_ ya da _notify_all_ fonksiyonlarından birini çağırır. Bu fonksiyonlar çağrıldığında kilitin edinilmiş durumda olması gerekmez.<br>
+- Bu amaçla tanımlanmış olan _std::condition_variable_ nesnesinin _notify_one_ ya da _notify_all_ fonksiyonlarından birini çağırır. Bu fonksiyonlar çağrıldığında kilitin edinilmiş durumda olması gerekmez. Eğer bu fonksiyonlar kilit edinilmiş durumda çağrılırsa bildirim alan _thread_'ler kilidi edinemezler ve tekrar bloke olurlar.
+<br>
 
-Bekleyen bir _thread_, önce _std::unique\_lock_ kullanarak (aynı) _mutex_'i edinir. Daha sonra aşağıdaki iki seçenekten birini uygular:<br<
+Bekleyen bir _thread_, önce _std::unique\_lock_ kullanarak (aynı) _mutex_'i edinir. Daha sonra aşağıdaki iki seçenekten birini uygular:<br>
 - Birinci seçenek
   - Değişikliği zaten yapılmış ve bildirimin de gerçekleşmiş olabileceği ihtimaline karşı önce kuşulu test eder.
-  - wait, wait\_for, ya da wait\_until fonksiyonlarından birini. çağırır. Çağrılan _wait_ fonksiyonu edinilmiş _mutex_'i otomatik olarak serbest bırakır ve _thread_'in çalışmasını durdurur.
+  - wait, wait\_for, ya da wait\_until fonksiyonlarından birini çağırır. Çağrılan _wait_ fonksiyonu edinilmiş _mutex_'i otomatik olarak serbest bırakır ve _thread_'in çalışmasını durdurur.
   - _condition\_variable_ nesnesinin _notify_ fonksiyonu çağrıldığında (ya da bekleme süresi dolduğunda) ya da bir _"spurious wakeup"_ oluştuğunda, _thread_ uyanır ve _mutex_ yeniden edinilir.
- - Uyanan ve kilidi edinen _thread_'in koşulun gerçekleşip gerçekleşmediğini kontrol etmesi eğer bir _spurious wakeup_ söz konusu ise tekrar bekleme durumuna geçmesi gerekir.
+ - Uyanan ve kilidi edinen _thread_'in koşulun gerçekleşip gerçekleşmediğini kontrol etmesi ve eğer bir _spurious wakeup_ söz konusu ise tekrar bekleme durumuna geçmesi gerekir.
 
 - İkinci seçenek olarak bekleyen _thread_
   - bu işlemlerin hepsini sarmalayan _wait_ fonksiyonlarının bir _predicate_ alan _overload_'larından birini çağırır. 
 
 _std::condition\_variable_ sınıfı yalnızca _std::unique\_lock<std::mutex>_ ile kullanılabilir. Bu şekilde kullanım zorunluluğu bazı platformlarda en yüksek verimle çalışmasını sağlar. _std::condition\_variable_any_ sınıfı ise _BasicLockable_ niteliğini sağlayan herhangi bir nesneyle _(örneğin std::shared\_lock)_ çalışabilmesini sağlar.<br>
-std::condition_variable sınıfının _wait, wait\_for, wait\_until, notify_one ve notify\_all_ üye fonksiyonları birden fazla _thread_ tarafından eş zamanlı çağrılabilir.
+_std::condition/_variable_ sınıfının _wait, wait\_for, wait\_until, notify_one ve notify\_all_ üye fonksiyonları birden fazla _thread_ tarafından eş zamanlı çağrılabilir.
 
 
