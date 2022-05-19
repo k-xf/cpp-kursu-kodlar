@@ -49,3 +49,4 @@ struct atomic;
 - Kopyalama ya da taşıma yoluyla nesne oluşturulamıyor. _(not copy-constructible - not move constructible)_
 - Atama yapılabilir _(assignable)_ bir tür. Ancak atama operatörü referans değil değer döndürüyor.
 - varsayılan bellek düzeni _(memory order)_ _std::memory_order_seq_cst_.
+- 
