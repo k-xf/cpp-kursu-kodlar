@@ -7,7 +7,7 @@
 - atomik bellek işlemleri _"torn read"_ ya da _"torn write"_ durumu oluşturmazlar.
 - C++ standart kütüphanesi atomik bellek işlemleri için aşağıdaki atomik türleri sunmaktadır:
     - _std::atomic_flag_
-    - _std::atomic_
+    - _std::atomic_\<>
 - Bu türler donanımın sağladığı atomik operasyonlar için uniform bir arayüz sunarlar.
 
 Atomik bir tür aşağıdaki garantileri sağlar:
@@ -30,6 +30,7 @@ Atomik bir tür aşağıdaki garantileri sağlar:
 std::atomic_flag f = ATOMIC_FLAG_INIT; 
 ```
 - Bir kilit mekanizmasının kullanılmadığı garanti edilmektedir.
+- Diğer atomik türlerde olan _is_lock_free_ üye fonksiyonuna sahip değildir (zaten lock-free olmak zorunda).
 - _std::atomic_flag_, _spinlock mutex_ gibi daha yüksek seviyeli senkronizsayon mekanizmalarında araç olarak kullanılır.
 
 #### std::atomic
