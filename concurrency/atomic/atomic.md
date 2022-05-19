@@ -11,8 +11,8 @@
 - Bu türler donanımın sağladığı atomik operasyonlar için uniform bir arayüz sunarlar.
 
 Atomik bir tür aşağıdaki garantileri sağlar:
-	- atomicity (atomiklik - bölünmezlik)
-	- ordering. (bellek işlemlerinin sıralanması - önceliği sonralığı)
+- atomicity (atomiklik - bölünmezlik)
+- ordering. (bellek işlemlerinin sıralanması - önceliği sonralığı)
 - Sıralı işlem garantisi bellek işlemlerinin diğer thread'lerde ne şekilde görülebileceği garantisidir.
 - atomik türler birbirinden bellek işlemlerinin sıralanması konusunda farklı garantiler sunarlar.
 - Varsayılan  düzen _"sequentially consistency_"'dir. 
@@ -23,7 +23,7 @@ Atomik bir tür aşağıdaki garantileri sağlar:
 - bu tür 2 operasyon sunar:
 	- _test_and_set_: _state_'i _true_ yaparken set işleminden önceki değeri sorgular _(get eder)_. 
 	- clear: _state_' i _false_ değere çekiyor.
-- varsayılan kurucu işlev _(default ctor)_ nesneyi belirlenmemiş bir değerle başlatır.
+- varsayılan kurucu işlev _(default ctor)_ nesneyi belirlenmemiş bir değerle başlatır. _C++20_ standartları ile bu durum değişti. _Default ctor_ artık _false_ değeri ile başlatıyor.
 - kopyalanamayan ve taşınamayan bir türdür.
 - derleyiciye bağlı olan _ATOMIC_FLAG_INIT_ makrosu bu türden bir değişkene ilk değer vermek için kullanılır: 
 ```
@@ -47,5 +47,5 @@ struct atomic;
 - Template argümanı olarak kullanılacak türün _"trivially copyable"_ ve "bitwise equality comparable" olması gerekiyor.
 - Kilit sistemi kullanılmama _(lock-free)_ olma garantisi verilmiyor. Ancak platformların çoğunda temel türler olan template argümanları söz konusu olduğunda bir kilit sistemi kullanılmadan _(lock-free)_ gerçekleştiriliyor.
 - Kopyalama ya da taşıma yoluyla nesne oluşturulamıyor. _(not copy-constructible - not move constructible)_
-- Atama yapılabilir (assignable) bir tür. Ancak atama operatörü referans değil değer döndürüyor.
-- varsayılan bellek düzeni (memory order) _std::memory_order_seq_cst_.
+- Atama yapılabilir _(assignable)_ bir tür. Ancak atama operatörü referans değil değer döndürüyor.
+- varsayılan bellek düzeni _(memory order)_ _std::memory_order_seq_cst_.
