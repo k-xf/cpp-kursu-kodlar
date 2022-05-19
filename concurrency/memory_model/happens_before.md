@@ -48,3 +48,30 @@ A _happens before_ B doğrudur.<br>
 
 Bu şu anlama geliyor:<br>
 _sequenced-before_ ilişkisi aynı zamanda _thread_ içindeki _(intra-thread)_ happens before ilişkisine karşılık geliyor.<br>
+
+- _happens-before_ ilişkisi zamana bağlı değildir, görünürlüğe _(visibility)_ bağlıdır.
+- _A happens before B_ ise, bu A'nın B'de önce yapılması anlamına gelmez (böyle bir garanti yoktur).
+- A B'den önce yapılmış ise _A happens-before B_ olmak değildir.
+- happens-before ilişkisi _acquire-release_ semantiği ile gerçekleştirilebilir. (Daha sonra ele alacağım)
+
+**Happens-Before Does Not Imply Happening Before!**
+
+Aşağıdaki koda bakalım:
+```
+#include <cstdio>
+
+int is_ready = 0;
+int answer = 0;
+
+void producer()
+{
+    answer = 42;                        // (1)
+    is_ready = 1;                      // (2)
+}
+
+void consumer()
+{
+    if (is_ready)                      // (3) <-- Burada okunan değerin 1 olduğunu düşünelim
+        printf("%d\n", answer); // (4)
+}
+```
