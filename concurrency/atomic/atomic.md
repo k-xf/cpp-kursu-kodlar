@@ -2,7 +2,7 @@
 
 - _Thread_'ler arasında veriyi paylaşırken _"data race"_ oluşmaması için genellikle bir senkronizasyon mekanizması gereklidir. (örneğin _mutex_ kullanarak senkronizasyonu sağlamak).
 - Veriye senkronize edilmiş erişim sağlamanın başka bir yolu da atomik türleri kullanmaktır.
-- Bölünemeyecek bir işleme "atomik işlem" denir. Atomik bir işlem arasına başka bir işlem giremez. Örneğin arttırma işlemi atomik ise bu işleme tabi tutulan bir değişken diğer _thread_'ler tarafından ya işlemden önceki ya da işlemden sonraki değeri ile görülebilir.
+- Bölünemeyecek _(indivisible)_ bir işleme "atomik işlem" denir. Atomik bir işlem arasına başka bir işlem giremez. Örneğin arttırma işlemi atomik ise bu işleme tabi tutulan bir değişken diğer _thread_'ler tarafından ya işlemden önceki ya da işlemden sonraki değeri ile görülebilir.
  İşlemcilerin çoğunda atomik bellek işlemleri özel makine komutları ile gerçekleştirilir.
 - atomik bellek işlemleri _"torn read"_ ya da _"torn write"_ durumu oluşturmazlar.
 - C++ standart kütüphanesi atomik bellek işlemleri için aşağıdaki atomik türleri sunmaktadır:
@@ -12,8 +12,9 @@
 
 Atomik bir tür aşağıdaki garantileri sağlar:
 - atomicity (atomiklik - bölünmezlik)
-- ordering. (bellek işlemlerinin sıralanması - önceliği sonralığı)
-- Sıralı işlem garantisi bellek işlemlerinin diğer thread'lerde ne şekilde görülebileceği garantisidir.
+- ordering (bellek işlemlerinin sıralanması - önceliği sonralığı)
+- visibility (bellek işlemlerinin sonuçlarının diğer thread'lerden görülmesi)
+- Sıralı işlem garantisi bellek işlemlerinin diğer _thread_'lerde ne şekilde görülebileceği garantisidir.
 - atomik türler birbirinden bellek işlemlerinin sıralanması konusunda farklı garantiler sunarlar.
 - Varsayılan  düzen _"sequentially consistency_"'dir. 
 
@@ -44,9 +45,10 @@ struct atomic;
 
 - T türünden bir nesne için atomik operasyonlar sağlıyor.
 - Tüm temel türler _(fundamental types)_ için standart kütüphane tarafından _"full specialization"_ sağlanmış durumdda.
-- Template argümanı olarak kullanılacak türün _"trivially copyable"_ ve "bitwise equality comparable" olması gerekiyor.
+- Template argümanı olarak kullanılacak türün _"trivially copyable"_ ve _"bitwise equality comparable"_ olması gerekiyor.
 - Kilit sistemi kullanılmama _(lock-free)_ olma garantisi verilmiyor. Ancak platformların çoğunda temel türler olan template argümanları söz konusu olduğunda bir kilit sistemi kullanılmadan _(lock-free)_ gerçekleştiriliyor.
 - Kopyalama ya da taşıma yoluyla nesne oluşturulamıyor. _(not copy-constructible - not move constructible)_
 - Atama yapılabilir _(assignable)_ bir tür. Ancak atama operatörü referans değil değer döndürüyor.
 - varsayılan bellek düzeni _(memory order)_ _std::memory_order_seq_cst_.
-- 
+
+
