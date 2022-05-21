@@ -1,3 +1,41 @@
+#### memory model nedir?
+
++ Bilgisayar programının belleğe erişiminde izin verilebilen semantik yapıyı tanımlar.
+- bellekten bir okuma yapıldığında hangi değer /değerler okunabilir? (hangi değerlerin okunması beklenebilir)
+- hangi durumlarda tanımsız davranış oluşabilir.
+- memory model, _multithread_ progranmlar için kritik olan bir bileşendir.
+
+- _thread_'ler bellek ve paylaşılan veril(ler) ile nasıl etkileşime giriyor?
+- Bellek programa ve programda kullanılan thread'lere nasıl görünüyor?
+- multi-thread programların yürütülmesine ilşkin kuralların belirlenebilmesi için programlama dilinin bir memory model oluştumrası gerekiyor.
+
+thread'ler programın çalışma zamanında paylaşılan verileri farklı değerlerde görebilir.
+bir memory model oluşturmadan derleyici optimizasyonları ve donanım tarfında yapılan optimizasyonlar sorunlar oluşturabilir.
+threadlerin paylaşılan değişkenlerde yapılan değişiklikleri anında gözlemleyebilmeleri verim _(efficiency)_ açısından  yüksek bir maliyet oluşturur.<br>
+
+kaynak kodumuzdaki işlemler 
+- derleyici tarafından
+- CPU tarafından;
+- bellek (caching) tarafından yeniden sıralanabilir
+
+memory model hangi durumlarda yeniden sıralamaya _(reordering)_ izin verilip verilmediğini belirliyor.
+Birden fazla _thread_ hangi durumlarda paylaşılan değişkenlere erişebilir?
+Bir thread tarafından bir değişkene yapılan atama eş zamanlı çalışan thread'ler tarafından ne zaman görünür olacak?
+Programcılar multi thread programların nasıl çalışacağını (belirli garantiler altında) kestirebilmeliler.
+
+C++11 öncesinde C++ dilinden formal bir bir memory model yoktu. C++ soyut makinesi single-thread olarak tasarlanmıştı.
+
+java memory model 1995 yılında oluşturuldu
+Yaygın kullanılan programlama dilleri içinde bu açıdan java bir ilk.
+pthreads kütüphanesi ilk olarak 1995 yılında, bir memory modele dayanmadan geliştirildi.
+Posix memory model oluşturmuyor. Tanımlar kesin (precise) değil. Yani, "program doğru mu" sorusunun formal bir cevabı yok.
+
+İlk olarak C++ dilinde java'nın memory modelinin kullanılması düşünüldü, ancak bunun uygun olmadığı görüldü (fazla kısıtılayıcı)
+Java modeli belirli veri türlerinin atomic olmasını gerektiriyor.
+Java memory model C++ için çok pahalı.
+bir thread library oluşturabilemek için derleyici üstünde bazı kısıtlamaların olması gerekiyor.
+Bunun için de bir memory model'e ihtiyaç duyuluyor.
+
 Bir programın çalışma zamanında nasıl davranacağını kestirebilmemiz için şunları bilebilmemiz gerekir:
 - programdaki (farklı _thread_'ler tarafından gerçekleştirilebilecek) işlemlerin _(operasyonların)_ hangi sırayla yürütüleceği _(ordering)_
 - programdaki bir işlemin/işlemlerin sonuçlarının (başka _thread_'ler tarafından yürütülebilecek) diğer bir işlem/işlemler yapılmadan görülür olup olmadığı _(visibility)_
