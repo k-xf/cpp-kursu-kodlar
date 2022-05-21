@@ -102,3 +102,5 @@ Buradaki fonksiyonlar iki ayrı _thread_ tarafından çalıştırılıyor olsun.
 
 - Inter-thread happens-before ilişkisi farklı thread'ler arasındaki happens-before ilişkisidir.
 - A ve B farklı threadler'deki operasyonlar olsun. Eğer A ve B arasında _inter-thread-happens_before_ ilişkisi varsa A ve B arasında _happens-before_ ilişkisi vardır. Yani A'daki operasyonların sonucu B'de görülebilir olmak zorundadır.
+- Inter-thread happens-before ilşkisi geçişkendir _(transitive)_
+- Inter-thread-happens-before ilişkisinin oluşması için (dil tarafından tanımlanan) bir senkronizasyonun söz konusu olması gerekir.
