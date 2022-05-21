@@ -99,3 +99,6 @@ void consumer()
 Buradaki fonksiyonlar iki ayrı _thread_ tarafından çalıştırılıyor olsun. Değişkenlere yapılan atamalar _(stores)_ ve değişkenlerden yapılan okumalar _(loads)_ atomik olsun. Programın çalışma zamanında _consumer thread_'inin **(3)** noktasına geldiğini ve _is_ready_ değişkeninin okunan değerinin **1** olduğunu düşünelim. Bu değer _producer thread_'inde **(2)** noktasında _is_ready_ değişkenine atanan değer. <br>
 **(2) (3)**'ten önce olmuş olmalı. Ama bu **(2)** ve **(3)** arasında _happens-before_ ilişkisi olduğu anlamına gelmez.<br>
 **(2)** ve **(3)** arasında _happens-before_ ilişkisi olmadığı gibi **(1)** ile **(4)** arasında da _happens-before_ ilişkisi yoktur. Bu yüzden **(1) (4)** arasındaki bellek işlemleri farklı şekilde sıralanabilir (reordering). derleyici tarafından oluşturulan _instruction_'lar işlemci ya da bellek tarafından farklı şekilde sıralanabilir _(instruction reordering / memory reordering)_. _consumer thread_'i **(4)** noktasına geldiğinde ekrana 0 değeri yazılabilir.
+
+- Inter-thread happens-before ilişkisi farklı thread'ler arasındaki happens-before ilişkisidir.
+- A ve B farklı threadler'deki operasyonlar olsun. Eğer A ve B arasında _inter-thread-happens_before_ ilişkisi varsa A ve B arasında _happens-before_ ilişkisi vardır. Yani A'daki operasyonların sonucu B'de görülebilir olmak zorundadır.
