@@ -7,6 +7,8 @@ int main()
 
 	int val = ++x; //atomic<T>::operator++()
 	std::cout << "val = " << val << "\n";
+	std::cout << "x = " << x << "\n";
 	val = x++; //atomic<T>::operator++(int)
 	std::cout << "val = " << val << "\n";
+	std::cout << "x = " << x << "\n";
 }
