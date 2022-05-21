@@ -13,7 +13,7 @@ public:
 	}
 	void lock() 
 	{
-		while (!m_f.test_and_set())
+		while (m_f.test_and_set())
 			; //null statement
 	}
 
