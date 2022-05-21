@@ -104,3 +104,6 @@ Buradaki fonksiyonlar iki ayrı _thread_ tarafından çalıştırılıyor olsun.
 - A ve B farklı threadler'deki operasyonlar olsun. Eğer A ve B arasında _inter-thread-happens_before_ ilişkisi varsa A ve B arasında _happens-before_ ilişkisi vardır. Yani A'daki operasyonların sonucu B'de görülebilir olmak zorundadır.
 - Inter-thread happens-before ilşkisi geçişkendir _(transitive)_
 - Inter-thread-happens-before ilişkisinin oluşması için (dil tarafından tanımlanan) bir senkronizasyonun söz konusu olması gerekir.
+- A ve B arasında happens-before ilişkisi olsun. Bu durumda
+    - A ve B aynı thread'de olabilir ve aralarında sequenced-before ilişkisi vardır.
+    - A ve B aynı farklı thread'lerde olabilir ve aralarında intra-thread-happens-before ilişkisi vardır.
