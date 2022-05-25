@@ -3,7 +3,7 @@
 struct Nec {
 public:
 	Nec(int val) : mx(val) {}
-	bool operator==(const Nec& other)const
+	[[nodiscard]] bool operator==(const Nec& other)const
 	{
 		return mx == other.mx;
 	}
