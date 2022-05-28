@@ -18,8 +18,8 @@ void consumer()
 void producer()
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds{200});
-	ready_flag = true;
 	svar = 38764;
+	ready_flag = true;	
 }
 
 int main()
