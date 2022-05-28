@@ -13,13 +13,13 @@ public:
 	}
 	void lock() 
 	{
-		while (m_f.test_and_set())
+		while (m_f.test_and_set(std::memory_order::acquire))
 			; //null statement
 	}
 
 	void unlock() 
 	{
-		m_f.clear();
+		m_f.clear(std::memory_order::release);
 	}
  private:
 	std::atomic_flag m_f;
