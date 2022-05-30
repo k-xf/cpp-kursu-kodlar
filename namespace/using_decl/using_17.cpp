@@ -18,6 +18,6 @@ int main()
 {
 	using A::f;
 	using B::f;
-	f(12); //gecerli  A::f
-	f(); //gecerli B::f
+	f(12); //valid  A::f
+	f(); //valid B::f
 }
