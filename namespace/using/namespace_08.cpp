@@ -10,7 +10,7 @@ namespace A {
 
 namespace X {
 	using ::f; // global f is now visible as ::X::f
-	using A::g; // A::g is now visilbe as ::X::g
+	using A::g; // A::g is now visible as ::X::g
 }
 
 void h()
