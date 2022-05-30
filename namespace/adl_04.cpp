@@ -1,7 +1,7 @@
 #include <iostream>
 
 namespace Enc {
-	struct S{};
+	struct S {};
 	void foo(S)
 	{
 		std::cout << "Enc::foo(S)\n";
@@ -23,5 +23,5 @@ namespace Enc {
 
 int main()
 {
-	Enc::Nested::func();
+	Enc::Nested::func(); //valid
 }
