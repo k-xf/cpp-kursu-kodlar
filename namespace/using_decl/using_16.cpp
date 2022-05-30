@@ -8,7 +8,7 @@ namespace B {
 
 void func()
 {
-	using A::f;
-	using B::f; //gecerli
-        f(); //gecersiz
+	using A::f; //valid
+	using B::f; //valid
+        f(); //invalid - ambiguity
 }
