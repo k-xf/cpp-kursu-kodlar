@@ -20,3 +20,6 @@ C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlan
   * Fonksiyon belirli bir basamakta elde ettiği ara veri ya da verileri kendisini çağıran fonksiyona iletebilir.
 
 * Bir _coroutine_ çağırdığımızda onun kodunu basamaklar _(steps)_ halinde çalıştırabiliyoruz. Bu paralel çalıştırma (parallelism) ile karıştırılmamlı. (ping pong oyunu gibi düşünebiliriz)
+* Hem ana kontrol akışı hem de _coroutine_'in kendi kontrol akışı aynı thread içinde gerçekleşiyor._multi-thread_ programlama ya da eş zamanlı erişim oluşturmak zorunda değiliz. Ancak _coroutine_'leri farklı _thread_'lerde çalıştırmak da mümkün.
+
+
