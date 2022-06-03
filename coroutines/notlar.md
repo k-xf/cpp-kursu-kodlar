@@ -8,6 +8,8 @@ C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlan
   * _subroutines_ (normal fonksiyonlar)
   * _coroutines_ (çalışması durdurulup sonra tekrar devam ettirilebilen fonksiyonlar)
 
+* normal fonksiyonlar, çağrıldıkları zaman kodlarının tamamı çalışıyor. Yani fonksiyonun çalışması ya bir _return_ deyimi ile ya da bir _exception_ gönderilmesi ile sonlanıyor. Oysa bir _coroutine_ birden fazla adıma bölünerek çalıştırılabiliyor. Yani fonksiyonun çalışması durudurulup _(suspend)_ tekrar başlatılabiliyor.
+
 * Bir fonksiyonun _coroutine_ olup olmadığı bildiriminden değil tanımından _(implementation)_ anlaşılıyor. Eğer fonksiyon tanımı içinde aşağıdaki anahtar sözcüklerden biri var ise derleyici söz konusu fonksiyonu bir _coroutine_ olarak ele alıyor:
  * co_await
  * co_yield
