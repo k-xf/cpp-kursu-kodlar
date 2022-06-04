@@ -44,7 +44,35 @@ C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlan
 
 * _coroutine frame_ _coroutine_'in çalıştırılmaya başlanmasından önce oluşturuluyor. (normal fonksiyonlarda _stack frame_'in oluşturulması gibi). Derleyici _coroutine frame_'i,  çağıran koda,  coroutine frame'e erişimi sağlayacak bir _handle_ döndürüyor (ama doğrudan değil)
 
+#### coroutine handle
+Peki _coroutine frame_'e nasıl erişeceğiz? Standart kütüphane bu amaçla bize _std::corutine_handle_ sınıf şablonunu sunuyor. Bu sınıfı iyi anlamalıyız:
+```
+template<typename T = void>
+struct coroutine_handle;
 
+template<>
+struct coroutine_handle<void> {
+	coroutine_handle()noexcept = default;
+	coroutine_handle(std::nullptr_t)noexcept;
+	coroutine_handle& operator=(std::nullptr_t)noexcept;
+	explicit operator bool()const noexcept;
+	static coroutine_handle from_address(void* adr)noexcept;
+	void* to_address()const noexcept;
+	void resume()const;
+	void destroy();
+	bool done()const;
+};
+
+template <typename Promise>
+struct coroutine_handle : coroutine_handle<Promise> {
+	Promise& promise()const noexcept;
+	static coroutine_handle from_promise(Promise&)noexcept;
+};
+```
+
+* Yukarıdaki koddan görülebileceği gibi std::coroutine<T> sınıf şablonunun void açılımı (specialization) için bir explicit specalization verilmiş. Diğer tür argümanları ile oluşturulacak sınıflar _coroutine_handle<void>_ sınıfından kalıtım yoluyla elde ediliyorlar. 
+
+ 
 #### co_await için nasıl bir kod üretiliyor?
 
 Bir _co_await_ ifadedsinin aşağıdaki gibi kullanıldığını düşünelim:
