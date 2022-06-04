@@ -86,12 +86,22 @@ struct coroutine_handle : coroutine_handle<Promise> {
 * Yukarıdaki koddan görülebileceği gibi _std::coroutine<T>_ sınıf şablonunun __void__ açılımı _(specialization)_ için bir _explicit specalization_ verilmiş.
  Diğer tür argümanları ile oluşturulacak sınıflar _coroutine_handle<void>_ sınıfından kalıtım yoluyla elde ediliyorlar. 
 
- 
+#### promise nesnesi _(promise object)_
+
+* Promise nesnesi _coroutine frame_ içinde tutuluyor. 
+* Promise nesnesi, _coroutine_ fonksiyonun içinden manipüle ediliyor. 
+* _coroutine_ ürettiği değer ya da değerleri kendisini çağıran koda promise nesnesini kullanarak iletiyor.
+
 #### co_await için nasıl bir kod üretiliyor?
 
 Bir _co_await_ ifadedsinin aşağıdaki gibi kullanıldığını düşünelim:
 
 ```auto result = co_await expr;```
+	
+#### Awaitables
+- co_await operatörünün ihtiyaç duyduğu operandlara Awaitables deniyor. Yani co_await operatörünü kullanabilmemiz için bir Awaitable gerekiyor.
+- Bir Awaitable elde etmenin tipik biçimine Awaiter deniyor.
+cort'nin suspen ya da resume olması için awaiter'ın 3 üye fonksiyona sahip olması gerekiyor. 
 
 
 
