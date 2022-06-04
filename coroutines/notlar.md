@@ -30,8 +30,28 @@ C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlan
   * _main_ fonksiyonu coroutine olamaz.
   * _coroutine_ bildiriminde _auto return type_ kullanılmaz.
 
-#### Derleyici bir coroutine için nasıl bir kod üretiyor.
-Bu konu bir hayli karmaşık. Öncelikle derleyicinin, programcı tarafından tanımlanacak bazı sınıflara ve fonksiyonlara güvenerek kod ürettiğini söyleyerek başlayayım. Standart kütüphane şimdilik doğrudan kullanılacak bazı sınıflar sunmuyor. _C++23_ standartları ile standart kütüphaneye yeni sınıfların ve fonksiyonların ekleneceği belirtiliyor.  
+#### Derleyici bir coroutine için nasıl bir kod üretiyor?.
+* Bu konu bir hayli karmaşık. Öncelikle derleyicinin, programcı tarafından tanımlanacak bazı sınıflara ve fonksiyonlara güvenerek kod ürettiğini söyleyerek başlayayım. Standart kütüphane şimdilik doğrudan kullanılacak bazı sınıflar sunmuyor. _C++23_ standartları ile standart kütüphaneye yeni sınıfların ve fonksiyonların ekleneceği belirtiliyor. Konunun daha iyi anlaşılmasına fayda sağlayacağını düşündüğümden coroutine'lerin gerçekleştiriminde kullanılan bileşenlerin her birini daha sonra ayrı ayrı ele alacağım.
+
+* Derleyicinin _coroutine_ için bir _"coroutine frame"_ oluşturması gerekiyor. Bunun için bir bellek alanına ihtiyacı var. _coroutine frame_'de hangi bilgiler tutuluyor?
+  * _coroutine_ parametre değişkenleri
+  * tüm yerel değişkenler
+  * bazı geçici nesneler
+  * _coroutine_ suspend edildiğindeki _excecution state_ (_register'lar instruction pointer_ vs.)
+  * çağıran koda iletilecek değer ya da değerleri tutacak olan bir _promise_ nesnesi.
+
+* Genel olarak _coroutine frame_ dinamik olarak edinilmek zorunda. _coroutine suspend_ edildiğinde (durdurulduğunda) _stack_ erişimini kaybediyor. _coroutine frame_'in oluşturulması için _operator new_ kullanılıyor. Ancak farklı ihtiyaçlar için _operator new_ yüklenebiliyor (overload edilebiliyor).
+
+* _coroutine frame_ _coroutine_'in çalıştırılmaya başlanmasından önce oluşturuluyor. (normal fonksiyonlarda _stack frame_'in oluşturulması gibi). Derleyici _coroutine frame_'i,  çağıran koda,  coroutine frame'e erişimi sağlayacak bir _handle_ döndürüyor (ama doğrudan değil)
+
+
+#### co_await için nasıl bir kod üretiliyor?
+
+Bir _co_await_ ifadedsinin aşağıdaki gibi kullanıldığını düşünelim:
+
+```auto result = co_await expr;```
+
+
 
 
 
