@@ -19,7 +19,7 @@ C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlan
   * Fonksiyon belirli bazı işlemleri gerçekleştirdikten sonra işine devam etmek için bazı başka işlemlerin yapılmasını bekleyebilir.
   * Fonksiyon belirli bir basamakta elde ettiği ara veri ya da verileri kendisini çağıran fonksiyona iletebilir.
 
-* Bir _coroutine_ çağırdığımızda onun kodunu basamaklar _(steps)_ halinde çalıştırabiliyoruz. Bu paralel çalıştırma (parallelism) ile karıştırılmamlı. (ping pong oyunu gibi düşünebiliriz)
+* Bir _coroutine_ çağırdığımızda onun kodunu basamaklar _(steps)_ halinde çalıştırabiliyoruz. Bu paralel çalıştırma (parallelism) ile karıştırılmamlı. (ping pong oyunu gibi düşünebiliriz.)
 * Hem ana kontrol akışı hem de _coroutine_'in kendi kontrol akışı aynı thread içinde gerçekleşiyor._multi-thread_ programlama ya da eş zamanlı erişim oluşturmak zorunda değiliz. Ancak _coroutine_'leri farklı _thread_'lerde çalıştırmak da mümkün.
 
 * Coroutin'ler için C++20 itibarıyla aşağıdaki kısıtlamalar söz konusu:
@@ -29,6 +29,9 @@ C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlan
   * bir constructor ya da destructor _coroutine_ olamaz.
   * _main_ fonksiyonu coroutine olamaz.
   * _coroutine_ bildiriminde _auto return type_ kullanılmaz.
+
+#### Derleyici bir coroutine için nasıl bir kod üretiyor.
+Bu konu bir hayli karmaşık. Öncelikle derleyicinin, programcı tarafından tanımlanacak bazı sınıflara ve fonksiyonlara güvenerek kod ürettiğini söyleyerek başlayayım. Standart kütüphane şimdilik doğrudan kullanılacak bazı sınıflar sunmuyor. _C++23_ standartları ile standart kütüphaneye yeni sınıfların ve fonksiyonların ekleneceği belirtiliyor.  
 
 
 
