@@ -11,12 +11,6 @@ C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlan
 
 * normal fonksiyonlar, çağrıldıkları zaman kodlarının tamamı çalışıyor. Yani fonksiyonun çalışması ya bir _return_ deyimi ile ya da bir _exception_ gönderilmesi ile sonlanıyor. Oysa bir _coroutine_ birden fazla adıma bölünerek çalıştırılabiliyor. Yani fonksiyonun çalışması durdurulup _(suspend)_ tekrar başlatılabiliyor. Bu işlem akışı birden fazla kez gerçekleştirilebiliyor.
 
-* C++ dilinde, bir fonksiyonun _coroutine_ olup olmadığı bildiriminden değil tanımından _(implementation)_ anlaşılıyor. 
-Eğer fonksiyon tanımı içinde aşağıdaki anahtar sözcüklerden biri var ise derleyici söz konusu fonksiyonu bir _coroutine_ olarak ele alıyor:
- * co_await
- * co_yield
- * co_return
-
 * Neden bir fonksiyonu bu şekilde çalıştırmak isteyelim? 
   * Fonksiyon belirli bazı işlemleri gerçekleştirdikten sonra işine devam etmek için bazı başka işlemlerin yapılmasını bekleyebilir.
   * Fonksiyon belirli bir basamakta elde ettiği ara veri ya da verileri kendisini çağıran fonksiyona iletebilir.
@@ -27,9 +21,22 @@ Bu paralel çalıştırma (parallelism) ile karıştırılmamlı.
 * Hem ana kontrol akışı hem de _coroutine_'in kendi kontrol akışı aynı thread içinde gerçekleşiyor. 
 _multi-thread_ programlama ya da eş zamanlı erişim oluşturmak zorunda değiliz. 
 Ancak _coroutine_'leri farklı _thread_'lerde çalıştırmak da mümkün.
+* Genel olarak programlama dillerindeki coroutine'ler iki ana kategoriye ayrılıyor:
+	* stackless coroutine'ler
+        * stackful  coroutine'ler
+C++ dili _stackless coroutin_'ler sunuluyor.
+
+* C++ dilinde, bir fonksiyonun _coroutine_ olup olmadığı bildiriminden değil tanımından _(implementation)_ anlaşılıyor. Yani bir fonksiyonun sadece bildirimine bakarak onun _coroutine_ olup olmadığını anlayamıyoruz. Eğer fonksiyon tanımı içinde aşağıdaki anahtar sözcüklerden biri var ise derleyici söz konusu fonksiyonu bir _coroutine_ olarak ele alıyor:
+ * co_await
+ * co_yield
+ * co_return
+
+Ancak bir fonksiyonun _coroutine_ olabilmesi için geri dönüş türünün bazı şartları sağlaması gerekiyor.
+
+
 
 * _Coroutine_'ler için C++20 itibarıyla aşağıdaki kısıtlamalar söz konusu:
-  * bir _coroutine_ içinde _return statement_ kullanılamaz. Yalnızca _co_return statement_ kullanılabilir. ancak _co_return statement_ kullanılması zorunlu değil.
+  * bir _coroutine_ içinde _return statement_ kullanılamaz. Yalnızca _co_return _ya da_ co_yield statement_ kullanılabilir. ancak _co_return statement_ kullanılması zorunlu değil.
   * _coroutine_ C tarzı bir _variadic_ fonksiyon olamaz.
   * _coroutine constexpr_ fonksiyon olamaz
   * bir constructor ya da destructor _coroutine_ olamaz.
