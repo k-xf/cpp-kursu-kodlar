@@ -27,7 +27,7 @@ _multi-thread_ programlama ya da eş zamanlı erişim oluşturmak zorunda değil
 Ancak _coroutine_'leri farklı _thread_'lerde çalıştırmak da mümkün.
 * Genel olarak programlama dillerindeki coroutine'ler iki ana kategoriye ayrılıyor:
 	* stackless coroutine'ler
-        * stackful  coroutine'ler
+        * stackful coroutine'ler
 C++ dili _stackless coroutin_'ler sunuluyor.
 
 * C++ dilinde, bir fonksiyonun _coroutine_ olup olmadığı bildiriminden değil tanımından _(implementation)_ anlaşılıyor. 
