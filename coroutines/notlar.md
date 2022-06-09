@@ -9,16 +9,20 @@
 Ancak yine de bu araçtan faydalanmak için en basit kullanım senaryolarında dahi bazı bileşenlerin programcılar tarafından yazılması gerekiyor. 
 C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlanıyor.
 
-* normal fonksiyonlar, çağrıldıkları zaman kodlarının tamamı çalışıyor. Yani fonksiyonun çalışması ya bir _return_ deyimi ile ya da bir _exception_ gönderilmesi ile sonlanıyor. Oysa bir _coroutine_ birden fazla adıma bölünerek çalıştırılabiliyor. Yani fonksiyonun çalışması durdurulup _(suspend)_ tekrar başlatılabiliyor. Bu işlem akışı birden fazla kez gerçekleştirilebiliyor.
+* normal fonksiyonların, çağrıldıkları zaman kodlarının tamamı çalışıyor. 
+Yani fonksiyonun çalışması ya bir _return_ deyimi ile ya da bir _exception_ gönderilmesi ile sonlanıyor. 
+Oysa bir _coroutine_ birden fazla adıma bölünerek çalıştırılabiliyor. 
+Yani fonksiyonun çalışması durdurulup _(suspend)_ tekrar başlatılabiliyor. 
+Bu işlem akışı (fonksiyonun kodunun durdurulup tekrar çalıştırılması) birden fazla kez gerçekleştirilebiliyor.
 
 * Neden bir fonksiyonu bu şekilde çalıştırmak isteyelim? 
   * Fonksiyon belirli bazı işlemleri gerçekleştirdikten sonra işine devam etmek için bazı başka işlemlerin yapılmasını bekleyebilir.
   * Fonksiyon belirli bir basamakta elde ettiği ara veri ya da verileri kendisini çağıran fonksiyona iletebilir.
 
 * Bir _coroutine_ çağırdığımızda onun kodunu basamaklar _(steps)_ halinde çalıştırabiliyoruz. 
-Bu paralel çalıştırma (parallelism) ile karıştırılmamlı. 
+Bu paralel çalıştırma _(parallelism)_ ile karıştırılmamalı. 
 (ping pong oyunu gibi düşünebiliriz.)
-* Hem ana kontrol akışı hem de _coroutine_'in kendi kontrol akışı aynı thread içinde gerçekleşiyor. 
+* Hem ana kontrol akışı hem de _coroutine_'in kendi kontrol akışı aynı _thread_ içinde gerçekleşiyor. 
 _multi-thread_ programlama ya da eş zamanlı erişim oluşturmak zorunda değiliz. 
 Ancak _coroutine_'leri farklı _thread_'lerde çalıştırmak da mümkün.
 * Genel olarak programlama dillerindeki coroutine'ler iki ana kategoriye ayrılıyor:
@@ -26,14 +30,14 @@ Ancak _coroutine_'leri farklı _thread_'lerde çalıştırmak da mümkün.
         * stackful  coroutine'ler
 C++ dili _stackless coroutin_'ler sunuluyor.
 
-* C++ dilinde, bir fonksiyonun _coroutine_ olup olmadığı bildiriminden değil tanımından _(implementation)_ anlaşılıyor. Yani bir fonksiyonun sadece bildirimine bakarak onun _coroutine_ olup olmadığını anlayamıyoruz. Eğer fonksiyon tanımı içinde aşağıdaki anahtar sözcüklerden biri var ise derleyici söz konusu fonksiyonu bir _coroutine_ olarak ele alıyor:
+* C++ dilinde, bir fonksiyonun _coroutine_ olup olmadığı bildiriminden değil tanımından _(implementation)_ anlaşılıyor. 
+Yani bir fonksiyonun sadece bildirimine bakarak onun _coroutine_ olup olmadığını anlayamıyoruz. 
+Eğer fonksiyon tanımı içinde aşağıdaki anahtar sözcüklerden biri var ise derleyici söz konusu fonksiyonu bir _coroutine_ olarak ele alıyor:
  * co_await
  * co_yield
  * co_return
 
 Ancak bir fonksiyonun _coroutine_ olabilmesi için geri dönüş türünün bazı şartları sağlaması gerekiyor.
-
-
 
 * _Coroutine_'ler için C++20 itibarıyla aşağıdaki kısıtlamalar söz konusu:
   * bir _coroutine_ içinde _return statement_ kullanılamaz. Yalnızca _co_return _ya da_ co_yield statement_ kullanılabilir. ancak _co_return statement_ kullanılması zorunlu değil.
@@ -44,18 +48,26 @@ Ancak bir fonksiyonun _coroutine_ olabilmesi için geri dönüş türünün baz�
   * _coroutine_ bildiriminde _auto return type_ kullanılmaz.
 
 #### Derleyici bir coroutine için nasıl bir kod üretiyor?.
-* Bu konu bir hayli karmaşık. Öncelikle derleyicinin, programcı tarafından tanımlanacak bazı sınıflara ve fonksiyonlara güvenerek kod ürettiğini söyleyerek başlayayım. Standart kütüphane şimdilik doğrudan kullanılacak bazı sınıflar sunmuyor. _C++23_ standartları ile standart kütüphaneye yeni sınıfların ve fonksiyonların ekleneceği belirtiliyor. Konunun daha iyi anlaşılmasına fayda sağlayacağını düşündüğümden coroutine'lerin gerçekleştiriminde kullanılan bileşenlerin her birini daha sonra ayrı ayrı ele alacağım.
+* Bu konu bir hayli karmaşık. Öncelikle derleyicinin, programcı tarafından tanımlanacak bazı sınıflara ve fonksiyonlara güvenerek kod ürettiğini söyleyerek başlayayım. Standart kütüphane şimdilik doğrudan kullanılacak bazı sınıflar sunmuyor. 
+_C++23_ standartları ile standart kütüphaneye yeni sınıfların ve fonksiyonların ekleneceği belirtiliyor. 
+Konunun daha iyi anlaşılmasına fayda sağlayacağını düşündüğümden _coroutine_'lerin gerçekleştiriminde kullanılan bileşenlerin her birini daha sonra ayrı ayrı ele alacağım.
 
-* Derleyicinin _coroutine_ için bir _"coroutine frame"_ oluşturması gerekiyor. Bunun için bir bellek alanına ihtiyacı var. _coroutine frame_'de hangi bilgiler tutuluyor?
+* Derleyicinin _coroutine_ için bir _"coroutine frame"_ oluşturması gerekiyor. 
+Bunun için bir bellek alanına ihtiyacı var. _coroutine frame_'de hangi bilgiler tutuluyor?
   * _coroutine_ parametre değişkenleri
   * tüm yerel değişkenler
   * bazı geçici nesneler
   * _coroutine_ suspend edildiğindeki _excecution state_ (_register'lar instruction pointer_ vs.)
   * çağıran koda iletilecek değer ya da değerleri tutacak olan bir _promise_ nesnesi.
 
-* Genel olarak _coroutine frame_ dinamik olarak edinilmek zorunda. _coroutine suspend_ edildiğinde (durdurulduğunda) _stack_ erişimini kaybediyor. _coroutine frame_'in oluşturulması için _operator new_ kullanılıyor. Ancak farklı ihtiyaçlar için _operator new_ yüklenebiliyor (overload edilebiliyor).
+* Genel olarak _coroutine frame_ dinamik olarak edinilmek zorunda. 
+_coroutine suspend_ edildiğinde (durdurulduğunda) _stack_ erişimini kaybediyor. 
+_coroutine frame_'in oluşturulması için _operator new_ kullanılıyor. 
+Ancak farklı ihtiyaçlar için _operator new_ yüklenebiliyor _(overload edilebiliyor)_.
 
-* _coroutine frame_ _coroutine_'in çalıştırılmaya başlanmasından önce oluşturuluyor. (normal fonksiyonlarda _stack frame_'in oluşturulması gibi). Derleyici _coroutine frame_'i,  çağıran koda,  coroutine frame'e erişimi sağlayacak bir _handle_ döndürüyor (ama doğrudan değil)
+* _coroutine frame_ _coroutine_'in çalıştırılmaya başlanmasından önce oluşturuluyor. 
+(normal fonksiyonlarda _stack frame_'in oluşturulması gibi). 
+Derleyici _coroutine frame_'i,  çağıran koda, _coroutine frame_'e erişimi sağlayacak bir _handle_ döndürüyor (ama doğrudan değil)
 
 #### coroutine handle
 Peki _coroutine frame_'e nasıl erişeceğiz? Standart kütüphane bu amaçla bize _std::corutine_handle_ sınıf şablonunu sunuyor. Bu sınıfı iyi anlamalıyız:
@@ -69,7 +81,7 @@ struct coroutine_handle<void> {
 	coroutine_handle(std::nullptr_t)noexcept;
 	coroutine_handle& operator=(std::nullptr_t)noexcept;
 	explicit operator bool()const noexcept;
-	static coroutine_handle from_address(void* adr)noexcept;
+	static coroutine_handle from_address(void* adr) noexcept;
 	void* to_address()const noexcept;
 	void resume()const;
 	void destroy();
@@ -77,7 +89,7 @@ struct coroutine_handle<void> {
 };
 
 template <typename Promise>
-struct coroutine_handle : coroutine_handle<Promise> {
+struct coroutine_handle : coroutine_handle<void> {
 	Promise& promise()const noexcept;
 	static coroutine_handle from_promise(Promise&)noexcept;
 };
@@ -94,14 +106,15 @@ struct coroutine_handle : coroutine_handle<Promise> {
 
 #### co_await için nasıl bir kod üretiliyor?
 
-Bir _co_await_ ifadedsinin aşağıdaki gibi kullanıldığını düşünelim:
+Bir _co_await_ ifadesinin aşağıdaki gibi kullanıldığını düşünelim:
 
 ```auto result = co_await expr;```
 	
 #### Awaitables
-- co_await operatörünün ihtiyaç duyduğu operandlara Awaitables deniyor. Yani co_await operatörünü kullanabilmemiz için bir Awaitable gerekiyor.
-- Bir Awaitable elde etmenin tipik biçimine Awaiter deniyor.
-cort'nin suspen ya da resume olması için awaiter'ın 3 üye fonksiyona sahip olması gerekiyor. 
+- co_await operatörünün ihtiyaç duyduğu operandlara _Awaitables_ deniyor. 
+Yani _co_await_ operatörünü kullanabilmemiz için bir _Awaitable_ gerekiyor.
+- Bir _Awaitable_ elde etmenin tipik biçimine _Awaiter_ deniyor.
+coroutine'in _suspend_ ya da _resume_ olması için _awaiter_'ın 3 üye fonksiyona sahip olması gerekiyor. 
 
 
 
