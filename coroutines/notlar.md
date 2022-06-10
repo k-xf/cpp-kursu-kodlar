@@ -106,6 +106,44 @@ _coroutine_'e yapılan her çağrıda _coroutine frame_ içinde bir _promise_ ne
 * _Promise_ nesnesi, _coroutine_ fonksiyonun içinden manipüle ediliyor. 
 * _coroutine_ ürettiği değer ya da değerleri kendisini çağıran koda _promise_ nesnesini kullanarak iletiyor.
 
+Derleyicinin ürettiği kodun kabaca şöyle olduğunu düşünebiliriz.
+
+```
+{
+	co_await promise.initial_suspend();
+	try {
+	
+		<body statements>
+	}
+	catch (...) {
+		promise.unhandled_exception();
+	}
+FinalSuspend:
+	co_await promise.final_suspend();
+}
+```
+
+Bir _coroutine_ fonksiyon çağrıldığında _coroutine_ gövdesindeki kodların çalıştırılmaya başlmasaından önce birçok işlem yapılıyor. Bu açıdan _coroutine_ fonksiyonlar normal fonksiyonlardan farklı. Daha sonra detaylı olarak incelemek üzere şimdi kabaca hangi işlemlerin yapıldığına bir bakalım:
+
+1. _coroutine frame_ için bellek alanı allocate ediliyor. Burada operarator new fonksiyonu çağrılıyor. Ama operator new fonksiyonunu burada overload etmek mümkün
+2. Fonksiyon parametreleri coroutine frame'e kopyalanıyor.
+3. Promise nesnesi için constructor çağrılıyor.
+
+4. promise nesnesinin get_return_object isimli fonksiyonu çağrılıyopr
+promise.get_return_object() 
+Bu fonksiyondan elde edilen geri dönüş değeri 
+coroutine ilk kez suspend edildiğinde fonksiyon çağrısı yapan koda gönderiliyor. 
+Sonuç yerel bir değişkende tutuluyor.
+
+5. promise nesnesinin initial_suspend() fonksiyonu çağrılıyor. fonksiyonun geri dönüş değeri co_await operatörünü operandı aypılıypr
+
+co_await promise.initial_suspend();
+
+6. promise.initial_suspend() ifadesi resume edildiğinde (hemen ya da asenkron larak)
+When the co_await promise.initial_suspend() expression resumes (either immediately or asynchronously), 
+coroutine gövdesinde bizim yazdığımız kodlar eçalışmaya başlıytpe
+
+	
 	
 #### co_await için nasıl bir kod üretiliyor?
 Bir _co_await_ ifadesinin aşağıdaki gibi kullanıldığını düşünelim:
