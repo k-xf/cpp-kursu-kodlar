@@ -26,8 +26,8 @@ Bu paralel çalıştırma _(parallelism)_ ile karıştırılmamalı.
 _multi-thread_ programlama ya da eş zamanlı erişim oluşturmak zorunda değiliz. 
 Ancak _coroutine_'leri farklı _thread_'lerde çalıştırmak da mümkün.
 * Genel olarak programlama dillerindeki coroutine'ler iki ana kategoriye ayrılıyor:
-	* stackless coroutine'ler
-        * stackful coroutine'ler
+	- stackless coroutine'ler
+	- stackful coroutine'ler
 C++ dili _stackless coroutin_'ler sunuluyor.
 
 * C++ dilinde, bir fonksiyonun _coroutine_ olup olmadığı bildiriminden değil tanımından _(implementation)_ anlaşılıyor. 
@@ -39,32 +39,30 @@ Eğer fonksiyon tanımı içinde aşağıdaki anahtar sözcüklerden biri var is
 
 Ancak bir fonksiyonun _coroutine_ olabilmesi için geri dönüş türünün bazı şartları sağlaması gerekiyor.
 
-* _Coroutine_'ler için C++20 itibarıyla aşağıdaki kısıtlamalar söz konusu:
-  * bir _coroutine_ içinde _return statement_ kullanılamaz. Yalnızca _co_return _ya da_ co_yield statement_ kullanılabilir. ancak _co_return statement_ kullanılması zorunlu değil.
-  * _coroutine_ C tarzı bir _variadic_ fonksiyon olamaz.
-  * _coroutine constexpr_ fonksiyon olamaz
-  * bir constructor ya da destructor _coroutine_ olamaz.
-  * _main_ fonksiyonu _coroutine_ olamaz.
-  * _coroutine_ bildiriminde _auto return type_ kullanılmaz.
+#### kısıtlamalar
+Coroutine_'ler için C++20 itibarıyla aşağıdaki kısıtlamalar söz konusu:
+* bir _coroutine_ içinde _return statement_ kullanılamaz. Yalnızca _co_return _ya da_ co_yield statement_ kullanılabilir. ancak _co_return statement_ kullanılması zorunlu değil.
+* _coroutine_ C tarzı bir _variadic_ fonksiyon olamaz.
+* _coroutine constexpr_ ya da _consteval_ fonksiyon olamaz
+* bir _constructor_ ya da _destructor_ _coroutine_ olamaz.
+* _main_ fonksiyonu _coroutine_ olarak tanımlanamaz.
+* _coroutine_ bildiriminde _auto return type_ kullanılmaz.
 
 #### Derleyici bir coroutine için nasıl bir kod üretiyor?.
-* Bu konu bir hayli karmaşık. Öncelikle derleyicinin, programcı tarafından tanımlanacak bazı sınıflara ve fonksiyonlara güvenerek kod ürettiğini söyleyerek başlayayım. Standart kütüphane şimdilik doğrudan kullanılacak bazı sınıflar sunmuyor. 
-_C++23_ standartları ile standart kütüphaneye yeni sınıfların ve fonksiyonların ekleneceği belirtiliyor. 
-Konunun daha iyi anlaşılmasına fayda sağlayacağını düşündüğümden _coroutine_'lerin gerçekleştiriminde kullanılan bileşenlerin her birini daha sonra ayrı ayrı ele alacağım.
+* Bu konu bir hayli karmaşık. Öncelikle derleyicinin, programcı tarafından tanımlanacak bazı sınıflara ve fonksiyonlara güvenerek kod ürettiğini söyleyerek başlayayım. Standart kütüphane şimdilik doğrudan kullanılacak bazı sınıflar sunmuyor. _C++23_ standartları ile standart kütüphaneye yeni sınıfların ve fonksiyonların ekleneceği belirtiliyor. Konunun daha iyi anlaşılmasına fayda sağlayacağını düşündüğümden _coroutine_'lerin gerçekleştiriminde kullanılan bileşenlerin her birini daha sonra ayrı ayrı ele alacağım.
 
-* Derleyicinin _coroutine_ için bir _"coroutine frame"_ oluşturması gerekiyor. 
+* Öncelikle derleyicininürettiği kodda _coroutine_ için bir _"coroutine frame"_ oluşturulması gerekiyor. 
 Bunun için bir bellek alanına ihtiyacı var. _coroutine frame_'de hangi bilgiler tutuluyor?
-  * _coroutine_ parametre değişkenleri
+  * _coroutine_ parametre değişkenlerinin kopyaları
   * tüm yerel değişkenler
   * bazı geçici nesneler
   * _coroutine_ suspend edildiğindeki _excecution state_ (_register'lar instruction pointer_ vs.)
-  * çağıran koda iletilecek değer ya da değerleri tutacak olan bir _promise_ nesnesi.
-
+  * Çağıran koda iletilecek değer ya da değerleri tutacak olan bir _promise_ nesnesi. _promise_ Derleyicinin üretteceği kod belirli noktalarda bu _promise_ nesnesinin
+üye fonksiyonlarını çağırıyor. 
 * Genel olarak _coroutine frame_ dinamik olarak edinilmek zorunda. 
 _coroutine suspend_ edildiğinde (durdurulduğunda) _stack_ erişimini kaybediyor. 
 _coroutine frame_'in oluşturulması için _operator new_ kullanılıyor. 
 Ancak farklı ihtiyaçlar için _operator new_ yüklenebiliyor _(overload edilebiliyor)_.
-
 * _coroutine frame_ _coroutine_'in çalıştırılmaya başlanmasından önce oluşturuluyor. 
 (normal fonksiyonlarda _stack frame_'in oluşturulması gibi). 
 Derleyici _coroutine frame_'i,  çağıran koda, _coroutine frame_'e erişimi sağlayacak bir _handle_ döndürüyor (ama doğrudan değil)
@@ -100,10 +98,11 @@ struct coroutine_handle : coroutine_handle<void> {
 
 #### promise nesnesi _(promise object)_
 
-_promise_ nesnesi, _coroutine_'in yürütülmesi sırasında bazı noktalarda çağrılacak fonksiyonları implemente ederek _coroutine_'in davranışını kontrol eder.
-_coroutine_'e yapılan her çağrıda _coroutine frame_ içinde bir _promise_ nesnesi hayata getirilir. Derleyici _coroutine_'in çalışması sırasında bazı noktalarda _promise_ nesnesinin bazı fonksiyonlarını çağırır. 	
-* _Promise_ nesnesi _coroutine frame_ içinde tutuluyor. 
-* _Promise_ nesnesi, _coroutine_ fonksiyonun içinden manipüle ediliyor. 
+_promise_ nesnesi, _coroutine_'in yürütülmesi sırasında bazı noktalarda çağrılacak fonksiyonları implemente ederek _coroutine_'in davranışını kontrol ediyor.
+_coroutine_'e yapılan her çağrıda _coroutine frame_ içinde bir _promise_ nesnesi hayata getiriliyor. 
+Derleyici _coroutine_'in çalışması sırasında bazı noktalarda _promise_ nesnesinin bazı fonksiyonlarını çağırıyor. 	
+* _promise_ nesnesi _coroutine frame_ içinde tutuluyor. 
+* _promise_ nesnesi, _coroutine_ fonksiyonun içinden manipüle ediliyor. 
 * _coroutine_ ürettiği değer ya da değerleri kendisini çağıran koda _promise_ nesnesini kullanarak iletiyor.
 
 Derleyicinin ürettiği kodun kabaca şöyle olduğunu düşünebiliriz.
@@ -125,14 +124,16 @@ FinalSuspend:
 
 Bir _coroutine_ fonksiyon çağrıldığında _coroutine_ gövdesindeki kodların çalıştırılmaya başlmasaından önce birçok işlem yapılıyor. Bu açıdan _coroutine_ fonksiyonlar normal fonksiyonlardan farklı. Daha sonra detaylı olarak incelemek üzere şimdi kabaca hangi işlemlerin yapıldığına bir bakalım:
 
-1. _coroutine frame_ için bellek alanı ediniliyor. Bunu gerçeleştirmek için _operarator new_ fonksiyonu çağrılıyor. Ama _operator new_ fonksiyonunu burada _overload_ etmek mümkün.
+1. _coroutine frame_ için bellek alanı ediniliyor. Bunu gerçekleştirmek için _operarator new_ fonksiyonu çağrılıyor. 
+Ama _operator new_ fonksiyonunu burada _overload_ etmek mümkün.
 2. Fonksiyonun parametre değişkenleri _coroutine frame_'e kopyalanıyor.
 3. _promise_ nesnesi için _constructor_ çağrılıyor. Yani _promise_ nesnesi hayata getiriliyor.
 4. _promise_ nesnesinin _get_return_object_ isimli fonksiyonu çağrılıyor:
 ```
 promise.get_return_object() ;
 ```
-Bu fonksiyondan elde edilen geri dönüş değeri _coroutine_ ilk kez _suspend_ edildiğinde coroutine fonksiyona çağrı yapan koda gönderiliyor. Sonuç yerel bir değişkende tutuluyor.<br>
+Bu fonksiyondan elde edilen geri dönüş değeri _coroutine_ ilk kez _suspend_ edildiğinde coroutine fonksiyona çağrı yapan koda gönderiliyor. 
+Sonuç yerel bir değişkende tutuluyor.
 5. _promise_ nesnesinin _initial_suspend()_ fonksiyonu çağrılıyor. Fonksiyonun geri dönüş değeri _co_await_ operatörünün operandı yapılıyor.
 
 ```
@@ -140,31 +141,32 @@ co_await promise.initial_suspend();
 ```
 6. _promise.initial_suspend()_ ifadesi _resume_ edildiğinde (hemen ya da asenkron olarak) _coroutine_ gövdesindeki bizim yazdığımız kodlar çalışmaya başlıyor.
 
-_coroutine_ kodu yürütüldüğünde bir _co_return_ deyimi ile karşılaşılırsa _promise_ nesnesinin _return_void_ ya da _return_value_ fonksiyonu çağrılır:
+_coroutine_ kodu yürütüldüğünde bir _co_return_ deyimi ile karşılaşılırsa _promise_ nesnesinin _return_void_ ya da _return_value_ fonksiyonu çağrılıyor:
 
 ```
 promise.return_void()
 promise.return_value(<expr>)
 ```
 
-Otomatik ömürlü tüm sınıf nesneleri (hayata geldikleri sıra ile ters sırada) destroy edilir. _promise_ nesnesinin _final_suspend_ isimli fonksiyonu çağrılır. 
-Bu çağrıdan elde edilen geri dönüş değeri _co_await_ operatörünü operandı yapılır:
+Otomatik ömürlü tüm sınıf nesneleri (hayata geldikleri sıra ile ters sırada) destroy ediliyor. Daha sonra _promise_ nesnesinin _final_suspend_ isimli fonksiyonu çağrılıyor. 
+Bu çağrıdan elde edilen geri dönüş değeri _co_await_ operatörünü operandı yapılıyor:
 ```
 co_await promise.final_suspend();
 ```
 
-Programın çalışma zamanında handle edilmeyen bir exception olursa bu exception yakalanır ve catch bloğu içinden promise nesnesinin unhandled_exception fonksiyonu çağrılır. promise nesnesinin final_suspend fonksiyonu çağrılır. Çağrılan fonksiyonun geri dönüş değeri co_await operatörünün operandı yapılır.
+Programın çalışma zamanında _handle_ edilmeyen bir _exception_ olursa bu _exception_ yakalanıyor ve _catch_ bloğu içinden _promise_ nesnesinin _unhandled_exception_ isimli fonksiyonu çağrılır. Daha sonra _promise_ nesnesinin _final_suspend_ fonksiyonu çağrılıyor. Çağrılan fonksiyonun geri dönüş değeri _co_await_ operatörünün operandı yapılıyor.
 
 ```
 co_await promise.final_suspend();
 ```
 
-Programın akışı _coroutine_ gövdesinin dışına çıktığında _coroutine frame_ _destroy_ edilir. _coroutine frame_'in _destroy_ edilmesi birkaç basamakta gerçekleştirilir:
+Programın akışı _coroutine_ gövdesinin dışına çıktığında _coroutine frame_ _destroy_ ediliyor. 
+_coroutine frame_'in _destroy_ edilmesi birkaç basamakta gerçekleştiriliyor:
 
-- _promise_ nesnesinin _destructor_'ı çağrılır
-- fonksiyon parametre değişkenlerinin oluşturulmuş kopyaları için _destructor_'lar çağrılır
-- _coroutine frame_ için edinilmiş bellek alanı _operator delete_ fonksiyonuna yapılan çağrı ile geri verilir.
-- Programın akışı çağrıyı yapan çağrıyı _resume_ eden koda yönlendirilir.
+- önce _promise_ nesnesinin _destructor_'ı çağrılıyor.
+- fonksiyon parametre değişkenlerinin oluşturulmuş kopyaları için _destructor_'lar çağrılıyor.
+- _coroutine frame_ için edinilmiş bellek alanı _operator delete_ fonksiyonuna yapılan çağrı ile geri veriliyor.
+- Programın akışı çağrıyı yapan çağrıyı _resume_ eden koda yönlendiriliyor.
 
 
 ```
