@@ -147,10 +147,10 @@ Bir _co_await_ ifadesinin aşağıdaki gibi kullanıldığını düşünelim:
 devam edecek...;;
 	
 #### Awaitables
-- _co_awai_t operatörünün ihtiyaç duyduğu operandlara _Awaitables_ deniyor. 
+- _co_await_ operatörünün ihtiyaç duyduğu operandlara _Awaitables_ deniyor. 
 Yani _co_await_ operatörünü kullanabilmemiz için bir _Awaitable_ gerekiyor.
 - Bir _Awaitable_ elde etmenin tipik biçimine _Awaiter_ deniyor.
-coroutine'in _suspend_ ya da _resume_ olması için _awaiter_'ın 3 üye fonksiyona sahip olması gerekiyor. 
+_coroutine_'in _suspend_ ya da _resume_ olması için _awaiter_'ın 3 üye fonksiyona sahip olması gerekiyor. 
 
 
 
