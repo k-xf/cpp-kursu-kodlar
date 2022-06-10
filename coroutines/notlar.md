@@ -105,13 +105,12 @@ struct coroutine_handle : coroutine_handle<void> {
 * _coroutine_ ürettiği değer ya da değerleri kendisini çağıran koda promise nesnesini kullanarak iletiyor.
 
 #### co_await için nasıl bir kod üretiliyor?
-
 Bir _co_await_ ifadesinin aşağıdaki gibi kullanıldığını düşünelim:
-
 ```auto result = co_await expr;```
+devam edecek...;;
 	
 #### Awaitables
-- co_await operatörünün ihtiyaç duyduğu operandlara _Awaitables_ deniyor. 
+- _co_awai_t operatörünün ihtiyaç duyduğu operandlara _Awaitables_ deniyor. 
 Yani _co_await_ operatörünü kullanabilmemiz için bir _Awaitable_ gerekiyor.
 - Bir _Awaitable_ elde etmenin tipik biçimine _Awaiter_ deniyor.
 coroutine'in _suspend_ ya da _resume_ olması için _awaiter_'ın 3 üye fonksiyona sahip olması gerekiyor. 
