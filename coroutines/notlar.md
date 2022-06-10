@@ -132,7 +132,7 @@ Bir _coroutine_ fonksiyon çağrıldığında _coroutine_ gövdesindeki kodları
 ```
 promise.get_return_object() ;
 ```
-Bu fonksiyondan elde edilen geri dönüş değeri _coroutine_ ilk kez _suspend_ edildiğinde coroutine fonksiyona çağrı yapan koda gönderiliyor. Sonuç yerel bir değişkende tutuluyor.
+Bu fonksiyondan elde edilen geri dönüş değeri _coroutine_ ilk kez _suspend_ edildiğinde coroutine fonksiyona çağrı yapan koda gönderiliyor. Sonuç yerel bir değişkende tutuluyor.<br>
 5. _promise_ nesnesinin _initial_suspend()_ fonksiyonu çağrılıyor. Fonksiyonun geri dönüş değeri _co_await_ operatörünün operandı yapılıyor.
 
 ```
