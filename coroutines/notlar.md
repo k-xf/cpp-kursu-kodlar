@@ -140,6 +140,20 @@ co_await promise.initial_suspend();
 ```
 6. _promise.initial_suspend()_ ifadesi _resume_ edildiğinde (hemen ya da asenkron olarak) _coroutine_ gövdesindeki bizim yazdığımız kodlar çalışmaya başlıyor.
 
+_coroutine_ kodu yürütüldüğünde bir _co_return_ deyimi ile karşılaşılırsa _promise_ nesnesinin _return_void_ ya da _return_value_ fonksiyonu çağrılır:
+
+```
+promise.return_void()
+promise.return_value(<expr>)
+```
+
+Otomatik ömürlü tüm sınıf nesneleri (hayata geldikleri sıra ile ters sırada) destroy edilir. _promise_ nesnesinin _final_suspend_ isimli fonksiyonu çağrılır. 
+Bu çağrıdan elde edilen geri dönüş değeri _co_await_ operatörünü operandı yapılır:
+
+```
+co_await promise.final_suspend();
+```
+
 	
 #### co_await için nasıl bir kod üretiliyor?
 Bir _co_await_ ifadesinin aşağıdaki gibi kullanıldığını düşünelim:
