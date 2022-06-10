@@ -7,7 +7,7 @@
   
 * _C++20_ standartları ile dile bu konuda eklemeler yapıldı. Hem dile bazı temel araçlar _(core features)_ hem de standart kütüphaneye bazı öğeler eklendi. 
 Ancak yine de bu araçtan faydalanmak için en basit kullanım senaryolarında dahi bazı bileşenlerin programcılar tarafından yazılması gerekiyor. 
-C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlanıyor.
+C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlanıyor. [Bu araçlar dile eklenene kadar bu amaçla _Lewis Baker_ tarafından geliştirilen _cppcoro_](https://github.com/lewissbaker/cppcoro) kütüphanesi kullanılabilir.
 
 * normal fonksiyonların, çağrıldıkları zaman kodlarının tamamı çalışıyor. 
 Yani fonksiyonun çalışması ya bir _return_ deyimi ile ya da bir _exception_ gönderilmesi ile sonlanıyor. 
