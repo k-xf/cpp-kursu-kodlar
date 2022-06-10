@@ -149,6 +149,23 @@ promise.return_value(<expr>)
 
 Otomatik ömürlü tüm sınıf nesneleri (hayata geldikleri sıra ile ters sırada) destroy edilir. _promise_ nesnesinin _final_suspend_ isimli fonksiyonu çağrılır. 
 Bu çağrıdan elde edilen geri dönüş değeri _co_await_ operatörünü operandı yapılır:
+```
+co_await promise.final_suspend();
+```
+
+Programın çalışma zamanında handle edilmeyen bir exception olursa bu exception yakalanır ve catch bloğu içinden promise nesnesinin unhandled_exception fonksiyonu çağrılır. promise nesnesinin final_suspend fonksiyonu çağrılır. Çağrılan fonksiyonun geri dönüş değeri co_await operatörünün operandı yapılır.
+
+```
+co_await promise.final_suspend();
+```
+
+Programın akışı _coroutine_ gövdesinin dışına çıktığında _coroutine frame_ _destroy_ edilir. _coroutine frame_'in _destroy_ edilmesi birkaç basamakta gerçekleştirilir:
+
+- _promise_ nesnesinin _destructor_'ı çağrılır
+- fonksiyon parametre değişkenlerinin oluşturulmuş kopyaları için _destructor_'lar çağrılır
+- _coroutine frame_ için edinilmiş bellek alanı _operator delete_ fonksiyonuna yapılan çağrı ile geri verilir.
+- Programın akışı çağrıyı yapan çağrıyı _resume_ eden koda yönlendirilir.
+
 
 ```
 co_await promise.final_suspend();
