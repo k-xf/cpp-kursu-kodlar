@@ -100,10 +100,13 @@ struct coroutine_handle : coroutine_handle<void> {
 
 #### promise nesnesi _(promise object)_
 
-* Promise nesnesi _coroutine frame_ içinde tutuluyor. 
-* Promise nesnesi, _coroutine_ fonksiyonun içinden manipüle ediliyor. 
-* _coroutine_ ürettiği değer ya da değerleri kendisini çağıran koda promise nesnesini kullanarak iletiyor.
+_promise_ nesnesi, _coroutine_'in yürütülmesi sırasında bazı noktalarda çağrılacak fonksiyonları implemente ederek _coroutine_'in davranışını kontrol eder.
+_coroutine_'e yapılan her çağrıda _coroutine frame_ içinde bir _promise_ nesnesi hayata getirilir. Derleyici _coroutine_'in çalışması sırasında bazı noktalarda _promise_ nesnesinin bazı fonksiyonlarını çağırır. 	
+* _Promise_ nesnesi _coroutine frame_ içinde tutuluyor. 
+* _Promise_ nesnesi, _coroutine_ fonksiyonun içinden manipüle ediliyor. 
+* _coroutine_ ürettiği değer ya da değerleri kendisini çağıran koda _promise_ nesnesini kullanarak iletiyor.
 
+	
 #### co_await için nasıl bir kod üretiliyor?
 Bir _co_await_ ifadesinin aşağıdaki gibi kullanıldığını düşünelim:
 ```auto result = co_await expr;```
