@@ -13,4 +13,8 @@
 [all resources](https://gist.github.com/MattPD/9b55db49537a90545a90447392ad3aeb#readings-research)
 
 [Gajendra Gulgulia - Painless C++ Coroutines-Part 1](https://ggulgulia.medium.com/painless-c-coroutines-part-1-ba90dd101adb)
+[Gajendra Gulgulia - Painless C++ Coroutines-Part 2](https://ggulgulia.medium.com/painless-coroutines-part2-29b36008b507)
+
+
+
 
