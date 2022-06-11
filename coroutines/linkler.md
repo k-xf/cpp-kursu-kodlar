@@ -9,3 +9,5 @@
 [Leviss Baker - C++ Coroutines: Understanding the promise type](https://lewissbaker.github.io/2018/09/05/understanding-the-promise-type)
 
 [Leviss Baker - C++ Coroutines: Understanding Symmetric Transfer](https://lewissbaker.github.io/2020/05/11/understanding_symmetric_transfer)
+
+[all resources](https://gist.github.com/MattPD/9b55db49537a90545a90447392ad3aeb#readings-research)
