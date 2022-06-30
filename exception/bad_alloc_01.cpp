@@ -3,7 +3,7 @@
 #include <exception>
 
 class Buffer {
-	constexpr static size_t size{ 1'024u* 1'024u};
+	constexpr static auto size{ 1'024u* 1'024u};
 	char mbuffer[size];
 };
 
