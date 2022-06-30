@@ -3,8 +3,8 @@
 #include <exception>
 
 class Buffer {
-	constexpr static size_t size{ 1'024 };
-	char mbuffer[1024];
+	constexpr static size_t size{ 1'024u* 1'024u};
+	char mbuffer[size];
 };
 
 int main()
@@ -12,11 +12,13 @@ int main()
 	std::vector<Buffer*> bvec;
 
 	try {
-		for (;;)
+		for (;;) {
 			bvec.push_back(new Buffer);
+			std::cout << '.';
+		}
 	}
 	catch (const std::bad_alloc& ex) {
-		std::cout << "exception caught : " << ex.what() << "\n";
+		std::cout << "\nexception caught : " << ex.what() << "\n";
 		std::cout << "size = " << bvec.size() << "\n";
 	}
 }
