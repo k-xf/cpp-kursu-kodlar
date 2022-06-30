@@ -1,3 +1,6 @@
+//constructor içinde sanal fonksiyonlara yapılan çağrılar için virtual dispatch uygulanmaz. 
+
+
 #include <iostream>
 
 class Base {
