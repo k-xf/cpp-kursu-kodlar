@@ -68,7 +68,7 @@ Ancak farklı ihtiyaçlar için _operator new_ yüklenebiliyor _(overload edileb
 Derleyici _coroutine frame_'i,  çağıran koda, _coroutine frame_'e erişimi sağlayacak bir _handle_ döndürüyor (ama doğrudan değil)
 
 #### coroutine handle
-Peki _coroutine frame_'e nasıl erişeceğiz? Standart kütüphane bu amaçla bize _std::corutine_handle_ sınıf şablonunu sunuyor. Bu sınıfı iyi anlamalıyız:
+Peki _coroutine frame_'e nasıl erişeceğiz? Standart kütüphane bu amaçla bize _std::corutine_handle_ isimli bir sınıf şablonu sunuyor. Bu sınıfı iyi anlamalıyız:
 ```
 template<typename T = void>
 struct coroutine_handle;
