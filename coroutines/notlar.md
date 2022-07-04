@@ -40,8 +40,8 @@ Eğer fonksiyon tanımı içinde aşağıdaki anahtar sözcüklerden biri var is
 Ancak bir fonksiyonun _coroutine_ olabilmesi için geri dönüş türünün bazı şartları sağlaması gerekiyor.
 
 #### kısıtlamalar
-Coroutine_'ler için C++20 itibarıyla aşağıdaki kısıtlamalar söz konusu:
-* bir _coroutine_ içinde _return statement_ kullanılamaz. Yalnızca _co_return _ya da_ co_yield statement_ kullanılabilir. ancak _co_return statement_ kullanılması zorunlu değil.
+_Coroutine_'ler için C++20 standartları itibarıyla aşağıdaki kısıtlamalar söz konusu:
+* bir _coroutine_ içinde _return statement_ kullanılamaz. Yalnızca _co_return_ ya da _co_yield_ _statement_ kullanılabilir. ancak _co_return statement_ kullanılması zorunlu değil.
 * _coroutine_ C tarzı bir _variadic_ fonksiyon olamaz.
 * _coroutine constexpr_ ya da _consteval_ fonksiyon olamaz
 * bir _constructor_ ya da _destructor_ _coroutine_ olamaz.
