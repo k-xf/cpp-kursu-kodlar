@@ -1,3 +1,6 @@
+//bir exception handle edilmediğinde rethrow statement yürütülürse std::terminate işlevi çağrılır.
+
+
 #include <iostream>
 
 void nec_terminate()
