@@ -20,5 +20,5 @@ int main()
 	std::cout << (n1 == n2) << '\n';
 	std::cout << (n1 != n2) << '\n';
 	std::cout << (10 != n1) << '\n';
-	std::cout << (76 != n2) << '\n';
+	std::cout << (n2 != 76) << '\n';
 }
