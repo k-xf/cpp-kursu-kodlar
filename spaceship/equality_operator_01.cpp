@@ -1,3 +1,8 @@
+// == operatör fonksiyonunun olması durumunda derleyici != ifadesi için
+// a != b yerine
+// !(a == b) mümkün değil ise
+// !(b == a) 
+
 #include <iostream>
 
 struct Nec {
