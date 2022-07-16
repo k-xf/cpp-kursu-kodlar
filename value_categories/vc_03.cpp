@@ -1,38 +1,38 @@
 #include <iostream>
 
-class Myclass {
+class Nec {
 	//
 };
 
 
-void foo(Myclass&)
+void foo(Nec&)
 {
-	std::cout << "foo(Myclass&)\n";
+	std::cout << "foo(Nec&)\n";
 }
 
-void foo(const Myclass&)
+void foo(const Nec&)
 {
-	std::cout << "foo(const Myclass&)\n";
+	std::cout << "foo(const Nec&)\n";
 }
 
-void foo(Myclass&&)
+void foo(Nec&&)
 {
-	std::cout << "foo(Myclass&&)\n";
+	std::cout << "foo(Nec&&)\n";
 }
 
-Myclass g;
-Myclass bar() { return g; }
-Myclass& baz() { return g; }
+Nec g;
+Nec bar() { return g; }
+Nec& baz() { return g; }
 
 int main()
 {
-	Myclass x;
-	const Myclass cx;
+	Nec x;
+	const Nec cx;
 
 	foo(x);
 	foo(cx);
 	foo(std::move(x));
-	foo(Myclass{});
+	foo(Nec{});
 	foo(bar());
-	(baz());
+	foo(baz());
 }
