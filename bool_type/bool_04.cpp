@@ -1,6 +1,6 @@
 int main()
 {
-	bool b{};
-
-	++b; //invalid
+	bool flag = false;
+	//...
+	++flag;  //C++17 ile dilden resmen kaldırıldı
 }
