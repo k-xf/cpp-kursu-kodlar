@@ -19,7 +19,15 @@ public:
 };
 
 
+//const geri dönüş değeri türü taşıma semantiğini bloke ediyor
 const Nec foo()
+{
+	Nec x;
+
+	return x;
+}
+
+Nec bar()
 {
 	Nec x;
 
@@ -32,4 +40,5 @@ int main()
 	//..
 
 	x = foo();
+	x = bar();
 }
