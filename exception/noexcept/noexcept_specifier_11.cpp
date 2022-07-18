@@ -10,7 +10,7 @@ public:
 	{
 		std::cout << "copy ctor\n";
 	}
-	//Sentence(Sentence&& other)noexcept
+	//Sentence(Sentence&& other)
 	Sentence(Sentence&& other)noexcept
 		: m_s{ std::move(other.m_s) }
 	{
