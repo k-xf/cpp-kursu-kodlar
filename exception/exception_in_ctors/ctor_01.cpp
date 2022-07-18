@@ -13,7 +13,7 @@ struct Myclass {
 
 	~Myclass()
 	{
-		std::cout << "Myclass detsructor\n";
+		std::cout << "Myclass destructor\n";
 	}
 };
 
