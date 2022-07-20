@@ -7,5 +7,5 @@ void func(T x, std::type_identity_t<T>);
 
 int main()
 {
-	func(12, 'A');
+	func(12, 'A'); // func<int, int>
 }
