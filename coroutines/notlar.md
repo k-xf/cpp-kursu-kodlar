@@ -9,8 +9,8 @@
 Ancak yine de bu araçtan faydalanmak için en basit kullanım senaryolarında dahi bazı bileşenlerin programcılar tarafından yazılması gerekiyor. 
 C++23 ile standart kütüphaneye destekleyici bazı öğelerin eklenmesi planlanıyor. [Bu araçlar dile eklenene kadar bu amaçla _Lewis Baker_ tarafından geliştirilen _cppcoro_](https://github.com/lewissbaker/cppcoro) kütüphanesi kullanılabilir.
 
-* normal fonksiyonların, çağrıldıkları zaman kodlarının tamamı çalışıyor. 
-Yani fonksiyonun çalışması ya bir _return_ deyimi ile ya da bir _exception_ gönderilmesi ile sonlanıyor. 
+* Çağrılan (normal) fonksiyonların kodlarının tamamı çalışıyor. 
+Yani bir fonksiyonun çalışması ya bir _return_ deyimi ile ya da bir _exception_ gönderilmesi ile sonlanıyor. 
 Oysa bir _coroutine_ birden fazla adıma bölünerek çalıştırılabiliyor. 
 Yani fonksiyonun çalışması durdurulup _(suspend)_ tekrar başlatılabiliyor. 
 Bu işlem akışı (fonksiyonun kodunun durdurulup tekrar çalıştırılması) birden fazla kez gerçekleştirilebiliyor.
@@ -26,8 +26,8 @@ Bu paralel çalıştırma _(parallelism)_ ile karıştırılmamalı.
 _multi-thread_ programlama ya da eş zamanlı erişim oluşturmak zorunda değiliz. 
 Ancak _coroutine_'leri farklı _thread_'lerde çalıştırmak da mümkün.
 * Genel olarak programlama dillerindeki coroutine'ler iki ana kategoriye ayrılıyor:
-	- stackless coroutine'ler
-	- stackful coroutine'ler
+	- _stackless coroutine_'ler
+	- _stackful coroutine_'ler
 C++ dili _stackless coroutin_'ler sunuluyor.
 
 * C++ dilinde, bir fonksiyonun _coroutine_ olup olmadığı bildiriminden değil tanımından _(implementation)_ anlaşılıyor. 
@@ -40,7 +40,7 @@ Eğer fonksiyon tanımı içinde aşağıdaki anahtar sözcüklerden biri var is
 Ancak bir fonksiyonun _coroutine_ olabilmesi için geri dönüş türünün bazı şartları sağlaması gerekiyor.
 
 #### kısıtlamalar
-_Coroutine_'ler için C++20 standartları itibarıyla aşağıdaki kısıtlamalar söz konusu:
+_Coroutine_'ler için _C++20_ standartları itibarıyla aşağıdaki kısıtlamalar söz konusu:
 * bir _coroutine_ içinde _return statement_ kullanılamaz. Yalnızca _co_return_ ya da _co_yield_ _statement_ kullanılabilir. ancak _co_return statement_ kullanılması zorunlu değil.
 * _coroutine_ C tarzı bir _variadic_ fonksiyon olamaz.
 * _coroutine constexpr_ ya da _consteval_ fonksiyon olamaz
@@ -75,7 +75,7 @@ struct coroutine_handle;
 
 template<>
 struct coroutine_handle<void> {
-	coroutine_handle()noexcept = default;
+	coroutine_handle() noexcept = default;
 	coroutine_handle(std::nullptr_t)noexcept;
 	coroutine_handle& operator=(std::nullptr_t)noexcept;
 	explicit operator bool()const noexcept;
@@ -148,7 +148,7 @@ promise.return_void()
 promise.return_value(<expr>)
 ```
 
-Otomatik ömürlü tüm sınıf nesneleri (hayata geldikleri sıra ile ters sırada) destroy ediliyor. Daha sonra _promise_ nesnesinin _final_suspend_ isimli fonksiyonu çağrılıyor. 
+Otomatik ömürlü tüm sınıf nesneleri (hayata geldikleri sıra ile ters sırada) yok ediliyor. Daha sonra _promise_ nesnesinin _final_suspend_ isimli fonksiyonu çağrılıyor. 
 Bu çağrıdan elde edilen geri dönüş değeri _co_await_ operatörünü operandı yapılıyor:
 ```
 co_await promise.final_suspend();
