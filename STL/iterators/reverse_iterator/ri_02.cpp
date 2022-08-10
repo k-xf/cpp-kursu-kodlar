@@ -12,7 +12,7 @@ int main()
 		std::cout << "found... " << *iter << "\n";
 	}
 	else {
-		std::cout << "bulunamadi\n";
+		std::cout << "not found\n";
 	}
 
 
@@ -20,7 +20,7 @@ int main()
 		std::cout << "found... " << *riter << "\n";
 	}
 	else {
-		std::cout << "bulunamadi\n";
+		std::cout << "not found\n";
 	}
 
 }
