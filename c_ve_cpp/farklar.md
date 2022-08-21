@@ -14,7 +14,6 @@ C++ dilinde
 + _structure, union, enum, class (user defined types)_ etiketleri (tags) doğrudan türü niteleyen isimler olarak kullanılabiliyor.
 + programcı tarafından oluşturulan türlerin _(user defined types)_ bir öğeye sahip olması gerekmiyor. _(empty classes)_
 + Fonksiyon tanımlarında fonksiyon parametrelerine isim vermek zorunlu değil.
-+  
 
 
 
