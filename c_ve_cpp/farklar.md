@@ -4,7 +4,7 @@ C++ dilinde
 + string literalleri const char diziler. (C'de string literallarinin türü char dizi)
 + karakter sabitlerinin _(character literals)_ türü _int_ değil _char_.
 + _const_ nesnelere ilk değer vermek zorunlu.
-+ global const nesneler iç bağlantıda _(internal linkage)_
++ global _const_ nesneler iç bağlantıda _(internal linkage)_
 + ilk değerini sabit ifadesi _(constant expression)_ ile almış _const_ nesnelerin oluşturduğu ifadeler sabir ifadesi olarak ele alınıyor.
 + _const T*_ türünden _T*_ türüne örtülü dönüşüm yok.
 + char* türünden değişkenlere string literalleri ile ilk değer veremeyiz. char* türünden değişkenlere string literallerini atayamayız.
@@ -14,6 +14,10 @@ C++ dilinde
 + _structure, union, enum, class (user defined types)_ etiketleri (tags) doğrudan türü niteleyen isimler olarak kullanılabiliyor.
 + programcı tarafından oluşturulan türlerin _(user defined types)_ bir öğeye sahip olması gerekmiyor. _(empty classes)_
 + Fonksiyon tanımlarında fonksiyon parametrelerine isim vermek zorunlu değil.
++ ```char str[4] = "mert"``` dizi boyutu ile ilk değer veren yazıdaki karater sayısı eşit ise tanım (definition) geçerli değil.
++ aritmetik türlerden enum türlerine örtülü dönüşüm yok.
++ farklı enum türleri arasında örtülü dönüşüm yok.
+
 
 
 
