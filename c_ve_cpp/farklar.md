@@ -17,6 +17,7 @@ C++ dilinde
 + ```char str[4] = "mert"``` dizi boyutu ile ilk değer veren yazıdaki karater sayısı eşit ise tanım _(definition)_ geçerli değil.
 + aritmetik türlerden _enum_ türlerine örtülü dönüşüm yok.
 + farklı _enum_ türleri arasında örtülü dönüşüm yok.
++ _auto_ anahtar sözcüğünün C dilindeki anlamı geçerli değil. _auto_ farklı anlamlarda kullanılıyor _(type deduction)_.
 
 
 
