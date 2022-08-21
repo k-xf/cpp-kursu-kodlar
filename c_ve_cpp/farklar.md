@@ -1,7 +1,7 @@
 C++ dilinde
-+ _"default function declaration" (implicit function declarations)"_ yok. Tüm isimler _(identifiers)_ bildirilmeli
++ _"default function declaration" (implicit function declarations)"_ yok. Tüm isimler _(identifiers)_ bildirilmeli.
 + _"implicit int"_ _(örtülü int)_ kuralı geçerli değil. 
-+ string literalleri const char diziler. (C'de string literallarinin türü char dizi)
++ string literalleri _const char_ diziler. (C'de string literalleri char diziler)
 + karakter sabitlerinin _(character literals)_ türü _int_ değil _char_.
 + _const_ nesnelere ilk değer vermek zorunlu.
 + global _const_ nesneler iç bağlantıda _(internal linkage)_
