@@ -11,12 +11,12 @@ C++ dilinde
 + _T_ ve _U_ farklı türler olmak üzere _T*_ türünden _U*_ türüne örtülü dönüşüm yok. (istisnalar ileride)
 + aritmetik türler ile adres türleri arasında otomatik dönüşüm yok.
 + _T_ void olmayan bir tür olmak üzere _void*_ türünden _T*_ türüne örtülü dönüşüm yok.
-+ _structure, union, enum, class (user defined types)_ etiketleri (tags) doğrudan türü niteleyen isimler olarak kullanılabiliyor.
++ _structure, union, enum, class (user defined types)_ etiketleri _(tags)_ doğrudan türü niteleyen isimler olarak kullanılabiliyor.
 + programcı tarafından oluşturulan türlerin _(user defined types)_ bir öğeye sahip olması gerekmiyor. _(empty classes)_
 + Fonksiyon tanımlarında fonksiyon parametrelerine isim vermek zorunlu değil.
-+ ```char str[4] = "mert"``` dizi boyutu ile ilk değer veren yazıdaki karater sayısı eşit ise tanım (definition) geçerli değil.
-+ aritmetik türlerden enum türlerine örtülü dönüşüm yok.
-+ farklı enum türleri arasında örtülü dönüşüm yok.
++ ```char str[4] = "mert"``` dizi boyutu ile ilk değer veren yazıdaki karater sayısı eşit ise tanım _(definition)_ geçerli değil.
++ aritmetik türlerden _enum_ türlerine örtülü dönüşüm yok.
++ farklı _enum_ türleri arasında örtülü dönüşüm yok.
 
 
 
