@@ -5,7 +5,7 @@ C++ dilinde
 + karakter sabitlerinin _(character literals)_ türü _int_ değil _char_.
 + _const_ nesnelere ilk değer vermek zorunlu.
 + global _const_ nesneler iç bağlantıda _(internal linkage)_
-+ ilk değerini sabit ifadesi _(constant expression)_ ile almış _const_ nesnelerin oluşturduğu ifadeler sabir ifadesi olarak ele alınıyor.
++ ilk değerini sabit ifadesi _(constant expression)_ ile almış _const_ nesnelerin oluşturduğu ifadeler sabit ifadesi olarak ele alınıyor.
 + _const T*_ türünden _T*_ türüne örtülü dönüşüm yok.
 + char* türünden değişkenlere string literalleri ile ilk değer veremeyiz. char* türünden değişkenlere string literallerini atayamayız.
 + _T_ ve _U_ farklı türler olmak üzere _T*_ türünden _U*_ türüne örtülü dönüşüm yok. (istisnalar ileride)
