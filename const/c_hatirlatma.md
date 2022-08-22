@@ -98,7 +98,7 @@ int main()
 
 Eğer yazdığınız kodda __const__ anahtar sözcüğünü nereye yazacağınız konusunda tereddütünüz varsa (kuralları unutmuşsanız) her zaman şu cümleyi hatırlayın:
 
-<h3>const neden önce geliyorsa const olan odur***</h3>
+#### const neden önce geliyorsa const olan odur
 
 ```
 int * const p = &x;
