@@ -89,7 +89,7 @@ int main()
 	int y = 20;
 
 	const int *ptr = &x; //ptr is a pointer to const int
-	//int const *ptr = &x;  //ptr is a pointer to const  int
+	//int const *ptr = &x;  //ptr is a pointer to const int
 	//*ptr = 90;   //geçersiz
 	ptr = &y; //geçerli
 	//...
