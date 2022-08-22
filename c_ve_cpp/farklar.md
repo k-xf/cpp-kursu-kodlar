@@ -19,7 +19,7 @@ C++ dilinde
 + aritmetik türlerden _enum_ türlerine örtülü dönüşüm yok (C dilinde var).
 + farklı _enum_ türleri arasında örtülü dönüşüm yok (C dilinde var).
 + _auto_ anahtar sözcüğünün _C_ dilindeki anlamı geçerli değil. _auto_ farklı anlamlarda kullanılıyor _(type deduction)_.
-+ _C99_ standartları ile C diline eklenen bazı araçlar C++ dilinde yok. _(restrict pointers, compound literals, flexible array members, designated initializers...)
++ _C99_ standartları ile C diline eklenen bazı araçlar C++ dilinde yok. _(restrict pointers, compound literals, flexible array members, designated initializers...)_
 
 
 
