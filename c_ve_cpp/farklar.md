@@ -3,7 +3,7 @@ C++ dilinde
 + C dilinde olan _"implicit int"_ _(örtülü int)_ kuralı geçerli değil. 
 + string literalleri _const char_ diziler. (C dilinde string literalleri _char_ diziler)
 + karakter sabitlerinin _(character literals)_ türü _char_ (C dilinde int).
-+ Karşılaştırma operatörleri ve lojik operatörler _bool_ türden _true_ ya da _false_ değerlerini üretiyorlar. C dilinde bu operatörler işaretli _int_ türden _1_ ya da _0_ değerlerini üretiyorlar.
++ Karşılaştırma operatörleri ve lojik operatörler _bool_ türden _true_ ya da _false_ değerlerini üretiyorlar. (C dilinde bu operatörler işaretli _int_ türden _1_ ya da _0_ değerlerini üretiyorlar.)
 + _const_ nesnelere ilk değer vermek zorunlu (C dilinde zorunlu değil).
 + global _const_ nesneler iç bağlantıda _(internal linkage)_ (C dilinde dış bağlantıda)
 + ilk değerini sabit ifadesi _(constant expression)_ ile almış _const_ nesnelerin oluşturduğu ifadeler sabit ifadesi olarak ele alınıyor.
@@ -20,6 +20,7 @@ C++ dilinde
 + farklı _enum_ türleri arasında örtülü dönüşüm yok (C dilinde var).
 + _auto_ anahtar sözcüğünün _C_ dilindeki anlamı geçerli değil. _auto_ farklı anlamlarda kullanılıyor _(type deduction)_.
 + _C99_ standartları ile C diline eklenen bazı araçlar C++ dilinde yok. _(restrict pointers, compound literals, flexible array members, designated initializers...)_
++ C dilinde _R Value expression_ olan bazı ifadeler _L value expression_. (_value category_ kurallarında iki dil arasında kural farklılıkları var.)
 
 
 
