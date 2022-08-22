@@ -12,7 +12,7 @@ int *const ptr = &x;
 ```
 
 İngilizcede bu şekilde tanımlanmış gösterici değişkenlere __"const pointer"__ denmektedir.
-C dilinde yaygın olarak kullanılmasa da _C++_'ta böyle pointer değişkenler için _"top level const"_ terimi de kullanılmaktadır.
+C dilinde yaygın olarak kullanılmasa da _C++_'ta böyle pointer değişkenler için _"top level const"_ terimi de kullanılmaktadır. Bazı programcılar böyle gösterici değişkenler için _"right const"_ terimini kullanırlar (bildirimde _const_ anahtar sözcüğü asterisk atomunun sağına yazıldığı için).
 Bu tür gösterici değişkenler için kurs boyunca _"const gösterici"_ ya da bu durumu özellikle vurgulamak için _"kendisi const gösterici"_ terimini kullanacağım.
 
 Buradaki belirtilen _ptr_ değişkeninin değerinin hayatı boyunca değişmeyecek olduğudur. Başka bir deyişle, _ptr_ değişkeni hayatı boyunca _x_ değişkenini gösterecektir. Bu durumda derleyici, _ptr_ değişkeninin değerini değiştirmeye yönelik kodları geçersiz kabul etmekle yükümlüdür. Yani (yanlışlıkla) _ptr_ değişkenine başka bir nesnenin adresini atarsak geçersiz kod (sentaks hatası) oluşur. Buradaki taahhüdümüz (sözümüz) _ptr_ yoluyla erişilecek nesnenin, yani gösterilen nesnenin _(pointee)_ yani 
@@ -40,7 +40,7 @@ int main()
 
 ## Peki, neden kendisi const pointer değişkenleri kullanırız?
 
-* Kodun lojik yapısı gösterici değişkenin değerinin hiç değişmemesini gerektirmektedir. Gösterici değişkene başka bir değerin atanmasının (yani başka bir nesnenin adresinin atanmasının) mantıksal bir hata olduğunu düşünelim.
+* Kodun mantıksal yapısı gösterici değişkenin değerinin hiç değişmemesini gerektirmektedir. Gösterici değişkene başka bir değerin atanmasının (yani başka bir nesnenin adresinin atanmasının) mantıksal bir hata olduğunu düşünelim:
 
 ```
 int g1 = 10;
@@ -67,7 +67,7 @@ Bu kez aşağıdaki koda bakalım:
 int x = 10;
 const int *ptr = &x;
 ```
-_ptr_ değişkeninin bildiriminde **const** anahtar sözcüğü _'*'_ _(asterisk)_ atomundan önce kullanılıyor. İngilizcede bu şekilde tanımlanmış gösterici değişkenlere _"pointer to const"_ denmektedir. Örneğin yukarıdaki koddaki _ptr_ için _"ptr is a pointer to const int"_ diyebiliriz. C dilinde yaygın olarak kullanılmasa da _C++_ dilinde böyle gösterici değişkenler için _"low level const"_ terimi de kullanılmaktadır. Bu tür gösterici değişkenler için kurs boyunca "const nesne göstericisi" ya da bu durumu özellikle vurgulamak için _"gösterdiği nesne const olan gösterici"_ terimlerini kullanacağım.
+_ptr_ değişkeninin bildiriminde **const** anahtar sözcüğü _'*'_ _(asterisk)_ atomundan önce kullanılıyor. İngilizcede bu şekilde tanımlanmış gösterici değişkenlere _"pointer to const"_ denmektedir. Örneğin yukarıdaki koddaki _ptr_ için _"ptr is a pointer to const int"_ diyebiliriz. C dilinde yaygın olarak kullanılmasa da _C++_ dilinde böyle gösterici değişkenler için _"low level const"_ terimi de kullanılmaktadır. Bu tür gösterici değişkenler için kurs boyunca "const nesne göstericisi" ya da bu durumu özellikle vurgulamak için _"gösterdiği nesne const olan gösterici"_ terimlerini kullanacağım. Bazı programcılar böyle gösterici değişkenler için _"left const"_ terimini kullanırlar (bildirimde _const_ anahtar sözcüğü asterisk atomunun sağına yazıldığı için).
 
 Yukarıdaki tanımlamada tür belirten _int_ anahtar sözcüğü ile __const__ anahtar sözcüğünün bildirimde yer değiştirmesi bir anlam farklılığı oluşturmaz. Yani
 
@@ -79,7 +79,7 @@ ile
 int const *ptr = &x;
 ```
 
-tanımlamaları tamamen aynı anlamdadır. Hangi biçimi tercih ettiğimiz kullandığımız kodlama konvensiyonları _(coding conventions)_ ile ilgilidir. Burada belirtilen, _ptr_ değişkeninin gösterdiği (ve ileride gösterebileceği) nesneleri salt okuma _(access)_ amaçlı gösteriyor olmasıdır. Başka bir deyişle, _*ptr_ ifadesine karşılık gelen nesneyi, _ptr_ yoluyla (aracılığı ile) değiştirmeme sözü vermiş oluyoruz.
+tanımlamaları tamamen aynı anlamdadır. Hangi biçimi tercih ettiğimiz kullandığımız kodlama konvensiyonları _(coding conventions)_ ile ilgilidir. Burada belirtilen, _ptr_ değişkeninin gösterdiği (ve ileride gösterebileceği) nesneleri salt okuma/erişim _(access)_ amaçlı gösteriyor olmasıdır. Başka bir deyişle, _*ptr_ ifadesine karşılık gelen nesneyi, _ptr_ yoluyla (aracılığı ile) değiştirmeme sözü vermiş oluyoruz.
 Bu durumda derleyici, _*ptr_ nesnesinin değerini değiştirmeye yönelik kodları geçersiz kabul etmekle yükümlüdür. Yani (yanlışlıkla) _*ptr_ yoluyla _ptr_'nin gösterdiği nesneye *(pointee)* bir atama yaparsak geçersiz kod (sentaks hatası) oluşur. Buradaki taahhüdümüz (sözümüz) _ptr_'nin değerini değiştirmemek değildir. _ptr_'nin değerini değiştirmemiz yani ona yeni bir değer atmamamız geçerlidir. Aşağıdaki koda bakalım:
 
 ```
@@ -98,7 +98,7 @@ int main()
 
 Eğer yazdığınız kodda __const__ anahtar sözcüğünü nereye yazacağınız konusunda tereddütünüz varsa (kuralları unutmuşsanız) her zaman şu cümleyi hatırlayın:
 
-> const neden önce geliyorsa const olan odur
+<h3>const neden önce geliyorsa const olan odur***</h3>
 
 ```
 int * const p = &x;
