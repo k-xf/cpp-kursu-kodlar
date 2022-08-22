@@ -54,7 +54,7 @@ void func()
 }
 ```
 
-*ptr*'nin hayatı boyunca *g1* değişkenini göstermesi gereksin. Eğer gösterici değişkeni yukarıdaki gibi tanımlarsak ve bu gösterici değişkene başka bir nesnenin adresini atarsak, bu atama lojik bir hata olmasına karşın kod geçerlidir. Böyle durumlarda *kendisi const pointer değişkenin* kullanılması kodlama hatası yapma riskini düşürmektedir.
+*ptr*'nin hayatı boyunca *g1* değişkenini göstermesi gereksin. Eğer gösterici değişkeni yukarıdaki gibi tanımlarsak ve bu gösterici değişkene başka bir nesnenin adresini atarsak, bu atama mantılsal bir hata olmasına karşın kod geçerlidir. Böyle durumlarda *kendisi const pointer değişkenin* kullanılması kodlama hatası yapma riskini düşürmektedir.
 
 * Kodu okuyana *ptr*'nin değerinin değişmeyeceğini bildirmek birçok durumda kodun okunmasını kolaylaştırabilir.
 
@@ -266,4 +266,40 @@ int main()
 }
 ```
 
-__devam edecek__
+## gösterici gösteren gösterici (pointer to pointer) ve const anahtar sözcüğü
+
+Yine _const_ anahtar sözcüğünün kullanıldığı yere bağlı olarak bildirimin anlamı değişmektedir (_const_ neden önce gelirse _const_ olan odur).
+
+```
+int main()
+{
+	int x = 10;
+	int y = 20;
+	int* p = &x;
+	int* q = &y;
+	
+	int** const ptr1 = &p;
+	//const pointer to pointer to int
+	// const ptr1'den önce geliyor, const olan ptr1
+	//ptr1 = &q; //geçersiz
+	*ptr1 = &y; //geçerli
+	**ptr1 = 99; //geçerli
+
+	int* const* ptr2 = &p;
+	//pointer to const pointer to int
+	// const *ptr2'den önce geliyor, const olan *ptr2
+
+	ptr2 = &q; //geçerli
+	//*ptr2 = &y; //geçersiz
+	**ptr2 = 99; //geçerli
+
+	const int** ptr3 = &p;
+	//pointer to pointer to const int
+	// const **ptr3'den önce geliyor, const olan **ptr3
+
+	ptr3 = &q; //geçerli
+	*ptr3 = &y; //geçerli
+	//**ptr3 = 99; //geçersiz
+
+}
+```
