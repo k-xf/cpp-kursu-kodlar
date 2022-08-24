@@ -1,7 +1,9 @@
 ### Arithmetic operations
 
-+ plus				function object implementing	x + y
-+ minus				function object implementing	x - y
++ plus<br>
+function object implementing	x + y
++ minus<br>
+function object implementing	x - y
 + multiplies			function object implementing	x * y
 divides				function object implementing	x / y
 modulus				function object implementing	x % y
