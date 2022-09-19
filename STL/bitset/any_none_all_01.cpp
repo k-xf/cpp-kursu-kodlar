@@ -11,7 +11,7 @@ int main()
 
 	cout << boolalpha;
 
-	cout << "is any bit set?    " << bs.any() << "\n";
-	cout << "is no bit set?     " << bs.none() << "\n";
-	cout << "all of bits set?   " << bs.all() << "\n";
+	cout << "is any bit set?    " << bs.any() << '\n';
+	cout << "none of the bits set?     " << bs.none() << '\n';
+	cout << "all of bits set?   " << bs.all() << '\n';
 }
