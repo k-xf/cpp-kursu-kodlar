@@ -1,7 +1,6 @@
 #include <tuple>
 #include <string>
 #include "date.h"
-#include <vector>
 #include "nutility.h"
 #include <fstream>
 #include <iomanip>
@@ -20,15 +19,15 @@ int main()
 	}
 
 	sort(ivec.begin(), ivec.end());
-	std::ofstream ofs{ "out.txt" };
+	ofstream ofs{ "out.txt" };
 	if (!ofs) {
 		std::cerr << "out.txt dosyasi olusturulamadi\n";
-		exit(EXIT_FAILURE);
+		return 1;
 	}
 
 	ofs << left;
 
 	for (const auto& [no, town, name, bdate] : ivec) {
-		ofs << no << " " << setw(16) << town << setw(16) << name << bdate << "\n";
+		ofs << no << " " << setw(16) << town << setw(16) << name << bdate << '\n';
 	}
 }
