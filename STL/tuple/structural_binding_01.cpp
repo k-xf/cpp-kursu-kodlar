@@ -16,8 +16,8 @@ int main()
 
 	auto [ival, dval, name, bdate] = func();
 
-	std::cout << "ival = " << ival << "\n";
-	std::cout << "dval = " << dval << "\n";
-	std::cout << "str = " << name << "\n";
-	std::cout << "mydate = " << bdate << "\n";
+	std::cout << "ival = " << ival << '\n';
+	std::cout << "dval = " << dval << '\n';
+	std::cout << "str = " << name << '\n';
+	std::cout << "mydate = " << bdate << '\n';
 }
