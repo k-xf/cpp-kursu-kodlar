@@ -10,7 +10,7 @@ int main()
 	cout << "bir tamsayi girin: ";
 	cin >> uval;
 	bitset<32> bs = uval;
-	cout << bs << "\n";
-	cout << "size = " << bs.size() << "\n";
-	cout << "set bit count = " << bs.count() << "\n";
+	cout << bs << '\n';
+	cout << "size = " << bs.size() << '\n';
+	cout << "set bit count = " << bs.count() << '\n';
 }
