@@ -1,4 +1,4 @@
-//tuple sınıf şablonu için tie işlevi yerine yapısal bağlama kullanmanın avantajları
+//tuple sınıf şablonu için tie işlevi yerine structured binding kullanmanın avantajları
 
 
 #include <tuple>
