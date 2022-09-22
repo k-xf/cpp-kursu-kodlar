@@ -17,5 +17,5 @@ int main()
 	std::cout << std::left;
 
 	for (const auto &[key, val] : mymap)
-		std::cout << std::setw(10) << key << val << "\n";
+		std::cout << std::setw(10) << key << val << '\n';
 }
