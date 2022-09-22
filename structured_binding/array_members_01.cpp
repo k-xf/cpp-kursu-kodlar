@@ -16,11 +16,14 @@ int main()
 
 	auto [str1, str2] = mydata;
 
-	std::cout << "sizeof(str1) = " << sizeof(str1) << "\n";
-	std::cout << "sizeof(str2) = " << sizeof(str2) << "\n";
+	std::cout << "sizeof(str1) = " << sizeof(str1) << '\n';
+	std::cout << "sizeof(str2) = " << sizeof(str2) << '\n';
 
 	Nec x;
 	auto [ar1, ar2] {x};
+
+	std::cout << "sizeof(ar1) = " << sizeof(ar1) << '\n';
+	std::cout << "sizeof(ar2) = " << sizeof(ar2) << '\n';
 
 	for (auto val : ar1)
 		std::cout << val << " ";
