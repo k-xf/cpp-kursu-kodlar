@@ -13,7 +13,7 @@ public:
 
 	void print()const
 	{
-		std::cout << "mx = " << mx << "\n";
+		std::cout << "mx = " << mx << '\n';
 	}
 private:
 	int mx;
