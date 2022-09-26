@@ -4,6 +4,8 @@ int foo(int);
 double func(double);
 void bar();
 
+//CTAD
+
 int main()
 {
 	std::function f1 = foo;
