@@ -1,3 +1,5 @@
+//generalized call back
+
 #include <functional>
 #include <iostream>
 
