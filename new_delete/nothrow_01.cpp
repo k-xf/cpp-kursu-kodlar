@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <new>
 
 struct Nec {
 	unsigned char buffer[1024 * 1024 * 16];
