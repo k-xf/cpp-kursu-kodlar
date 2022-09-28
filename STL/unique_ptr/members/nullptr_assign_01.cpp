@@ -7,10 +7,10 @@ int main()
 
 	auto upx = make_unique<Triple>(10, 30, 56);
 	cout << *upx << "\n";
-	cout << (upx ? "dolu" : "bos") << "\n";
+	cout << (upx ? "not empty" : "empty") << '\n';
 
 	upx = nullptr;
 
 	(void)getchar();
-	cout << (upx ? "dolu" : "bos") << "\n";
+	cout << (upx ? "not empty" : "empty") << '\n';
 }
