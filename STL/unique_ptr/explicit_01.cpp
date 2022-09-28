@@ -5,5 +5,5 @@
 
 std::unique_ptr<Triple> foo()
 {
-	return new Triple; //gecersiz
+	return new Triple; //invalid
 }
