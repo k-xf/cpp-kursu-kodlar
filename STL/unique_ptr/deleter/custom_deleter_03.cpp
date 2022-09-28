@@ -3,7 +3,7 @@
 
 void mydeleter(std::string* p)
 {
-	std::cout << "delete edilen nesne adresi: " << p << "\n";
+	std::cout << "delete edilen nesne adresi: " << p << '\n';
 	delete p;
 };
 
