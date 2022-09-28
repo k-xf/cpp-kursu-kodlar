@@ -7,7 +7,7 @@ int main()
 	using namespace std;
 
 	auto f = [](string* p) {
-		cout << "lambda deleter deletes the string at the address " << p << "\n";
+		cout << "lambda deleter deletes the string at the address " << p << '\n';
 		delete p;
 	};
 
