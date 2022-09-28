@@ -9,22 +9,22 @@ int main()
 	unique_ptr<string> upx;
 
 	if (upx)
-		cout << "dolu\n";
+		cout << "not empty\n";
 	else
-		cout << "bos\n";
+		cout << "empty";
 
 	if (upx != nullptr)
-		cout << "dolu\n";
+		cout << "not empty\n";
 	else
-		cout << "bos\n";
+		cout << "empty";
 
 	if (upx.get())
-		cout << "dolu\n";
+		cout << "not empty\n";
 	else
-		cout << "bos\n";
+		cout << "empty";
 
 	if (upx.get() != nullptr)
-		cout << "dolu\n";
+		cout << "not empty\n";
 	else
-		cout << "bos\n";
+		cout << "empty";
 }
