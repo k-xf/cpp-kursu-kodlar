@@ -6,10 +6,9 @@ int main()
 {
 	try {
 		std::unique_ptr<std::string> upx;
-		if (upx)
-			std::cout << *upx << "\n";  //ub
+		std::cout << *upx << '\n';  //ub
 	}
 	catch (const std::exception& ex) {
-		std::cout << "hata yakalandi : " << ex.what() << "\n";
+		std::cout << "hata yakalandi : " << ex.what() << '\n';
 	}
 }
