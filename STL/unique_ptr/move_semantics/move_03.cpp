@@ -5,5 +5,5 @@ std::unique_ptr<Triple> func(void);
 
 int main()
 {
-	auto uptr = func(); //gecerli (move semantics)
+	auto uptr = func(); //valid (move semantics)
 }
