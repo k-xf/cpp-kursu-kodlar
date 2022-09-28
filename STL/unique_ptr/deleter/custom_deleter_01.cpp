@@ -5,7 +5,7 @@
 struct SDeleter {
 	void operator()(std::string* p)
 	{
-		std::cout << "the address of deleted object: " << p << "\n";
+		std::cout << "the address of deleted object: " << p << '\n';
 		delete p;
 	}
 };
