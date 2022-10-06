@@ -1,8 +1,13 @@
-#include <ostream>
+#include <iostream>
 
 class Point {
 public:
-	Point(int x, int y, int z) : mx{x}, my{y}, mz{z} {}
+	Point() = default;
+	Point(int x, int y, int z) : mx{ x }, my{ y }, mz{ z } {}
+	~Point()
+	{
+		std::cout << "Point " << *this << " destroyed\n";
+	}
 	friend std::ostream& operator<<(std::ostream& os, const Point& p)
 	{
 		return os << '(' << p.mx << ", " << p.my << ", " << p.mz << ')';
