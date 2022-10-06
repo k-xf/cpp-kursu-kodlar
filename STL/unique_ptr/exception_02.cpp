@@ -1,32 +1,32 @@
 #include <memory>
-#include "triple.h"
-#include <iostream>
-
+#include "point.h"
 
 void func()
 {
-	//throw std::exception{};
+	throw std::exception{};
 }
 
 int main()
 {
-	std::cout << ios::unitbuf;
-	std::cout << "main started\n";
+	using namespace std;
+
+	cout << unitbuf;
+	cout << "main started\n";
 
 	try {
-		std::unique_ptr<Triple>upx(new Triple{ 10, 20, 30 });
+		unique_ptr<Point>upx(new Point{1, 2, 3});
 
-		std::cout << (upx ? "not empty" : "empty") << '\n';
-		std::cout << *upx << '\n';
+		cout << (upx ? "not empty" : "empty") << '\n';
+		cout << *upx << '\n';
 		upx->set(3, 6, 7);
 		func();
-		std::cout << *upx << '\n';
-		std::cout << "end of the block\n";
+		cout << *upx << '\n';
+		cout << "end of the block\n";
 	}
 	catch (const std::exception& ex) {
-		std::cout << "exception caught: " << ex.what() << '\n';
+		cout << "exception caught: " << ex.what() << '\n';
 
 	}
 
-	std::cout << "main goes on\n";
+	cout << "main goes on\n";
 }
