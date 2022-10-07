@@ -2,6 +2,7 @@
 #include "person.h"
 #include <list>
 #include <vector>
+#include <iostream>
 
 int main()
 {
@@ -18,7 +19,7 @@ int main()
 			std::vector<std::shared_ptr<Person>> myvec(mylist.begin(), mylist.end());
 			////
 			for (auto& s : myvec)
-				s->set_name(s->Name() + "can");
+				s->set_name(s->get_name() + "can");
 		}
 
 		for (auto& s : mylist)
