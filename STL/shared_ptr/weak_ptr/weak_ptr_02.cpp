@@ -1,24 +1,26 @@
 #include <memory>
 #include <iostream>
-#include "date.h"
+#include "point.h"
 
 int main()
 {
 	using namespace std;
+	cout << boolalpha;
 
-	auto sptr = make_shared<Date>(12, 5, 1987);
-	weak_ptr<Date> wp{ sptr };
+	auto sptr = make_shared<Point>(4, 7, 9);
+	weak_ptr<Point> wp{ sptr };
 
-	cout << "sptr.use_count() = " << sptr.use_count() << "\n";
-	sptr.reset();
-	//cout << "wp.use_count() = " << wp.use_count() << "\n";
-	//cout << boolalpha << wp.expired() << "\n";
+	cout << "sptr.use_count() = " << sptr.use_count() << '\n';
+	//sptr.reset();
+	//cout << "wp.use_count() = " << wp.use_count() << '\n';
+	//cout << "wp.expired() = " << wp.expired() << "\n";
+
 	//if (shared_ptr<Date> sp = wp.lock()) {
 	if (auto sp = wp.lock()) {
-		cout << "kaynak halen hayatta : " << *sp << "\n";
+		cout << "resource not released yet: " << *sp << '\n';
 	}
 	else {
-		cout << "kaynak sonlandirilmis\n";
+		cout << "resource already released\n";
 	}
 
 }
