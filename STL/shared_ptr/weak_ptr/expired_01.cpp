@@ -1,20 +1,23 @@
-#include "date.h"
 #include <memory>
+#include "point.h"
 #include <iostream>
 
 int main()
 {
 	using namespace std;
-	auto sptr{ make_shared<Date>(12, 5, 1987) };
-	weak_ptr<Date> wp{ sptr };
 
-	cout << "sptr.use_count() = " << sptr.use_count() << "\n";
+	auto sptr{ make_shared<Point>(12, 5, 1987) };
+	weak_ptr<Point> wp{ sptr };
+
+	cout << "sptr.use_count() = " << sptr.use_count() << '\n';
 	//wp.reset();
-	cout << "wp.use_count() = " << wp.use_count() << "\n";
-	cout << boolalpha << wp.expired() << "\n";
+	cout << "wp.use_count()   = " << wp.use_count() << '\n';
+	cout << boolalpha;
+	std::cout << "wp.expired() = " << wp.expired() << '\n';
+
 	if (!wp.expired()) {
-		shared_ptr<Date> sp(wp);
-		cout << *sp << "\n";
+		shared_ptr<Point> sp(wp);
+		cout << *sp << '\n';
 	}
 	else {
 		cout << "kaynak sonlandirilmis\n";
