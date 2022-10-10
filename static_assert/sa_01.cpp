@@ -1,14 +1,15 @@
 #include <type_traits>
 
 template <typename T>
-int f(T t) 
+void foo(T t)
 {
-    static_assert(std::is_integral<T>(), "T must be integral");
-    return 42;
+   //static_assert(std::is_integral<T>(), "T must be integral");
+   //static_assert(std::is_integral<T>::value, "T must be integral");
+   static_assert(std::is_integral_v<T>, "T must be integral");
 }
 
-int main() 
+int main()
 {
-    f(1.2);
+    //foo(10);
+    foo(4.5);
 }
-
