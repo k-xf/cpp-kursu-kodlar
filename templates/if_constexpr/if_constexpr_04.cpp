@@ -1,4 +1,3 @@
-
 //function return type may be int or double
 
 constexpr auto func()
