@@ -17,9 +17,8 @@ int main()
     int* iptr{ &ival };
     double* dptr{ &dval };
 
-    std::cout << getval(ival) << "\n";
-    std::cout << getval(iptr) << "\n";
-    std::cout << getval(dval) << "\n";
-    std::cout << getval(dptr) << "\n";
-    
+    std::cout << getval(ival) << '\n';
+    std::cout << getval(iptr) << '\n';
+    std::cout << getval(dval) << '\n';
+    std::cout << getval(dptr) << '\n';    
 }
