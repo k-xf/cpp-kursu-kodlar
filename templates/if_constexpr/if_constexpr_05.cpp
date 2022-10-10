@@ -1,7 +1,6 @@
 #include <iterator>
 #include <iostream>
 
-
 //implementation for random access iterators
 template <typename Iter, typename Dist>
 void Advance_impl(Iter& pos, Dist n, std::random_access_iterator_tag)
