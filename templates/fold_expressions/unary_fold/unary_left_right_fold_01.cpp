@@ -22,6 +22,6 @@ auto fdiv_l(Args && ...args)
 
 int main()
 {
-	std::cout << fdiv_r(500, 50, 5, 2) << "\n";
-	std::cout << fdiv_l(500, 50, 5, 2) << "\n";
+	std::cout << fdiv_r(500, 50, 5, 2) << '\n';
+	std::cout << fdiv_l(500, 50, 5, 2) << '\n';
 }
