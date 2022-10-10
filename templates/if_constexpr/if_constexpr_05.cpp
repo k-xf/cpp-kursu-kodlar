@@ -52,10 +52,10 @@ int main()
 	vector<int> ivec{ 1, 2, 3 ,4, 5 };
 	auto veciter = ivec.begin();
 	Advance(veciter, 3);
-	std::cout << *veciter << "\n";
+	std::cout << *veciter << '\n';
 
 	list<int> ilist{ 1, 2, 3, 4, 5 };
 	auto listiter = ilist.begin();
 	Advance(listiter, 4);
-	std::cout << *listiter << "\n";
+	std::cout << *listiter << '\n';
 }
