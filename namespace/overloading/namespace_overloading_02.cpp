@@ -22,7 +22,8 @@ int main()
 {
 	using Nec::func;
 
-	func(); //gecersiz
+	//func(); //gecersiz
 	func(12);
 	func(2.5);
+	::func();
 }
