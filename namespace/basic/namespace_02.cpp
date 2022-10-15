@@ -1,4 +1,3 @@
-
 namespace nec {
 	int x = 10;
 }
