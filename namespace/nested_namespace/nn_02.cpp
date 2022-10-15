@@ -12,9 +12,11 @@ namespace Enc {
 		{
 			std::cout << "Enc::Nested::foo()\n";
 		}
+
 		void func()
 		{
-			foo(10);
+			//foo(10); //invalid
+			Enc::foo(10); 
 		}
 
 	}
