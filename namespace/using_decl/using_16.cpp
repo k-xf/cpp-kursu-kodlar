@@ -10,5 +10,7 @@ void func()
 {
 	using A::f; //valid
 	using B::f; //valid
-        f(); //invalid - ambiguity
+	f(); //invalid - ambiguity
+	A::f();
+	B::f();
 }
