@@ -19,7 +19,7 @@ private:
 	std::ostream& mos;
 	//decltype(mos.flags()) mflags;
 	std::ios_base::fmtflags mflags;
-	char					mfill;
-	std::streamsize			mwidth;
-	std::streamsize			mprecision;
+	char mfill;
+	std::streamsize	mwidth;
+	std::streamsize mprecision;
 };
