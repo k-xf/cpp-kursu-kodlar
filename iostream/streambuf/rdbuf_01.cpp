@@ -14,6 +14,6 @@ int main()
 	int x = 47'802, y = 57'054;
 	double dval = 4187.7233;
 
-	cout << x << " " << y << " " << dval << " " << (x > y) << "\n";
-	ostr << x << " " << y << " " << dval << " " << (x > y) << "\n";
+	cout << x << " " << y << " " << dval << " " << (x > y) << '\n';
+	ostr << x << " " << y << " " << dval << " " << (x > y) << '\n';
 }
