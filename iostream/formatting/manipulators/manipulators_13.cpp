@@ -7,5 +7,5 @@ int main()
 
 	std::cout << "bir isim girin: ";
 	std::cin >> std::setw(10) >> name;
-	std::cout << "isim : " << name << "\n";
+	std::cout << "isim : " << name << '\n';
 }
