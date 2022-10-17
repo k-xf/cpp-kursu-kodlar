@@ -2,7 +2,6 @@
 #include <limits>
 #include <sstream>
 
-
 class ignore_line {
 
 public:
