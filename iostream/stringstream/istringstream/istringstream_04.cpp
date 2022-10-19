@@ -5,18 +5,19 @@
 int main()
 {
 	using namespace std;
+
 	string str;
-	cout << "sayilar giriniz: ";
+	cout << "enter yor numbers: ";
 	getline(cin, str);
 
 	istringstream iss{ str };
 
-	int ival;
+	int ival{};
 	int sum{};
 
 	while (iss >> ival) {
 		sum += ival;
 	}
 
-	std::cout << "toplam = " << sum << "\n";
+	std::cout << "the sum is = " << sum << '\n';
 }
