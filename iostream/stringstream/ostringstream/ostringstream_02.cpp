@@ -1,5 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <string>
 #include <ctime>
 #include <sstream>
@@ -10,9 +8,9 @@ std::string get_current_time()
 {
 	using namespace std;
 
-	time_t timer;
+	time_t timer{};
 	time(&timer);
-	tm* p = localtime(&timer);
+	tm* const p = localtime(&timer);
 	ostringstream oss;
 	oss.fill('0');
 
