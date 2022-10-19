@@ -8,19 +8,19 @@ int main()
 
 	int x{};
 
-	while (std::cout << "bir tamsayi girin: " && !(std::cin >> x)) {
+	while (std::cout << "enter an integer: " && !(std::cin >> x)) {
 		if (cin.eof()) {
-			std::cout << "giris yapmadiniz...\n";
+			std::cout << "you have not entered anything!\n";
 			cin.clear();
 		}
 		else {
 			cin.clear();
 			string line;
 			getline(cin, line);
-			cout << "[" << line << "] gecerli tam sayi degil\n";
+			cout << "[" << line << "] is not a valid integer!\n";
 		}
 	}
 
-	cout << "giris basarili : " << x << "\n";
+	cout << "your number is : " << x << "\n";
 
 }
