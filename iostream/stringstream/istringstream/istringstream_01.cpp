@@ -11,5 +11,5 @@ int main()
 	istringstream iss(sline);
 	string word;
 	while (iss >> word)
-		cout << word << "\n";
+		cout << word << '\n';
 }
