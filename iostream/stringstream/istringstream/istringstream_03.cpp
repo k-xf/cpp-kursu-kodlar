@@ -10,7 +10,7 @@ int main()
 	using namespace std;
 
 	string str;
-	cout << "bir yazi giriniz: ";
+	cout << "enter a sentence: ";
 	getline(cin, str);
 
 	istringstream iss{ str };
@@ -21,8 +21,8 @@ int main()
 
 	vector<string> svec;
 	while (iss >> word) {
-		cout << setw(2) << ++cnt << " " << word << "\n";
-		svec.push_back(word);
+		cout << setw(2) << ++cnt << " " << word << '\n';
+		svec.push_back(std::move(word));
 	}
 
 	sort(begin(svec), end(svec));
