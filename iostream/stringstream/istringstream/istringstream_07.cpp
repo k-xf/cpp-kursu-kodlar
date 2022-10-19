@@ -8,6 +8,7 @@
 int main()
 {
 	using namespace std;
+
 	string str;
 	cout << "sayilar giriniz: ";
 	getline(cin, str);
@@ -15,8 +16,8 @@ int main()
 	istringstream iss{ str };
 
 	vector<int> ivec{ istream_iterator<int>{iss}, {} };
-	
-	cout << "ivec.size() = " << ivec.size() << "\n";
+
+	cout << "ivec.size() = " << ivec.size() << '\n';
 	sort(ivec.begin(), ivec.end(), greater{});
 	copy(ivec.begin(), ivec.end(), ostream_iterator<int>{cout, " "});
 }
