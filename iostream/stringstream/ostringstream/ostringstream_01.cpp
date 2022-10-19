@@ -7,7 +7,7 @@ int main()
 
 	int x;
 
-	cout << "bir sayi girin: ";
+	cout << "enter an integer: ";
 	cin >> x;
 
 	ostringstream oss;
