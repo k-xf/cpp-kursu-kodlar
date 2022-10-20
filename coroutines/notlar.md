@@ -177,7 +177,7 @@ co_await promise.final_suspend();
 #### co_await için nasıl bir kod üretiliyor?
 Bir _co_await_ ifadesinin aşağıdaki gibi kullanıldığını düşünelim:
 ```auto result = co_await expr;```
-devam edecek...;;
+devam edecek...
 	
 #### Awaitables
 - _co_await_ operatörünün ihtiyaç duyduğu operandlara _Awaitables_ deniyor. 
