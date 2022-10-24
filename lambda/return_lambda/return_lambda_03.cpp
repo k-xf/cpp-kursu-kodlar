@@ -5,7 +5,7 @@ struct Neco
 {
 	auto func()
 	{
-		return [str = str] { std::cout << str << "\n"; };
+		return [str = str] { std::cout << str << '\0'; };
 	}
 
 	std::string str;
