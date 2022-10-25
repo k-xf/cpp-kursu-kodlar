@@ -1,4 +1,4 @@
-//C++14 ile dile eklenen tamsayi sabiti basamak ayiraci
+//C++14 standartları ile dile eklenen tamsayi sabiti basamak ayiraci
 
 #include <iostream>
 #include <chrono>
@@ -16,7 +16,7 @@ int main()
 	int t = 0x10'0000;
 	int m = 0'004'000'000;
 
-	std::cout << std::boolalpha << (x == y && x == z && x == t && x == m) << "\n";
+	std::cout << std::boolalpha << (x == y && x == z && x == t && x == m) << '\n';
 	double d1 = 1.602'176'565e-19;
 	double d2 = 1.602176565e-19;
 
