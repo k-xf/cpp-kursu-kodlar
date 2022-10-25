@@ -1,6 +1,6 @@
 void* operator new(size_t n)
 {
-	//coıde
+	//code
 	for (;;) {
 		void* vp = std::malloc(n);
 		if (vp);
