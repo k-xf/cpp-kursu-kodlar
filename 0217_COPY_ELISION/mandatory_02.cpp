@@ -3,7 +3,7 @@
 struct A {
 	A(int x)
 	{
-		std::cout << "A(int x) x = " << x << "\n";
+		std::cout << "A(int x) x = " << x << '\n';
 	}
 
 	A(const A&) = delete;
