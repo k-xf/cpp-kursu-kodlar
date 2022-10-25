@@ -5,7 +5,7 @@ class Nec {
 public:
 	void* operator new(size_t n) //static member function
 	{
-		std::cout << "Nec::operator::new(size_t n) n = " << n << "\n";
+		std::cout << "Nec::operator::new(size_t n) n = " << n << '\n';
 		void* vp = std::malloc(n);
 		if (!vp) {
 			throw std::bad_alloc{};
@@ -16,7 +16,7 @@ public:
 
 	void operator delete(void* vp) //static member function
 	{
-		std::cout << "Nec::operator delete(void *p) " << vp << "\n";
+		std::cout << "Nec::operator delete(void *p) " << vp << '\n';
 		std::free(vp);
 	}
 
