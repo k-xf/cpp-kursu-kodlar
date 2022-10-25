@@ -3,7 +3,7 @@
 struct A {
 	A()
 	{
-		std::cout << "default ctor this = " << this << "\n";
+		std::cout << "default ctor this = " << this << '\n';
 	}
 
 	A(const A&) = delete;
