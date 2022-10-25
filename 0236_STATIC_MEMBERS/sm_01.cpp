@@ -16,7 +16,7 @@ int Nec::z{ 30 };
 
 int main()
 {
-	std::cout << "Nec::x = " << Nec::x << "\n";
-	std::cout << "Nec::y = " << Nec::y << "\n";
-	std::cout << "Nec::z = " << Nec::z << "\n";
+	std::cout << "Nec::x = " << Nec::x << '\n';
+	std::cout << "Nec::y = " << Nec::y << '\n';
+	std::cout << "Nec::z = " << Nec::z << '\n';
 }
