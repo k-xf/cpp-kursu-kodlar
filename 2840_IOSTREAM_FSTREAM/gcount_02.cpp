@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <iterator>
 
-
 int main()
 {
 	using namespace std;
@@ -16,13 +15,16 @@ int main()
 	}
 
 	//int ival;
-	constexpr int size = 100;
+	constexpr size_t size = 10;
 
-	vector<int> ivec(100);
+	vector<int> ivec(size);
 
 	while (ifs.read(reinterpret_cast<char*>(ivec.data()), sizeof(int) * ivec.size())) {
-		cout << "okunan byte sayisi : " << ifs.gcount() << "\n";
-		auto n = ifs.gcount() / sizeof(int);
-		copy(ivec.begin(), ivec.begin() + n, ostream_iterator<int>(cout, " "));
+		copy(ivec.begin(), ivec.begin() + size, ostream_iterator<int>(cout, " "));
+		cout << "\n==================================================\n";
+	}
+
+	if (auto n = ifs.gcount() / sizeof(int)) {
+		copy(ivec.begin(), ivec.begin() + static_cast<int>(n), ostream_iterator<int>(cout, " "));
 	}
 }
