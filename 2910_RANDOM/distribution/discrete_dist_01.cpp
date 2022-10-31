@@ -18,5 +18,5 @@ int main()
 		++results[dist(eng)];
 
 	for (const auto& [die, count] : results)
-		std::cout << "zar degeri " << die + 1 << " : " << count << "\n";
+		std::cout << "zar degeri " << die + 1 << " : " << count << '\n';
 }
