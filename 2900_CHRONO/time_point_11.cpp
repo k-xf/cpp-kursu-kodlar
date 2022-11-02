@@ -1,5 +1,5 @@
-#include <chrono>
 #include <iostream>
+#include <chrono>
 
 int main()
 {
@@ -7,7 +7,5 @@ int main()
 
 	std::chrono::system_clock::time_point x;
 
-	auto val = std::chrono::system_clock::to_time_t(x);
-
-	std::cout << "val = " << val << "\n";
+	std::cout << std::chrono::system_clock::to_time_t(x);
 }
