@@ -18,13 +18,14 @@ using Day = std::chrono::duration<int, std::ratio<60 * 60 * 24>>;
 
 int main()
 {
-	cout << 45s << "\n";
-	cout << 12ms << "\n";
-	cout << 45us << "\n";
-	cout << 45ns << "\n";
+	cout << 45s << '\n';
+	cout << 12ms << '\n';
+	cout << 45us << '\n';
+	cout << 45ns << '\n';
 
-	cout << halfsec{ 128 } << "\n";
-	cout << tensec{ 5} << "\n";
-	cout << frame{ 3.61 } << "\n";
-	cout << Day{ 5 } << "\n";
+	cout << halfsec{ 128 } << '\n';
+	cout << tensec{ 5 } << '\n';
+	cout << frame{ 3.61 } << '\n';
+	cout << Day{ 5 } << '\n';
 }
+
