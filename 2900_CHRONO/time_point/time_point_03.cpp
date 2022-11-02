@@ -48,7 +48,6 @@ int main()
 {
 	auto tp_now = system_clock::now();
 
-
 	print_time(system_clock::to_time_t(tp_now));
 	int min;
 	cout << "kac dakika : ";
