@@ -20,5 +20,5 @@ int main()
 
 	auto nhours = duration_cast<hours> (dt);
 
-	std::cout << "1/1/2000'den gecen gun sayisi: " << nhours.count() << "\n";
+	std::cout << "1/1/2000'den gecen saat sayisi: " << nhours.count() << "\n";
 }
