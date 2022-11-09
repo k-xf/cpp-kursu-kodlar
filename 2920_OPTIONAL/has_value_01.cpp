@@ -8,13 +8,12 @@ int main()
 {
 	std::string name;
 	//...
-	auto op = getMiddleName(name);
 
-	if (op.has_value()) {
-		std::cout << "ikinci isim: " << *op << "\n";
+	if (auto op = getMiddleName(name); op.has_value()) {
+		std::cout << "ikinci isim: " << *op << '\n';
 		//
 	}
 	else {
-		std::cout << "ikinci isim yok..." << "\n";
+		std::cout << "ikinci isim yok..." << '\n';
 	}
 }
