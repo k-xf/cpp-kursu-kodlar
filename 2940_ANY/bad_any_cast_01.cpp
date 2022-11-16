@@ -14,7 +14,7 @@ int main()
 		ival = any_cast<int>(a);
 		cout << "ival = " << ival << '\n';
 	}
-	catch (const std::bad_any_cast& ex) {
+	catch (const bad_any_cast& ex) {
 		cout << "hata yakalandi: " << ex.what() << '\n';
 	}
 }
