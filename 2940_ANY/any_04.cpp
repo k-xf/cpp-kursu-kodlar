@@ -8,17 +8,19 @@
 
 int main()
 {
+	using namespace std;
+
 	try {
-		std::any any_val = 876;
-		std::cout << "Deger:  " << std::any_cast<int>(any_val) << "\n";
+		any any_val = 876;
+		cout << "Deger:  " << any_cast<int>(any_val) << '\n';
 
 		any_val.reset();
 		if (!any_val.has_value())
-			std::cout << "degisken bir degere sahip degil\n";
+			cout << "degisken bir degere sahip degil\n";
 
 		auto ival = std::any_cast<int>(any_val); //hata gonderecek
 	}
-	catch (const std::bad_any_cast& e) {
-		std::cout << "hata yakalandi: " << e.what() << "\n";
+	catch (const bad_any_cast& e) {
+		cout << "hata yakalandi: " << e.what() << '\n';
 	}
 }
