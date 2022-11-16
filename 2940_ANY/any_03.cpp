@@ -5,7 +5,7 @@
 
 void* operator new(size_t n)
 {
-	std::cout << "operator new called n: " << n << "\n";
+	std::cout << "operator new called n: " << n << '\n';
 	auto vp = std::malloc(n);
 	if (!vp)
 		throw std::bad_alloc{};
@@ -25,10 +25,9 @@ struct Data {
 int main()
 {
 	using namespace std;
-	using namespace literals;
 
-	cout << "sizeof(any)        = " << sizeof(any) << "\n";
-	cout << "sizeof (type_info) = " << sizeof(type_info) << "\n";
+	cout << "sizeof(any)        = " << sizeof(any) << '\n';
+	cout << "sizeof (type_info) = " << sizeof(type_info) << '\n';
 
 	any ax = 10;
 	ax = 1.0;
