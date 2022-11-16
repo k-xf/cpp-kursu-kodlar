@@ -4,28 +4,28 @@
 
 int main()
 {
-	std::cout << std::boolalpha;
+	using namespace std;
+
+	cout << boolalpha;
 
 	auto f = [](const auto& val) {
-		std::cout << "deger: " << val << '\n';
+		cout << "deger: " << val << '\n';
 	};
-
-	std::variant<bool, std::string> var;
+	
+	variant<bool, string> var;
 	var = "necati";
 
-	// bool ogeye atama yapildi
-	std::cout << "index: " << var.index() << '\n';
-	std::visit(f, var);
+	// C++20 oncesi bool ogeye atama yapilmis olurdu
+	cout << "index: " << var.index() << '\n';
+	visit(f, var);
 
 	var.emplace<1>("ekrem");
-	std::cout << "index: " << var.index() << '\n';
-	std::visit(f, var);
+	cout << "index: " << var.index() << '\n';
+	visit(f, var);
 
-	var.emplace<std::string>("elif");
-	std::visit(f, var);
+	var.emplace<string>("elif");
+	visit(f, var);
 
-	using namespace std::literals;
 	var = "sinan"s;
-	std::visit(f, var);
-
+	visit(f, var);
 }
