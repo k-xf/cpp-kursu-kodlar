@@ -10,9 +10,9 @@ int main()
 
 	any a = Der();
 	if (Base* base_ptr = std::any_cast<Base>(&a)) {
-		std::cout << "correct type\n";
+		cout << "correct type\n";
 	}
 	else {
-		std::cout << "incorrect type\n";
+		cout << "incorrect type\n";
 	}
 }
