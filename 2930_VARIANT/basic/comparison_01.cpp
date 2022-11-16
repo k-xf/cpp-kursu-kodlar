@@ -6,9 +6,9 @@ int main()
 {
 	using namespace std;
 
-	variant<monostate, int, std::string> v1, 
-		           v2{ "necati" }, v3{ 54 };
-	variant<monostate, std::string, int> v4;
+	variant<monostate, int, string> v1,
+		v2{ "necati" }, v3{ 54 };
+	variant<monostate, string, int> v4;
 	//v1 == v4 gecersiz
 	cout << boolalpha;
 	cout << "v1 == v2 : " << (v1 == v2) << '\n';
