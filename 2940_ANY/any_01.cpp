@@ -6,7 +6,6 @@
 int main()
 {
 	using namespace std;
-	using namespace std::literals;
 
 	any a1{ 12 }; //int
 	any a2 = 4.5; //double
