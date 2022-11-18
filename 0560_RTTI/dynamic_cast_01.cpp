@@ -1,4 +1,4 @@
-lass Base {
+class Base {
 public:
 };
 
