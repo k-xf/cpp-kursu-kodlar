@@ -205,7 +205,7 @@ int main()
 ```
 
 #### std::bad_any_cast
-_any_cast/<>_ ile yapılan dönüşüm başarısız olursa yani dönüşümdeki hedef tür _any_ nesnesinin tuttuğu tür ile aynı değilse _std::bad_any_cast_ sınıfı türünden bir hata nesnesi gönderilir:
+_any_cast\<>_ ile yapılan dönüşüm başarısız olursa yani dönüşümdeki hedef tür _any_ nesnesinin tuttuğu tür ile aynı değilse _std::bad_any_cast_ sınıfı türünden bir hata nesnesi gönderilir:
 
 ```
 #include <any>
