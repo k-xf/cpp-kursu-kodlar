@@ -1,21 +1,25 @@
-Öyle bir nesne olsun ki istediğimiz herhangi türden bir değeri tutabilsin. İstediğimiz zaman nesnemizin tuttuğu değeri herhangi türden bir değer olarak değiştirebilelim. C++17 standartları ile dile eklenen std::any sınıfı işte bu işe yarıyor.
-C++ dilinin sağladığı en önemli avantajlardan biri tür güvenliği (type safety). Yazdığımız kodlarda değer taşıyacak nesnelerimizi bildirirken onların türlerini de belirtiyoruz. Derleyici program bu bildirimlerden edindiği bilgi ile nesne üzerinde hangi işlemlerin yapılabileceğini derleme zamanında biliyor ve kodu buna göre kontrol ediyor. C++ dilinde değer taşıyan nesnelerin türleri programın çalışma zamanında hiçbir şekilde değişmiyor.
-std::any sınıfı herhangi bir türden değer tutabilirken bir değer türü (value type) olarak tür güvenliği de sağlıyor. any bir sınıf şablonu değil. Bir any nesnesi oluşturduğumuzda onun hangi türden bir değer tutacağını belirtmemiz gerekmiyor. _std::any_ türünden bir nesne herhangi bir türden değeri tutabilirken sahip olduğu değerin türünü de biliyor. Peki bu nasıl mümkün oluyor? Yani nasıl oluyor da bir nesne herhangi türden bir değeri saklayabiliyor? Bunun sırrı _std::any_ nesnesinin tuttuğu değerin yanı sıra bu değere ilişkin typeid değerini de _(type_info)_ tutuyor olması.
-any sınıfının tanımı any isimli başlık dosyasında:
+Öyle bir nesne olsun ki istediğimiz herhangi türden bir değeri tutabilsin. İstediğimiz zaman nesnemizin tuttuğu değeri herhangi türden bir değer olarak değiştirebilelim. C++17 standartları ile dile eklenen _std::any_ sınıfı işte bu işe yarıyor.
+C++ dilinin sağladığı en önemli avantajlardan biri tür güvenliği _(type safety)_. Yazdığımız kodlarda değer taşıyacak nesnelerimizi bildirirken onların türlerini de belirtiyoruz. Derleyici program bu bildirimlerden edindiği bilgi ile nesne üzerinde hangi işlemlerin yapılabileceğini derleme zamanında biliyor ve kodu buna göre kontrol ediyor. C++ dilinde değer taşıyan nesnelerin türleri programın çalışma zamanında hiçbir şekilde değişmiyor.
+_std::any_ sınıfı herhangi bir türden değer tutabilirken bir değer türü _(value type)_ olarak tür güvenliği de sağlıyor. any bir sınıf şablonu değil. Bir any nesnesi oluşturduğumuzda onun hangi türden bir değer tutacağını belirtmemiz gerekmiyor. _std::any_ türünden bir nesne herhangi bir türden değeri tutabilirken sahip olduğu değerin türünü de biliyor. Peki bu nasıl mümkün oluyor? Yani nasıl oluyor da bir nesne herhangi türden bir değeri saklayabiliyor? Bunun sırrı _std::any_ nesnesinin tuttuğu değerin yanı sıra bu değere ilişkin _typeid_ değerini de _(type_info)_ tutuyor olması.
+_any_ sınıfının tanımı _any_ isimli başlık dosyasında:
 
+```
 namespace std {
     class any {
         //...
     };
 }
+```
 
 #### std::any nesnelerini oluşturmak
 Bir any sınıf nesnesi belirli türden bir değeri tutacak durumda ya da boş olarak yani bir değer tutmayan durumda hayata getirilebilir:
+
 ```
 #include <string>
 #include <any>
 #include <bitset>
 #include <vector>
+
 int main()
 {
     using namespace std::literals;
@@ -30,6 +34,7 @@ int main()
     std::any b3 = {}; //boş
 }
 ```
+
 any sınıf nesnesinin kurucu işlevine gönderilen argümandan farklı türden bir değeri tutabilmesi için kurucu işlevin ilk parametresine standart <utility> başlık dosyasında tanımlanan in_place_type<> argümanının gönderilmesi gerekiyor. any tarafından tutulacak nesnenin kurucu işlevine birden fazla değer gönderilmesi durumunda da yine in_place_type<> çağrıdaki ilk argüman olmalı:
 
 ```
@@ -37,6 +42,7 @@ any sınıf nesnesinin kurucu işlevine gönderilen argümandan farklı türden 
 #include <string>
 #include <complex>
 #include <set>
+	
 int main()
 {
     using namespace std;
@@ -117,7 +123,9 @@ int main()
 
 #### std::any nesnesini boşaltmak
 Bir değer tutan any nesnesini boşaltmak için sınıfın reset isimli işlevi çağrılabilir:
+```
 a.reset();
+```
 Bu çağrı ile any türünden a değişkeni eğer boş değil ise a değişkeninin tuttuğu nesnenin hayatı sonlandırılıyor. Bu işlemden sonra a değişkeni boş durumda. any nesnesini boşaltmanın bir başka yolu da ona varsayılan kurucu işlev (default constructor) ile oluşturulmuş bir geçici nesneyi atamak:
 a = std::any{};
 Atama aşağıdaki gibi de yapılabilir:
@@ -126,6 +134,7 @@ std::any nesnesinin boş olup olmadığını sınamak
 Bir any nesnesinin boş olup olmadığı yani bir değer tutup tutmadığı sınıfın has_value isimli üye işleviyle sınanabilir. (boost::any sınıfında olan empty üye işlevi yerine has_value ìsminin tercih edilmiş olması ilginç.)
 bool has_value()const noexcept;
 Aşağıdaki koda bakalım:
+```
 #include <any>
 #include <iostream>
 int main()
@@ -143,7 +152,8 @@ int main()
     a = {};
     cout << a.has_value() << '\n'; //false
 }
-std::any_cast<> işlev şablonu
+```
+#### std::any_cast<> işlev şablonu
 any sınıf nesnesinin tuttuğu değere erişmenin tek yolu onu global any_cast<> işleviyle tuttuğu değerin türüne dönüştürmek. any_cast<> işleviyle, any sınıf nesnesi bir değer türüne bir referans türüne ya da bir adres türüne dönüştürülebilir:
 #include <any>
 #include <string>
