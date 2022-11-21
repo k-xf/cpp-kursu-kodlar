@@ -37,7 +37,7 @@ int main()
 }
 ```
 
-any sınıf nesnesinin kurucu işlevine gönderilen argümandan farklı türden bir değeri tutabilmesi için kurucu işlevin ilk parametresine standart <utility> başlık dosyasında tanımlanan in_place_type<> argümanının gönderilmesi gerekiyor. any tarafından tutulacak nesnenin kurucu işlevine birden fazla değer gönderilmesi durumunda da yine in_place_type<> çağrıdaki ilk argüman olmalı:
+_any_ sınıf nesnesinin kurucu işlevine gönderilen argümandan farklı türden bir değeri tutabilmesi için kurucu işlevin ilk parametresine standart _\<utility>_ başlık dosyasında tanımlanan _in_place_type\<>_ argümanının gönderilmesi gerekiyor. _any_ tarafından tutulacak nesnenin kurucu işlevine birden fazla değer gönderilmesi durumunda da yine _in_place_type\<>_ çağrıdaki ilk argüman olmalı:
 
 ```
 #include <any>
@@ -57,8 +57,8 @@ int main()
 }
 ```
 
-####std::make_any<> yardımcı işlevi
-any türünden bir nesne oluşturmanın bir başka yolu da make_any<> yardımcı fabrika işlevini kullanmak. Burada any nesnesinin tutacağı değerin türü şablon tür argümanı olarak seçildiğinden in_place_type<> yardımcısının kullanılması gerekmiyor:
+#### std::make_any<> yardımcı işlevi
+any türünden bir nesne oluşturmanın bir başka yolu da make_any<> yardımcı fabrika işlevini kullanmak. Burada _any_ nesnesinin tutacağı değerin türü şablon tür argümanı olarak seçildiğinden _in_place_type\<>_ yardımcısının kullanılması gerekmiyor:
 
 ```
 #include <any>
@@ -75,8 +75,8 @@ int main()
 }
 ```
 
-std::any nesneleri için bellek ihtiyacı
-Bir any sınıf nesnesi tarafından tutulacak değerin bellek gereksinimi (storage) 1 byte da olabilir 5000 byte da. any nesnesi sahip olacağı değeri tutmak için heap alanında bir bellek bloğu edinebilir. Bu konuda derleyiciler istedikleri gibi kod üretebiliyorlar. Derleyiciler tipik olarak doğrudan any nesnesi içinde bir bellek alanını görece olarak küçük nesnelerin tutulması amaçlı kullanıyorlar. (C++17 standartları da böyle bir gerçekleştirimi öneriyor.) Eğer any tarafından saklanacak değer bu bellek alanına sığıyor ise değer bu alanda tutuluyor. Bu tekniğe "küçük tampon optimizasyonu" (small buffer optimization SBO) deniyor. Saklanacak nesne bu bellek alanına sığmıyor ise heap alanından bir bellek bloğu elde ediliyor. Aşağıda programı kendi derleyiciniz ile derleyerek çalıştırın ve any nesneleri için sizeof değerinin ne olduğunu görün:
+#### std::any nesneleri için bellek ihtiyacı
+Bir _any_ sınıf nesnesi tarafından tutulacak değerin bellek gereksinimi _(storage)_ 1 byte da olabilir 5000 byte da. _any_ nesnesi sahip olacağı değeri tutmak için heap alanında bir bellek bloğu edinebilir. Bu konuda derleyiciler istedikleri gibi kod üretebiliyorlar. Derleyiciler tipik olarak doğrudan any nesnesi içinde bir bellek alanını görece olarak küçük nesnelerin tutulması amaçlı kullanıyorlar. (C++17 standartları da böyle bir gerçekleştirimi öneriyor.) Eğer _any_ tarafından saklanacak değer bu bellek alanına sığıyor ise değer bu alanda tutuluyor. Bu tekniğe "küçük tampon optimizasyonu" _(small buffer optimization SBO)_ deniyor. Saklanacak nesne bu bellek alanına sığmıyor ise heap alanından bir bellek bloğu elde ediliyor. Aşağıda programı kendi derleyiciniz ile derleyerek çalıştırın ve any nesneleri için _sizeof_ değerinin ne olduğunu görün:
 
 ```
 #include <any>
@@ -87,13 +87,17 @@ int main()
     std::cout << "sizeof(any) : " << sizeof(std::any) << '\n';
 }
 ```
+
 Benim farklı derleyiciler ile yaptığım testlerin sonucu şöyle oldu:
+```
 GCC 8.1                        16
 Clang 7.0.0                    32
 MSVC 2017 15.7.0 32-bit        40
 MSVC 2017 15.7.0 64-bit        64
-std::any nesnesinin değerini değiştirmek
-Sınıfın atama operatör işlevi ya da emplace<> işlev şablonu ile bir any sınıf nesnesinin değeri değiştirilebilir. Aşağıdaki kodu inceleyin:
+```
+
+#### std::any nesnesinin değerini değiştirmek
+Sınıfın atama operatör işlevi ya da _emplace\<>_ işlev şablonu ile bir _any_ nesnesinin değeri değiştirilebilir. Aşağıdaki kodu inceleyin:
 
 ```
 #include <any>
@@ -124,18 +128,29 @@ int main()
 ```
 
 #### std::any nesnesini boşaltmak
-Bir değer tutan any nesnesini boşaltmak için sınıfın reset isimli işlevi çağrılabilir:
+Bir değer tutan _any_ nesnesini boşaltmak için sınıfın _reset_ isimli işlevi çağrılabilir:
+
 ```
 a.reset();
 ```
+
 Bu çağrı ile any türünden a değişkeni eğer boş değil ise a değişkeninin tuttuğu nesnenin hayatı sonlandırılıyor. Bu işlemden sonra a değişkeni boş durumda. any nesnesini boşaltmanın bir başka yolu da ona varsayılan kurucu işlev (default constructor) ile oluşturulmuş bir geçici nesneyi atamak:
+```
 a = std::any{};
+```
 Atama aşağıdaki gibi de yapılabilir:
+```
 a = {};
-std::any nesnesinin boş olup olmadığını sınamak
-Bir any nesnesinin boş olup olmadığı yani bir değer tutup tutmadığı sınıfın has_value isimli üye işleviyle sınanabilir. (boost::any sınıfında olan empty üye işlevi yerine has_value ìsminin tercih edilmiş olması ilginç.)
+```
+
+#### std::any nesnesinin boş olup olmadığını sınamak
+Bir _any_ nesnesinin boş olup olmadığı yani bir değer tutup tutmadığı sınıfın has_value isimli üye işleviyle sınanabilir. (_boost::any_ sınıfında olan _empty_ üye işlevi yerine _has_value_ ìsminin tercih edilmiş olması ilginç.)
+```
 bool has_value()const noexcept;
+```
+
 Aşağıdaki koda bakalım:
+
 ```
 #include <any>
 #include <iostream>
@@ -155,11 +170,15 @@ int main()
     cout << a.has_value() << '\n'; //false
 }
 ```
+
 #### std::any_cast<> işlev şablonu
-any sınıf nesnesinin tuttuğu değere erişmenin tek yolu onu global any_cast<> işleviyle tuttuğu değerin türüne dönüştürmek. any_cast<> işleviyle, any sınıf nesnesi bir değer türüne bir referans türüne ya da bir adres türüne dönüştürülebilir:
+_any_ nesnesinin tuttuğu değere erişmenin tek yolu onu global _any_cast/<>_ işleviyle tuttuğu değerin türüne dönüştürmek. _any_cast/<>_ işleviyle, _any_ sınıf nesnesi bir değer türüne bir referans türüne ya da bir adres türüne dönüştürülebilir:
+
+```
 #include <any>
 #include <string>
 #include <iostream>
+
 int main()
 {
     using namespace std;
@@ -174,10 +193,15 @@ int main()
     const string& crs{ any_cast<string &>(a) }
     crs = "ali serce"; //gecersiz
 }
-std::bad_any_cast
+```
+
+#### std::bad_any_cast
 any_cast<> ile yapılan dönüşüm başarısız olursa yani dönüşümdeki hedef tür any nesnesinin tuttuğu tür ile aynı değilse bad_any_cast sınıfı türünden bir hata nesnesi gönderilir:
+
+```
 #include <any>
 #include <iostream>
+
 int main()
 {
     using namespace std;
@@ -193,13 +217,20 @@ int main()
 	cout << "hata yakalandi: " << ex.what() << '\n';
     }
 }
-Burada gönderilen bad_any_cast sınıfı için türetme hiyerarşisi şöyle:
+```
+
+Burada gönderilen _bad_any_cast_ sınıfı için türetme hiyerarşisi şöyle:
+```
 std::exception  
      ^
 std::bad_cast  
      ^
 std::bad_any_cast
-any_cast<> dönüştürme işlevini kullanarak any tarafından tutulan nesneye gösterici (pointer) semantiği ile de erişilebilir. Ancak bu durumda şablon argümanı olarak kullanılan tür tutulan nesnenin türü değil ise bir hata nesnesi gönderilmez _(exception throw edilmez)?, nullptr değeri elde edilir:
+```
+
+any_cast/<> dönüştürme işlevini kullanarak any tarafından tutulan nesneye gösterici (pointer) semantiği ile de erişilebilir. Ancak bu durumda şablon argümanı olarak kullanılan tür tutulan nesnenin türü değil ise bir hata nesnesi gönderilmez _(exception throw edilmez)?, nullptr değeri elde edilir:
+
+```
 #include <any>
 #include <iostream>
 int main()
@@ -212,12 +243,21 @@ int main()
 	cout << "tutulan nesne int turden degil\n";
     //...
 }
-tutulan nesnenin türünü öğrenmek
+```
+
+#### tutulan nesnenin türünü öğrenmek
 Sınıfın type isimli üye işlevi ile any tarafından tutulmakta olan nesnenin türü öğrenilebilir:
+
+```
 const std::type_info& type() const noexcept;
+```
+
 İşlevin geri dönüş değeri any nesnesinin tuttuğu değerin tür bilgisini taşıyan type_info nesnesi. Eğer any nesnesi boş ise type işlevinin geri dönüş değeri typeid(void) olur. Bu işlevle erişilen type_info nesnesi type_info sınıfının operator== işleviyle bir karşılaştırma işlemine sokulabilir. Aşağıdaki kodu inceleyelim:
+
+```
 #include <any>
 #include <iostream>
+
 int main()
 {
     using namespace std;
@@ -228,8 +268,12 @@ int main()
     cout << (x.type() == typeid(int)) << '\n'; //true
     cout << (x.type() == typeid(double)) << '\n'; //false
 }
-std::any sınıfı ve taşıma semantiği
+```
+
+#### std::any sınıfı ve taşıma semantiği
 any sınıfı taşıma (move) semantiğini de destekliyor. Ancak taşıma semantiğinin desteklenmesi için tutulan değere ilişkin türün kopyalama semantiğini de desteklemesi gerekiyor. unique_ptr<T> gibi kopyalamaya kapalı ancak taşımaya açık türlerden değerler (movable but not copyable) any nesneleri tarafından tutulamazlar. Aşağıdaki kodda string nesnesinden any nesnesine ve any nesnesinden string nesnesine yapılan taşıma işlemlerini görebilirsiniz:
+
+```
 #include <any>
 #include <string>
 #include <iostream>
@@ -242,11 +286,16 @@ int main()
     name = move(any_cast<string&>(a)); // a'daki string name'e taşınıyor
     cout << name << "\n";
 }
-std::any sınıfının kullanıldığı yerler
+```
+
+#### std::any sınıfının kullanıldığı yerler
 C++17 standartları öncesinde C++ dilinde yazılan kodlarda daha önce void* türünün kullanıldığı birçok yerde any sınıfı kullanılabilir. void * türünden bir gösterici (pointer) değişken, herhangi türünden bir nesnenin adresini tutabilir. Ancak void* türünden bir değişken adresini tuttuğu nesnenin türünü bilmez ve onun hayatını kontrol edemez. Ayrıca void * türü bir gösterici türü olduğu için "deger türü" (value type) semantiğine sahip değildir. any istenilen herhangi türden bir değeri saklayabilir. Tutulan nesnenin değeri ve türü değiştirilebilir. any tuttuğu nesnenin hayatını da kontrol eder ve her zaman tuttuğu nesnenin türünü bilir. Eğer tutulacak değerin hangi türlerden olabileceği biliniyorsa any yerine variant türünün kullanılması çok daha uygun olacaktır. Aşağıdaki kullanım örneği resmi öneri metninden alındı:
+
+```
 #include <string>
 #include <any>
 #include <list>
+
 struct property
 {
     property();
@@ -254,6 +303,10 @@ struct property
     std::string name;
     std::any value;
 };
+
 typedef std::list<property> properties;
-Yukarıdaki kodda tanımlanan property türünden bir nesne hem istenilen türden bir değer saklayabilir hem de bu değere ilişkin tanımlayıcı bir yazıyı tutabilir. Böyle bir tür GUI uygulamalarından oyun programlarına kadar birçok yerde kullanılabilir. Bir kütüphanenin ele alacağı türleri bilmeden o türlerden değerleri tutabilmesi ve başka API'lere bunları gönderebilmesi gereken durumlarda any sınıfı iyi bir seçenek oluşturabilir. Betik (script) dilleriyle arayüz oluşturma, betik dilleri için yazılan yorumlayıcı programlarda böyle türlere ihtiyaç artabiliyor.
+```
+	
+Yukarıdaki kodda tanımlanan property türünden bir nesne hem istenilen türden bir değer saklayabilir hem de bu değere ilişkin tanımlayıcı bir yazıyı tutabilir. Böyle bir tür _GUI_ uygulamalarından oyun programlarına kadar birçok yerde kullanılabilir. Bir kütüphanenin ele alacağı türleri bilmeden o türlerden değerleri tutabilmesi ve başka _API_'lere bunları gönderebilmesi gereken durumlarda any sınıfı iyi bir seçenek oluşturabilir. Betik _(script)_ dilleriyle arayüz oluşturma, betik dilleri için yazılan yorumlayıcı programlarda böyle türlere ihtiyaç artabiliyor.
+	
 any sınıfının tasarımında büyük ölçüde Kelvin Henney tarafından yazılan ve 2001 yılında boost kütüphanesine eklenen boost::any sınıfı esas alındı. Kevlin Henney ve Beman Dawes 2006 yılında WG21/N1939=J16/06–0009 belge numarasıyla any sınıfının standartlara eklenmesi önerisini sundular. Nihayet Beman Dawes ve Alisdair Meredith'in önerileriyle diğer kütüphane bileşenleriyle birlikte any sınıfı da C++17 standartları ile dile eklendi. boost::any kütüphanesinde olmayan, emplace işlevi, in_place_type_t<> parametreli kurucu işlev, küçük tampon optimizasyonu (small buffer optimization) yapılabilmesi gibi bazı özellikler std::any kütüphanesine yer alıyor.
