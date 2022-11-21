@@ -1,6 +1,6 @@
 Öyle bir nesne olsun ki istediğimiz herhangi türden bir değeri tutabilsin. İstediğimiz zaman nesnemizin tuttuğu değeri herhangi türden bir değer olarak değiştirebilelim. C++17 standartları ile dile eklenen std::any sınıfı işte bu işe yarıyor.
 C++ dilinin sağladığı en önemli avantajlardan biri tür güvenliği (type safety). Yazdığımız kodlarda değer taşıyacak nesnelerimizi bildirirken onların türlerini de belirtiyoruz. Derleyici program bu bildirimlerden edindiği bilgi ile nesne üzerinde hangi işlemlerin yapılabileceğini derleme zamanında biliyor ve kodu buna göre kontrol ediyor. C++ dilinde değer taşıyan nesnelerin türleri programın çalışma zamanında hiçbir şekilde değişmiyor.
-std::any sınıfı herhangi bir türden değer tutabilirken bir değer türü (value type) olarak tür güvenliği de sağlıyor. any bir sınıf şablonu değil. Bir any nesnesi oluşturduğumuzda onun hangi türden bir değer tutacağını belirtmemiz gerekmiyor. any türünden bir nesne herhangi bir türden değeri tutabilirken sahip olduğu değerin türünü de biliyor. Peki bu nasıl mümkün oluyor? Yani nasıl oluyor da bir nesne herhangi türden bir değeri saklayabiliyor? Bunun sırrı any nesnesinin tuttuğu değerin yanı sıra bu değere ilişkin typeid değerini de (type_info) tutuyor olması.
+std::any sınıfı herhangi bir türden değer tutabilirken bir değer türü (value type) olarak tür güvenliği de sağlıyor. any bir sınıf şablonu değil. Bir any nesnesi oluşturduğumuzda onun hangi türden bir değer tutacağını belirtmemiz gerekmiyor. _std::any_ türünden bir nesne herhangi bir türden değeri tutabilirken sahip olduğu değerin türünü de biliyor. Peki bu nasıl mümkün oluyor? Yani nasıl oluyor da bir nesne herhangi türden bir değeri saklayabiliyor? Bunun sırrı _std::any_ nesnesinin tuttuğu değerin yanı sıra bu değere ilişkin typeid değerini de _(type_info)_ tutuyor olması.
 any sınıfının tanımı any isimli başlık dosyasında:
 
 namespace std {
@@ -51,9 +51,12 @@ int main()
 
 ####std::make_any<> yardımcı işlevi
 any türünden bir nesne oluşturmanın bir başka yolu da make_any<> yardımcı fabrika işlevini kullanmak. Burada any nesnesinin tutacağı değerin türü şablon tür argümanı olarak seçildiğinden in_place_type<> yardımcısının kullanılması gerekmiyor:
+
+```
 #include <any>
 #include <string>
 #include <complex>
+
 int main()
 {
     using namespace std;
@@ -62,14 +65,20 @@ int main()
     auto a2{ make_any<complex<double>>(1.2, 4.5) };
     //...
 }
+```
+
 std::any nesneleri için bellek ihtiyacı
 Bir any sınıf nesnesi tarafından tutulacak değerin bellek gereksinimi (storage) 1 byte da olabilir 5000 byte da. any nesnesi sahip olacağı değeri tutmak için heap alanında bir bellek bloğu edinebilir. Bu konuda derleyiciler istedikleri gibi kod üretebiliyorlar. Derleyiciler tipik olarak doğrudan any nesnesi içinde bir bellek alanını görece olarak küçük nesnelerin tutulması amaçlı kullanıyorlar. (C++17 standartları da böyle bir gerçekleştirimi öneriyor.) Eğer any tarafından saklanacak değer bu bellek alanına sığıyor ise değer bu alanda tutuluyor. Bu tekniğe "küçük tampon optimizasyonu" (small buffer optimization SBO) deniyor. Saklanacak nesne bu bellek alanına sığmıyor ise heap alanından bir bellek bloğu elde ediliyor. Aşağıda programı kendi derleyiciniz ile derleyerek çalıştırın ve any nesneleri için sizeof değerinin ne olduğunu görün:
+
+```
 #include <any>
 #include <iostream>
+
 int main()
 {
     std::cout << "sizeof(any) : " << sizeof(std::any) << '\n';
 }
+```
 Benim farklı derleyiciler ile yaptığım testlerin sonucu şöyle oldu:
 GCC 8.1                        16
 Clang 7.0.0                    32
@@ -77,10 +86,13 @@ MSVC 2017 15.7.0 32-bit        40
 MSVC 2017 15.7.0 64-bit        64
 std::any nesnesinin değerini değiştirmek
 Sınıfın atama operatör işlevi ya da emplace<> işlev şablonu ile bir any sınıf nesnesinin değeri değiştirilebilir. Aşağıdaki kodu inceleyin:
+
+```
 #include <any>
 #include <string>
 #include <vector>
 #include <set>
+
 class Nec
 {
     int mx, my;
@@ -88,6 +100,7 @@ public:
     Nec(int x, int y) : mx{ x }, my{ y } { }
     //...
 };
+
 int main()
 {
     using namespace std;
@@ -100,7 +113,9 @@ int main()
     a.emplace<vector<int>>(100); //vector<int>
     a.emplace<set<int, decltype(fcmp)>>({ 1, 5, -4, -6, 3 }, fcmp);
 }
-std::any nesnesini boşaltmak
+```
+
+#### std::any nesnesini boşaltmak
 Bir değer tutan any nesnesini boşaltmak için sınıfın reset isimli işlevi çağrılabilir:
 a.reset();
 Bu çağrı ile any türünden a değişkeni eğer boş değil ise a değişkeninin tuttuğu nesnenin hayatı sonlandırılıyor. Bu işlemden sonra a değişkeni boş durumda. any nesnesini boşaltmanın bir başka yolu da ona varsayılan kurucu işlev (default constructor) ile oluşturulmuş bir geçici nesneyi atamak:
