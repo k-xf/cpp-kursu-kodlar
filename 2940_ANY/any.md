@@ -100,7 +100,7 @@ MSVC 2017 15.7.0 32-bit        40
 MSVC 2017 15.7.0 64-bit        64
 ```
 
-#### std::any nesnesinin değerini değiştirmek
+#### any nesnesinin değerini değiştirmek
 Sınıfın atama operatör işlevi ya da _emplace\<>_ işlev şablonu ile bir _any_ nesnesinin değeri değiştirilebilir. Aşağıdaki kodu inceleyin:
 
 ```
@@ -132,7 +132,7 @@ int main()
 }
 ```
 
-#### std::any nesnesini boşaltmak
+#### any nesnesini boşaltmak
 Bir değer tutan _any_ nesnesini boşaltmak için sınıfın _reset_ isimli işlevi çağrılabilir:
 
 ```
@@ -179,7 +179,7 @@ int main()
 }
 ```
 
-#### std::any_cast/<> işlev şablonu
+#### std::any_cast\<> işlev şablonu
 _any_ nesnesinin tuttuğu değere erişmenin tek yolu onu global _any_cast/<>_ işleviyle tuttuğu değerin türüne dönüştürmek. _any_cast/<>_ işleviyle, _any_ sınıf nesnesi bir değer türüne bir referans türüne ya da bir adres türüne dönüştürülebilir:
 
 ```
