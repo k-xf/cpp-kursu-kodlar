@@ -7,6 +7,6 @@ int main()
 
 	std::string_view sv{ s, 4 };
 
-	std::cout << sv << "\n"; //no problem
-	std::cout << sv.data() << "\n"; //ub
+	std::cout << sv << '\n'; //no problem
+	std::cout << sv.data() << '\n'; //ub
 }
