@@ -26,26 +26,27 @@ int main()
 	}
 	catch (const bad_any_cast& e)
 	{
-		std::cout << "hata yakalandi: " << e.what() << '\n';
+		std::cout << "exception caught: " << e.what() << '\n';
 	}
 
 	// has value
 	ax = 1;
 	if (ax.has_value()) {
-		cout << "tur : " << ax.type().name() <<
-			" deger : " << any_cast<int>(ax) << "\n";
+		cout << "type : " << ax.type().name() <<
+			" value : " << any_cast<int>(ax) << "\n";
 	}
 
 	// reset
 	ax.reset();
 	if (!ax.has_value())
 	{
-		cout << "degere sahip degil\n";
+		cout << "empty\n";
 	}
 
-	// tutulan degere pointer
+	// pointer to the object stored
 	ax = 1;
+
 	//int* iptr = any_cast<int>(&ax);
-	auto iptr = any_cast<int>(&ax);
-	cout << *iptr << '\n';
+	if (auto iptr = any_cast<int>(&ax))
+		cout << *iptr << '\n';
 }
